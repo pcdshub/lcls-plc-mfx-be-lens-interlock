@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.26">
+  <POU Name="p_ValveSup" Id="{d74af9f3-256b-4aa1-b0fa-4d0578f38ed8}">
+    <Declaration><![CDATA[PROGRAM p_ValveSup
+VAR
+	fbMXT_VGC_04 : FB_VGC;
+	fbDVD_VGC_01 : FB_VGC;
+	fbDIA_VGC_01 : FB_VGC;
+	fbDIA_VGC_02 : FB_VGC;
+	fbDG1_VGC_01 : FB_VGC;
+	fbDG1_VGC_02 : FB_VGC;
+	//fbDG2_VGC_01 : FB_VGC;
+	//vgDownstream: LCLSVACUUMLIB.ST_VG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+vgcMXT_VGC_04.xEXT_OK := TRUE;
+fbMXT_VGC_04(iq_stValve:=vgcMXT_VGC_04, i_stDSG:=vgDVD_GCC_02, i_stUSG:=vgMXT_GCC_06, i_xDis_DPIlk:=FALSE);
+
+vgcDVD_VGC_01.xEXT_OK := TRUE;
+fbDVD_VGC_01(iq_stValve:=vgcDVD_VGC_01, i_stDSG:=vgDVD_GCC_04, i_stUSG:=vgDVD_GCC_02, i_xDis_DPIlk:=FALSE);
+
+vgcDIA_VGC_01.xEXT_OK := TRUE;
+fbDIA_VGC_01(iq_stValve:=vgcDIA_VGC_01, i_stDSG:=vgDIA_GCC_01, i_stUSG:=vgMON_GCC_01, i_xDis_DPIlk:=FALSE);
+
+vgcDIA_VGC_02.xEXT_OK := TRUE;
+fbDIA_VGC_02(iq_stValve:=vgcDIA_VGC_02, i_stDSG:=vgSB2_GCC_01, i_stUSG:=vgDIA_GCC_01, i_xDis_DPIlk:=FALSE);
+
+vgcDG1_VGC_01.xEXT_OK := TRUE;
+fbDG1_VGC_01(iq_stValve:=vgcDG1_VGC_01, i_stDSG:=vgDG1_GCC_01, i_stUSG:=vgSB2_GCC_01, i_xDis_DPIlk:=FALSE);
+
+vgcDG1_VGC_02.xEXT_OK := TRUE;
+fbDG1_VGC_02(iq_stValve:=vgcDG1_VGC_02, i_stDSG:=vgDG2_GCC_01, i_stUSG:=vgDG1_GCC_01, i_xDis_DPIlk:=FALSE);]]></ST>
+    </Implementation>
+    <ObjectProperties />
+  </POU>
+</TcPlcObject>

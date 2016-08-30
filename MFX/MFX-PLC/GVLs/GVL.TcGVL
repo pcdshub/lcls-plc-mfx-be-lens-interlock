@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <GVL Name="GVL" Id="{14f7e4c4-1971-4a0b-b8fc-55754218cf88}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	/// User Memory Variables 
+	
+	// Lenses are in a known position
+	i_xMFX_LENS01_SAFE : BOOL; // First Lens in known position
+	i_xMFX_LENS02_SAFE : BOOL; // Second Lens in known position
+	i_xMFX_LENS03_SAFE : BOOL; // Third Lens in known position
+	i_xMFX_LENS04_SAFE : BOOL; // Fourth Lens in known position
+	i_xMFX_LENS05_SAFE : BOOL; // Fifth Lens in known position
+	i_xMFX_LENS06_SAFE : BOOL; // Sixth Lens in known position
+	i_xMFX_LENS07_SAFE : BOOL; // Seventh Lens in known position
+	i_xMFX_LENS08_SAFE : BOOL; // Eight Lens in known position
+	i_xXRT_LENS01_SAFE : BOOL; 
+	i_xXRT_LENS02_SAFE : BOOL;
+	i_xXRT_LENS03_SAFE : BOOL;
+	
+	xLOTO_Override: BOOL := TRUE;
+	/// test mb_Input_Coils[0] with "modpoll -r 32769 -t 1 127.0.0.1" 
+	mb_Input_Coils: ARRAY[0..255] OF BOOL;
+	/// test mb_Output_Coils[0] with "modpoll -r 32769 -t 0 127.0.0.1" 
+	mb_Output_Coils: ARRAY[0..255] OF BOOL;
+	/// test mb_Input_Registers[0] with "modpoll -r 32769 -t 3 127.0.0.1" 
+	mb_Input_Registers: ARRAY[0..255] OF WORD;
+	/// test mb_Output_Registers[0] with "modpoll -r 32769 -t 4 127.0.0.1" 
+	mb_Output_Registers: ARRAY[0..255] OF WORD;
+	/// test mb_PLC_Memory[0] with "modpoll -r 12289 -t 4 127.0.0.1" 
+	mb_PLC_Memory AT %MW0: ARRAY[0..1000] OF WORD;
+	
+	q_xMFX_LENSES_IN: BOOL;
+	q_xXRT_LENSES_IN: BOOL;
+	// First Lens is in
+	i_xMFX_LENS01_IN: BOOL;
+	// Second Lens is in
+	i_xMFX_LENS02_IN: BOOL;
+	// Third Lens is in
+	i_xMFX_LENS03_IN: BOOL;
+	// Fourth Lens is in
+	i_xMFX_LENS04_IN: BOOL;
+	// Fifth Lens is in
+	i_xMFX_LENS05_IN: BOOL;
+	// Sixth Lens is in
+	i_xMFX_LENS06_IN: BOOL;
+	// Seventh Lens is in
+	i_xMFX_LENS07_IN: BOOL;
+	// Eighth Lens is in
+	i_xMFX_LENS08_IN: BOOL;
+	// Lenses are Unknown
+	q_xLENSES_KNOWN: BOOL;
+	// First XRT Lens is in
+	i_xXRT_LENS01_IN: BOOL;
+	// Second XRT Lens is in
+	i_xXRT_LENS02_IN: BOOL;
+	// Third XRT Lens is in
+	i_xXRT_LENS03_IN: BOOL;
+	// LIMIT WHEN BOTH LENS SETS ARE IN
+	i_xPREFOCUS_LIMIT: REAL;
+	// The current focus of the beam
+	i_xBEAM_FOCUS: REAL;
+	// Limit when only MFX lenses are in
+	i_xMFX_ONLY_LIMIT: REAL;
+	// LImit when only XRT lenses are in
+	i_xXRT_ONLY_LIMIT: REAL;
+	// Whether IOC is still updating heartbeat
+	q_xHEARBEAT_ALIVE: BOOL;
+	// IOC Heartbeat
+	i_xIOC_HEARTBEAT: BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

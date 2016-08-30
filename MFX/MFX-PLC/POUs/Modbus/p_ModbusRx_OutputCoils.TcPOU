@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.26">
+  <POU Name="p_ModbusRx_OutputCoils" Id="{943c36cb-adb4-42b1-982e-b281da4eed9b}">
+    <Declaration><![CDATA[PROGRAM p_ModbusRx_OutputCoils
+VAR
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//mb_Output_Coils[0];  //System Controls
+g_stSystem.xOverrideMode:=mb_Output_Coils[1];  //System Controls
+//mb_Output_Coils[2];  //System Controls
+//mb_Output_Coils[3];  //System Controls
+//mb_Output_Coils[4];  //System Controls
+//mb_Output_Coils[5];  //System Controls
+//mb_Output_Coils[6];  //System Controls
+//mb_Output_Coils[7];  //System Controls
+//mb_Output_Coils[8];  //System Controls
+//mb_Output_Coils[9];  //System Controls
+vgcMXT_VGC_04.xOPN_SW:=mb_Output_Coils[10];  //Valve switch controls
+vgcDVD_VGC_01.xOPN_SW:=mb_Output_Coils[11];  //Valve switch controls
+vgcDIA_VGC_01.xOPN_SW:=mb_Output_Coils[12];  //Valve switch controls
+vgcDIA_VGC_02.xOPN_SW:=mb_Output_Coils[13];  //Valve switch controls
+vgcDG1_VGC_01.xOPN_SW:=mb_Output_Coils[14];  //Valve switch controls
+vgcDG1_VGC_02.xOPN_SW:=mb_Output_Coils[15];  //Valve switch controls
+//mb_Output_Coils[16];  //Valve switch controls
+//mb_Output_Coils[17];  //Valve switch controls
+//mb_Output_Coils[18];  //Valve switch controls
+//mb_Output_Coils[19];  //Valve switch controls
+//mb_Output_Coils[20];  //Valve switch controls
+//mb_Output_Coils[21];  //Valve switch controls
+//mb_Output_Coils[22];  //Valve switch controls
+//mb_Output_Coils[23];  //Valve switch controls
+//mb_Output_Coils[24];  //Valve switch controls
+//mb_Output_Coils[25];  //Valve switch controls
+//mb_Output_Coils[26];  //Valve switch controls
+//mb_Output_Coils[27];  //Valve switch controls
+//mb_Output_Coils[28];  //Valve switch controls
+//mb_Output_Coils[29];  //Valve switch controls
+//mb_Output_Coils[30];  //Valve switch controls
+//mb_Output_Coils[31];  //Valve switch controls
+//mb_Output_Coils[32];  //Valve switch controls
+//mb_Output_Coils[33];  //Valve switch controls
+//mb_Output_Coils[34];  //Valve switch controls
+//mb_Output_Coils[35];  //Valve switch controls
+//mb_Output_Coils[36];  //Valve switch controls
+//mb_Output_Coils[37];  //Valve switch controls
+//mb_Output_Coils[38];  //Valve switch controls
+//mb_Output_Coils[39];  //Valve switch controls
+//mb_Output_Coils[40];  //Valve switch controls
+//mb_Output_Coils[41];  //Valve switch controls
+//mb_Output_Coils[42];  //Valve switch controls
+//mb_Output_Coils[43];  //Valve switch controls
+//mb_Output_Coils[44];  //Valve switch controls
+//mb_Output_Coils[45];  //Valve switch controls
+//mb_Output_Coils[46];  //Valve switch controls
+//mb_Output_Coils[47];  //Valve switch controls
+//mb_Output_Coils[48];  //Valve switch controls
+//mb_Output_Coils[49];  //Valve switch controls
+//mb_Output_Coils[50];  //Valve switch controls
+//mb_Output_Coils[51];  //Valve switch controls
+//mb_Output_Coils[52];  //Valve switch controls
+//mb_Output_Coils[53];  //Valve switch controls
+//mb_Output_Coils[54];  //Valve switch controls
+//mb_Output_Coils[55];  //Valve switch controls
+//mb_Output_Coils[56];  //Valve switch controls
+//mb_Output_Coils[57];  //Valve switch controls
+//mb_Output_Coils[58];  //Valve switch controls
+//mb_Output_Coils[59];  //Valve switch controls
+//mb_Output_Coils[60];  //Valve switch controls
+//mb_Output_Coils[61];  //Valve switch controls
+//mb_Output_Coils[62];  //Valve switch controls
+//mb_Output_Coils[63];  //Valve switch controls
+//mb_Output_Coils[64];  //Valve switch controls
+//mb_Output_Coils[65];  //Valve switch controls
+//mb_Output_Coils[66];  //Valve switch controls
+//mb_Output_Coils[67];  //Valve switch controls
+//mb_Output_Coils[68];  //Valve switch controls
+//mb_Output_Coils[69];  //Valve switch controls
+//mb_Output_Coils[70];  //Turbo Controls
+//mb_Output_Coils[71];  //Turbo Controls
+//mb_Output_Coils[72];  //Turbo Controls
+//mb_Output_Coils[74];  //Turbo Controls
+//mb_Output_Coils[75];  //Turbo Controls
+//mb_Output_Coils[76];  //Turbo Controls
+//mb_Output_Coils[77];  //Turbo Controls
+//mb_Output_Coils[78];  //Turbo Controls
+//mb_Output_Coils[79];  //Turbo Controls
+//mb_Output_Coils[80];  //Turbo Controls
+//mb_Output_Coils[81];  //Turbo Controls
+//mb_Output_Coils[82];  //Turbo Controls
+//mb_Output_Coils[83];  //Turbo Controls
+//mb_Output_Coils[84];  //Turbo Controls
+//mb_Output_Coils[85];  //Turbo Controls
+//mb_Output_Coils[86];  //Turbo Controls
+//mb_Output_Coils[87];  //Turbo Controls
+//mb_Output_Coils[88];  //Turbo Controls
+//mb_Output_Coils[89];  //Turbo Controls
+//mb_Output_Coils[90];  //Turbo Controls
+//mb_Output_Coils[91];  //Turbo Controls
+//mb_Output_Coils[92];  //Turbo Controls
+//mb_Output_Coils[93];  //Turbo Controls
+//mb_Output_Coils[94];  //Turbo Controls
+//mb_Output_Coils[95];  //Turbo Controls
+//mb_Output_Coils[96];  //Turbo Controls
+//mb_Output_Coils[97];  //Turbo Controls
+//mb_Output_Coils[98];  //Turbo Controls
+//mb_Output_Coils[99];  //Turbo Controls
+//mb_Output_Coils[100];  //Turbo Controls
+//mb_Output_Coils[101];  //Turbo Controls
+//mb_Output_Coils[102];  //Turbo Controls
+//mb_Output_Coils[103];  //Turbo Controls
+//mb_Output_Coils[104];  //Turbo Controls
+//mb_Output_Coils[105];  //Turbo Controls
+//mb_Output_Coils[106];  //Turbo Controls
+//mb_Output_Coils[107];  //Turbo Controls
+//mb_Output_Coils[108];  //Turbo Controls
+//mb_Output_Coils[109];  //Turbo Controls
+//mb_Output_Coils[110];  //Turbo Controls
+//mb_Output_Coils[111];  //Turbo Controls
+//mb_Output_Coils[112];  //Turbo Controls
+//mb_Output_Coils[113];  //Turbo Controls
+//mb_Output_Coils[114];  //Turbo Controls
+//mb_Output_Coils[115];  //Turbo Controls
+//mb_Output_Coils[116];  //Turbo Controls
+//mb_Output_Coils[117];  //Turbo Controls
+//mb_Output_Coils[118];  //Turbo Controls
+//mb_Output_Coils[119];  //Turbo Controls
+//vgMXT_GCC_06.xHV_SW:=mb_Output_Coils[120];  //CC HV Enable
+vgDVD_GCC_02.xHV_SW:=mb_Output_Coils[121];  //CC HV Enable
+vgDVD_GCC_04.xHV_SW:=mb_Output_Coils[122];  //CC HV Enable
+vgMON_GCC_01.xHV_SW:=mb_Output_Coils[123];  //CC HV Enable
+vgDIA_GCC_01.xHV_SW:=mb_Output_Coils[124];  //CC HV Enable
+vgSB2_GCC_01.xHV_SW:=mb_Output_Coils[125];  //CC HV Enable
+vgDG1_GCC_01.xHV_SW:=mb_Output_Coils[126];  //CC HV Enable
+vgDG2_GCC_01.xHV_SW:=mb_Output_Coils[127];  //CC HV Enable
+//mb_Output_Coils[128];  //CC HV Enable
+//mb_Output_Coils[129];  //CC HV Enable
+//mb_Output_Coils[130];  //CC HV Enable
+//mb_Output_Coils[131];  //CC HV Enable
+//mb_Output_Coils[132];  //CC HV Enable
+//mb_Output_Coils[133];  //CC HV Enable
+//mb_Output_Coils[134];  //CC HV Enable
+//mb_Output_Coils[135];  //CC HV Enable
+//mb_Output_Coils[136];  //CC HV Enable
+//mb_Output_Coils[137];  //CC HV Enable
+//mb_Output_Coils[138];  //CC HV Enable
+//mb_Output_Coils[139];  //CC HV Enable
+//mb_Output_Coils[140];  //CC HV Enable
+//mb_Output_Coils[141];  //CC HV Enable
+//mb_Output_Coils[142];  //CC HV Enable
+//mb_Output_Coils[143];  //CC HV Enable
+//mb_Output_Coils[144];  //CC HV Enable
+//mb_Output_Coils[145];  //CC HV Enable
+//mb_Output_Coils[146];  //CC HV Enable
+//mb_Output_Coils[147];  //CC HV Enable
+//mb_Output_Coils[148];  //CC HV Enable
+//mb_Output_Coils[149];  //CC HV Enable
+//mb_Output_Coils[150];  //CC HV Enable
+//mb_Output_Coils[151];  //CC HV Enable
+//mb_Output_Coils[152];  //CC HV Enable
+//mb_Output_Coils[153];  //CC HV Enable
+//mb_Output_Coils[154];  //CC HV Enable
+//mb_Output_Coils[155];  //CC HV Enable
+//mb_Output_Coils[156];  //CC HV Enable
+//mb_Output_Coils[157];  //CC HV Enable
+//mb_Output_Coils[158];  //CC HV Enable
+//mb_Output_Coils[159];  //CC HV Enable
+//mb_Output_Coils[160];  //
+//mb_Output_Coils[161];  //
+//mb_Output_Coils[162];  //
+//mb_Output_Coils[163];  //
+//mb_Output_Coils[164];  //
+//mb_Output_Coils[165];  //
+//mb_Output_Coils[166];  //
+//mb_Output_Coils[167];  //
+//mb_Output_Coils[168];  //
+//mb_Output_Coils[169];  //
+//mb_Output_Coils[170];  //
+//mb_Output_Coils[171];  //
+//mb_Output_Coils[172];  //
+//mb_Output_Coils[173];  //
+//mb_Output_Coils[174];  //
+//mb_Output_Coils[175];  //
+//mb_Output_Coils[176];  //
+//mb_Output_Coils[177];  //
+//mb_Output_Coils[178];  //
+//mb_Output_Coils[179];  //
+//mb_Output_Coils[180];  //
+//mb_Output_Coils[181];  //
+//mb_Output_Coils[182];  //
+//mb_Output_Coils[183];  //
+//mb_Output_Coils[184];  //
+//mb_Output_Coils[185];  //
+//mb_Output_Coils[186];  //
+//mb_Output_Coils[187];  //
+//mb_Output_Coils[188];  //
+//mb_Output_Coils[189];  //
+//mb_Output_Coils[190];  //
+//mb_Output_Coils[191];  //
+//mb_Output_Coils[192];  //
+//mb_Output_Coils[193];  //
+//mb_Output_Coils[194];  //
+//mb_Output_Coils[195];  //
+//mb_Output_Coils[196];  //
+//mb_Output_Coils[197];  //
+//mb_Output_Coils[198];  //
+//mb_Output_Coils[199];  //
+//mb_Output_Coils[200];  //Valve overrides
+//mb_Output_Coils[201];  //Valve overrides
+//mb_Output_Coils[202];  //Valve overrides
+//mb_Output_Coils[203];  //Valve overrides
+//mb_Output_Coils[204];  //
+//mb_Output_Coils[205];  //
+//mb_Output_Coils[206];  //
+//mb_Output_Coils[207];  //
+//mb_Output_Coils[208];  //
+//mb_Output_Coils[209];  //
+//mb_Output_Coils[210];  //
+//mb_Output_Coils[211];  //
+//mb_Output_Coils[212];  //
+//mb_Output_Coils[213];  //
+//mb_Output_Coils[214];  //
+//mb_Output_Coils[215];  //
+//mb_Output_Coils[216];  //
+//mb_Output_Coils[217];  //
+//mb_Output_Coils[218];  //
+//mb_Output_Coils[219];  //
+//mb_Output_Coils[220];  //
+//mb_Output_Coils[221];  //
+//mb_Output_Coils[222];  //
+//mb_Output_Coils[223];  //
+//mb_Output_Coils[224];  //
+//mb_Output_Coils[225];  //
+//mb_Output_Coils[226];  //
+//mb_Output_Coils[227];  //
+//mb_Output_Coils[228];  //
+//mb_Output_Coils[229];  //
+//mb_Output_Coils[230];  //
+//mb_Output_Coils[231];  //
+//mb_Output_Coils[232];  //
+//mb_Output_Coils[233];  //
+//mb_Output_Coils[234];  //
+//mb_Output_Coils[235];  //
+//mb_Output_Coils[236];  //
+//mb_Output_Coils[237];  //
+//mb_Output_Coils[238];  //
+//mb_Output_Coils[239];  //
+//mb_Output_Coils[240];  //
+//mb_Output_Coils[241];  //
+//mb_Output_Coils[242];  //
+//mb_Output_Coils[243];  //
+//mb_Output_Coils[244];  //
+//mb_Output_Coils[245];  //
+//mb_Output_Coils[246];  //
+//mb_Output_Coils[247];  //
+//mb_Output_Coils[248];  //
+//mb_Output_Coils[249];  //
+//mb_Output_Coils[250];  //
+//mb_Output_Coils[251];  //
+//mb_Output_Coils[252];  //
+//mb_Output_Coils[253];  //
+//mb_Output_Coils[254];  //
+//mb_Output_Coils[255];  //]]></ST>
+    </Implementation>
+    <ObjectProperties />
+  </POU>
+</TcPlcObject>

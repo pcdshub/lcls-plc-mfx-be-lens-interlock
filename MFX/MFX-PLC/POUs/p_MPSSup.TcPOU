@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="p_MPSSup" Id="{22fa257d-fc87-4b8c-8293-563a03fa02d7}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM p_MPSSup
+VAR
+	q_xMFX_LENS_MPSOK: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[q_xHEARBEAT_ALIVE := Heartbeat(BEAT:=i_xIOC_HEARTBEAT,DEADTIME:=TIME#1.0S);
+
+q_xLENSES_KNOWN := (       i_xMFX_LENS01_SAFE AND i_xMFX_LENS02_SAFE
+				 	   AND i_xMFX_LENS03_SAFE AND i_xMFX_LENS04_SAFE 
+				       AND i_xMFX_LENS04_SAFE AND i_xMFX_LENS05_SAFE 
+					   AND i_xMFX_LENS06_SAFE AND i_xMFX_LENS07_SAFE 
+					   AND i_xMFX_LENS08_SAFE AND i_xXRT_LENS01_SAFE
+					   AND i_xMFX_LENS02_SAFE AND i_xXRT_LENS01_SAFE);
+					
+IF NOT q_xLENSES_KNOWN THEN
+  q_xMFX_LENS_MPSOK := 0;
+  RETURN;
+END_IF
+
+q_xMFX_LENSES_IN := (   i_xMFX_LENS01_IN OR i_xMFX_LENS02_IN
+				 	 OR i_xMFX_LENS03_IN OR i_xMFX_LENS04_IN 
+					 OR i_xMFX_LENS04_IN OR i_xMFX_LENS05_IN 
+					 OR i_xMFX_LENS06_IN OR i_xMFX_LENS07_IN 
+					 OR i_xMFX_LENS08_IN);
+
+q_xXRT_LENSES_IN := (   i_xXRT_LENS01_IN 
+					 OR i_xXRT_LENS02_IN 
+					 OR i_xXRT_LENS03_IN);
+
+IF q_xMFX_LENSES_IN AND q_xXRT_LENSES_IN THEN
+	IF  i_xPREFOCUS_LIMIT > i_xBEAM_FOCUS THEN
+		q_xMFX_LENS_MPSOK := 0;
+		RETURN;
+	END_IF
+	
+ELSIF q_xMFX_LENSES_IN THEN
+	IF i_xMFX_ONLY_LIMIT > i_xBEAM_FOCUS THEN
+		q_xMFX_LENS_MPSOK := 0;
+		RETURN;
+	END_IF
+	
+ELSIF q_xXRT_LENSES_IN THEN
+	IF i_xXRT_ONLY_LIMIT < i_xBEAM_FOCUS THEN
+		q_xMFX_LENS_MPSOK := 0;
+		RETURN;
+	END_IF
+
+ELSE
+	q_xMFX_LENS_MPSOK := 1;
+	RETURN;
+END_IF
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

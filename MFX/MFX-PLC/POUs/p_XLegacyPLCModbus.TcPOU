@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.26">
+  <POU Name="p_XLegacyPLCModbus" Id="{584bfb6d-db40-4fd3-ab21-119692ccb33c}">
+    <Declaration><![CDATA[PROGRAM p_XLegacyPLCModbus
+VAR
+	fbLegacyPLCInputCoilsRx	:	FB_MBReadCoils;
+	
+	i_xLegacyPLC_CnBits	:	ARRAY [0..20] OF BYTE;
+	
+	ftReset	: F_TRIG; 
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+(* Modbus Info for Koyo
+Modbus Addresses for
+Koyo DL05/06/240/250/260/430/440/450 PLCs
+PLC Memory Type		| Modbus start address Decimal (octal) | Function codes
+Inputs (X)			  2048 (04000)							2
+Special Relays (SP)	  3072 (06000)							2
+Outputs (Y)			  2048 (04000)							1, 5, 15
+Control Relays (C)	  3072 (06000)							1, 5, 15
+Timer Contacts (T)	  6144 (014000)							1, 5, 15
+Counter Contacts (CT) 6400 (014400)							1, 5, 15
+Stage Status Bits (S) 6144 (012000)							1, 5, 15
+*)
+
+ftReset(CLK:=fbLegacyPLCInputCoilsRx.bBusy);
+
+fbLegacyPLCInputCoilsRx.bExecute := TRUE;
+
+fbLegacyPLCInputCoilsRx(sIPAddr:='172.21.36.66', nTCPPort:=502, nQuantity:=32, nMBAddr:=8#6000, cbLength:=SIZEOF(i_xLegacyPLC_CnBits),  pDestAddr:=ADR(i_xLegacyPLC_CnBits), tTimeout:=T#10S);
+
+IF fbLegacyPLCInputCoilsRx.bError THEN
+	//run some error code for modbus
+	//if there's a modbus error, set all incoming bits to zero, set 
+	// HXX PLC Relay coil C[10] is used for MXT:GCC:06.VacOK
+	i_xLegacyPLC_CnBits[0].0 := 0;
+	i_xLegacyPLC_CnBits[0].1 := 0;
+	i_xLegacyPLC_CnBits[0].2 := 0;
+	i_xLegacyPLC_CnBits[0].3 := 0;
+	i_xLegacyPLC_CnBits[0].4 := 0;
+	i_xLegacyPLC_CnBits[1].0 := 0;
+	i_xLegacyPLC_CnBits[1].1 := 0;
+	i_xLegacyPLC_CnBits[1].2 := 0;
+	
+	
+	
+ELSIF ftReset.Q AND fbLegacyPLCInputCoilsRx.cbRead > 0 THEN
+	fbLegacyPLCInputCoilsRx.bExecute := FALSE;
+	
+	//i_xUSVacOK := i_xLegacyPLC_CnBits[1].0;
+	
+ELSE
+	//more error code cause we didn't manage to read anything
+END_IF
+ 
+]]></ST>
+    </Implementation>
+    <ObjectProperties />
+  </POU>
+</TcPlcObject>
