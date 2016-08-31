@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="Heartbeat" Id="{bb1dec25-e01c-4031-9939-182a9d36637a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Heartbeat : BOOL
+VAR_INPUT
+	BEAT      : BOOL; (*Heartbeat to monitor*)
+	DEADTIME  : TIME; (*Acceptable deadtime*)
+	
+END_VAR
+VAR
+	ALIVE : BOOL;     (*Whether Hearbeat is alive*)
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF BEAT THEN
+	R := TON(IN:=BEAT,PT:=DEADTIME).Q;
+	ALIVE := R.q_xDG1_EB1_ep2338c03;
+	RETURN; 
+END_IF
+
+IF NOT BEAT THEN
+	ALIVE := TOF(IN:=BEAT,PT:=DEADTIME).Q;
+	RETURN; 
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

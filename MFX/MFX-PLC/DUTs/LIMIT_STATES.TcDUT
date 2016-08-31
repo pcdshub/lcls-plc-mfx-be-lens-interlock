@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <DUT Name="LIMIT_STATES" Id="{592e01d0-0d36-41c4-a333-b1d9bba78f5b}">
+    <Declaration><![CDATA[TYPE LIMIT_STATES :
+(
+	NO_LENSES := 0,
+	XRT_ONLY  := 1,
+	MFX_ONLY  := 2,
+	PREFOCUS := 3
+	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
