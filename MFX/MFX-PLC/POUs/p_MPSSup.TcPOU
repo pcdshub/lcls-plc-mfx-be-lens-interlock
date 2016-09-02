@@ -4,16 +4,19 @@
     <Declaration><![CDATA[PROGRAM p_MPSSup
 VAR
 	q_xMFX_LENS_MPSOK: BOOL;
+	BEAT: Heartbeat;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[q_xHEARTBEAT_ALIVE := Heartbeat(BEAT:=i_xIOC_HEARTBEAT,DEADTIME:=TIME#1.0S);
-
+      <ST><![CDATA[//Instantiate Heartbeat and check to see if IOC is alive
+BEAT(BEAT:=i_xIOC_HEARTBEAT,DEADTIME:=TIME#1.0S);
+q_xHEARTBEAT_ALIVE := BEAT.ALIVE;
 IF NOT q_xHEARTBEAT_ALIVE THEN
 	q_xMFX_LENS_MPSOK := 0;
 	RETURN;
 END_IF
 
+//Check no lens is unknown position
 q_xLENSES_KNOWN := (       i_xMFX_LENS01.KNOWN AND i_xMFX_LENS02.KNOWN
 				 	   AND i_xMFX_LENS03.KNOWN AND i_xMFX_LENS04.KNOWN 
 				       AND i_xMFX_LENS04.KNOWN AND i_xMFX_LENS05.KNOWN 
@@ -27,6 +30,7 @@ IF NOT q_xLENSES_KNOWN THEN
   RETURN;
 END_IF
 
+//Determine which lens group/s are being used
 q_xMFX_LENSES_IN := (   i_xMFX_LENS01.IN OR i_xMFX_LENS02.IN
 				 	 OR i_xMFX_LENS03.IN OR i_xMFX_LENS04.IN 
 					 OR i_xMFX_LENS04.IN OR i_xMFX_LENS05.IN 
@@ -37,42 +41,38 @@ q_xXRT_LENSES_IN := (   i_xXRT_LENS01.IN
 					 OR i_xXRT_LENS02.IN 
 					 OR i_xXRT_LENS03.IN);
 
+//If Both lenses are used, compare to pre-focused limit
 IF q_xMFX_LENSES_IN AND q_xXRT_LENSES_IN THEN
 	q_xLIMIT_MODE := 3;
-
-ELSIF q_xMFX_LENSES_IN THEN
-	q_xLIMIT_MODE := 2;
-	
-ELSIF q_xXRT_LENSES_IN THEN
-	q_xLIMIT_MODE := 1;
-
-ELSE 
-	q_xMFX_LENS_MPSOK := 1;
-END_IF
-	
-	
-CASE q_xLIMIT_MODE OF
-i_xMODES.PREFOCUS:
 	IF  i_xPREFOCUS_LIMIT < i_xBEAM_FOCUS THEN
 		q_xMFX_LENS_MPSOK := 1;
 	ELSE
 		q_xMFX_LENS_MPSOK := 0;
 	END_IF
-	
-i_xMODES.MFX_ONLY:
+
+//If only MFX lenses are in compare to MFX only limit
+ELSIF q_xMFX_LENSES_IN THEN
+	q_xLIMIT_MODE := 2;
 	IF i_xMFX_ONLY_LIMIT < i_xBEAM_FOCUS THEN
 		q_xMFX_LENS_MPSOK := 1;
 	ELSE
 		q_xMFX_LENS_MPSOK := 0;
 	END_IF
 
-i_xMODES.XRT_ONLY:	
+//If only XRT lenses are in compare to XRT only limit
+ELSIF q_xXRT_LENSES_IN THEN
 	IF i_xXRT_ONLY_LIMIT > i_xBEAM_FOCUS THEN
 		q_xMFX_LENS_MPSOK := 1;
 	ELSE
 		q_xMFX_LENS_MPSOK := 0;
+	q_xLIMIT_MODE := 1;
 	END_IF
-END_CASE;
+//IF no lenses are in, simply return 
+ELSE 
+	q_xLIMIT_MODE :=0;
+	q_xMFX_LENS_MPSOK := 1;
+	RETURN;
+END_IF
 
 ]]></ST>
     </Implementation>

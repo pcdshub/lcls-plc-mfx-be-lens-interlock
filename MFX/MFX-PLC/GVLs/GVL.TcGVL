@@ -8,9 +8,9 @@
 	q_xXRT_LENSES_IN: BOOL;  //One of the XRT lenses are in
 	q_xHEARTBEAT_ALIVE: BOOL;//Whether heartbeat has updated
 	q_xLAST_MESSAGE: WORD;   //Message to IOC
+	q_xFAULTED: BOOL; //Whether Lens Interlock has tripped
 	q_xLIMIT_MODE : INT;     //Limit mode being evaluated
-	
-	i_xMODES : LIMIT_STATES; //ENUM with each node
+	q_xCURRENT_LIMIT : REAL; //Limit value being used
 	
 	i_xMFX_LENS01 : LENS_STRUCT; //First transfocator lens
 	i_xMFX_LENS02 : LENS_STRUCT; //Second transfocator lens

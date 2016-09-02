@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.26">
-  <POU Name="MAIN" Id="{8f63f011-6378-4f32-beaf-4437ace2efcc}">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="MAIN" Id="{8f63f011-6378-4f32-beaf-4437ace2efcc}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	myBoolean : BOOL;
@@ -17,22 +17,20 @@ p_XLegacyPLCModbus();
 (* 	HARD-WIRED I/O UPDATE
 	Update IO 
 *)
-p_EtherCATDiag();
-p_SoftIOMap();
+
 
 (* 	RESOLVE LOGIC
 	Device Control & Monitoring 
 *)
 
-p_GaugeSup();
-p_ValveSup();
+
 //p_TurboSup();
 p_MPSSup();
 
 (* 	HARD-WIRED I/O UPDATE
 	Update IO 
 *)
-p_SoftIOMap();
+
 
 (* 	EPICS Tx UPDATE
 	Modbus Map Receive
@@ -43,9 +41,7 @@ p_ModbusTx_OutputCoils();
 p_ModbusTx_InputReg();
 //p_ModbusTx_OutputReg();
 p_ModbusTx_PLCMemory();
-
-g_xFirstPass := FALSE; // set this false after the first pass]]></ST>
+]]></ST>
     </Implementation>
-    <ObjectProperties />
   </POU>
 </TcPlcObject>

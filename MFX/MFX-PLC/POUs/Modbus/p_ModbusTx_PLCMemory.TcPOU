@@ -1,21 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.26">
-  <POU Name="p_ModbusTx_PLCMemory" Id="{d85d0cac-5378-471f-b9d9-8f92ec2f478e}">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="p_ModbusTx_PLCMemory" Id="{d85d0cac-5378-471f-b9d9-8f92ec2f478e}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusTx_PLCMemory
 VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//MEMCPY(destAddr:=ADR(mb_PLC_Memory[10]), srcAddr:=ADR(vgMXT_GCC_06.rPRESS), n:=SIZEOF(vgMXT_GCC_06.rPRESS));  //VG pressure readbacks
-MEMCPY(destAddr:=ADR(mb_PLC_Memory[12]), srcAddr:=ADR(vgDVD_GCC_02.rPRESS), n:=SIZEOF(vgDVD_GCC_02.rPRESS));  //VG pressure readbacks
-MEMCPY(destAddr:=ADR(mb_PLC_Memory[14]), srcAddr:=ADR(vgDVD_GCC_04.rPRESS), n:=SIZEOF(vgDVD_GCC_04.rPRESS));  //VG pressure readbacks
-MEMCPY(destAddr:=ADR(mb_PLC_Memory[16]), srcAddr:=ADR(vgMON_GCC_01.rPRESS), n:=SIZEOF(vgMON_GCC_01.rPRESS));  //VG pressure readbacks
-MEMCPY(destAddr:=ADR(mb_PLC_Memory[18]), srcAddr:=ADR(vgDIA_GCC_01.rPRESS), n:=SIZEOF(vgDIA_GCC_01.rPRESS));  //VG pressure readbacks
-MEMCPY(destAddr:=ADR(mb_PLC_Memory[20]), srcAddr:=ADR(vgSB2_GCC_01.rPRESS), n:=SIZEOF(vgSB2_GCC_01.rPRESS));  //VG pressure readbacks
-MEMCPY(destAddr:=ADR(mb_PLC_Memory[22]), srcAddr:=ADR(vgDG1_GCC_01.rPRESS), n:=SIZEOF(vgDG1_GCC_01.rPRESS));  //VG pressure readbacks
-MEMCPY(destAddr:=ADR(mb_PLC_Memory[24]), srcAddr:=ADR(vgDG2_GCC_01.rPRESS), n:=SIZEOF(vgDG2_GCC_01.rPRESS));  //VG pressure readbacks
+//MEMCPY(destAddr:=ADR(mb_PLC_Memory[12]), srcAddr:=ADR(vgDVD_GCC_02.rPRESS), n:=SIZEOF(vgDVD_GCC_02.rPRESS));  //VG pressure readbacks
+//MEMCPY(destAddr:=ADR(mb_PLC_Memory[14]), srcAddr:=ADR(vgDVD_GCC_04.rPRESS), n:=SIZEOF(vgDVD_GCC_04.rPRESS));  //VG pressure readbacks
+//MEMCPY(destAddr:=ADR(mb_PLC_Memory[16]), srcAddr:=ADR(vgMON_GCC_01.rPRESS), n:=SIZEOF(vgMON_GCC_01.rPRESS));  //VG pressure readbacks
+//MEMCPY(destAddr:=ADR(mb_PLC_Memory[18]), srcAddr:=ADR(vgDIA_GCC_01.rPRESS), n:=SIZEOF(vgDIA_GCC_01.rPRESS));  //VG pressure readbacks
+//MEMCPY(destAddr:=ADR(mb_PLC_Memory[20]), srcAddr:=ADR(vgSB2_GCC_01.rPRESS), n:=SIZEOF(vgSB2_GCC_01.rPRESS));  //VG pressure readbacks
+//MEMCPY(destAddr:=ADR(mb_PLC_Memory[22]), srcAddr:=ADR(vgDG1_GCC_01.rPRESS), n:=SIZEOF(vgDG1_GCC_01.rPRESS));  //VG pressure readbacks
+//MEMCPY(destAddr:=ADR(mb_PLC_Memory[24]), srcAddr:=ADR(vgDG2_GCC_01.rPRESS), n:=SIZEOF(vgDG2_GCC_01.rPRESS));  //VG pressure readbacks
 ]]></ST>
     </Implementation>
-    <ObjectProperties />
   </POU>
 </TcPlcObject>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.26">
-  <POU Name="p_ModbusTx_InputCoils" Id="{b7e18312-80ba-4297-9b98-214f322b6e9d}">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="p_ModbusTx_InputCoils" Id="{b7e18312-80ba-4297-9b98-214f322b6e9d}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusTx_InputCoils
 VAR
 
@@ -12,27 +12,27 @@ VAR_OUTPUT
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[mb_Input_Coils[0]:=FALSE;  //default
-mb_Input_Coils[1]:=i_xMFX_ppsStopperPos_Out;  //default
-mb_Input_Coils[2]:=i_xMFX_ppsStopperPos_In;  //default
-mb_Input_Coils[3]:=q_xMFX_MPSOK;  //default
-mb_Input_Coils[4]:=g_xIOState;  //default
-mb_Input_Coils[5]:=i_xDG1_MMS01_OUT;  //default
+mb_Input_Coils[1]:=FALSE;  //default
+mb_Input_Coils[2]:=FALSE;  //default
+mb_Input_Coils[3]:=FALSE;  //default
+mb_Input_Coils[4]:=FALSE;  //default
+mb_Input_Coils[5]:=FALSE;  //default
 mb_Input_Coils[6]:=FALSE;  //default
 mb_Input_Coils[7]:=FALSE;  //default
 mb_Input_Coils[8]:=FALSE;  //default
 mb_Input_Coils[9]:=FALSE;  //default
-mb_Input_Coils[10]:=vgcMXT_VGC_04.i_xOpnLS;  //Valve position readbacks
-mb_Input_Coils[11]:=vgcMXT_VGC_04.i_xClsLS;  //Valve position readbacks
-mb_Input_Coils[12]:=vgcDVD_VGC_01.i_xOpnLS;  //Valve position readbacks
-mb_Input_Coils[13]:=vgcDVD_VGC_01.i_xClsLS;  //Valve position readbacks
-mb_Input_Coils[14]:=vgcDIA_VGC_01.i_xOpnLS;  //Valve position readbacks
-mb_Input_Coils[15]:=vgcDIA_VGC_01.i_xClsLS;  //Valve position readbacks
-mb_Input_Coils[16]:=vgcDIA_VGC_02.i_xOpnLS;  //Valve position readbacks
-mb_Input_Coils[17]:=vgcDIA_VGC_02.i_xClsLS;  //Valve position readbacks
-mb_Input_Coils[18]:=vgcDG1_VGC_01.i_xOpnLS;  //Valve position readbacks
-mb_Input_Coils[19]:=vgcDG1_VGC_01.i_xClsLS;  //Valve position readbacks
-mb_Input_Coils[20]:=vgcDG1_VGC_02.i_xOpnLS;  //Valve position readbacks
-mb_Input_Coils[21]:=vgcDG1_VGC_02.i_xClsLS;  //Valve position readbacks
+mb_Input_Coils[10]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[11]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[12]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[13]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[14]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[15]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[16]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[17]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[18]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[19]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[20]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[21]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[22]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[23]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[24]:=FALSE;  //Valve position readbacks
@@ -71,12 +71,12 @@ mb_Input_Coils[56]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[57]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[58]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[59]:=FALSE;  //Valve position readbacks
-mb_Input_Coils[60]:=vgcMXT_VGC_04.xOPN_OK;  //Valve position readbacks
-mb_Input_Coils[61]:=vgcDVD_VGC_01.xOPN_OK;  //Valve position readbacks
-mb_Input_Coils[62]:=vgcDIA_VGC_01.xOPN_OK;  //Valve position readbacks
-mb_Input_Coils[63]:=vgcDIA_VGC_02.xOPN_OK;  //Valve position readbacks
-mb_Input_Coils[64]:=vgcDG1_VGC_01.xOPN_OK;  //Valve position readbacks
-mb_Input_Coils[65]:=vgcDG1_VGC_02.xOPN_OK;  //Valve position readbacks
+mb_Input_Coils[60]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[61]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[62]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[63]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[64]:=FALSE;  //Valve position readbacks
+mb_Input_Coils[65]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[66]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[67]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[68]:=FALSE;  //Valve position readbacks
@@ -231,28 +231,28 @@ mb_Input_Coils[216]:=FALSE;  //Turbo pump readbacks
 mb_Input_Coils[217]:=FALSE;  //Turbo pump readbacks
 mb_Input_Coils[218]:=FALSE;  //Turbo pump readbacks
 mb_Input_Coils[219]:=FALSE;  //Turbo pump readbacks
-//mb_Input_Coils[220]:=vgMXT_GCC_06.xAT_VAC;  //VG readbacks
-mb_Input_Coils[221]:=vgDVD_GCC_02.xAT_VAC;  //VG readbacks
-mb_Input_Coils[222]:=vgDVD_GCC_02.xHV_DIS;  //VG readbacks
-mb_Input_Coils[223]:=vgDVD_GCC_04.xAT_VAC;  //VG readbacks
-mb_Input_Coils[224]:=vgDVD_GCC_04.xHV_DIS;  //VG readbacks
-mb_Input_Coils[225]:=vgMON_GCC_01.xAT_VAC;  //VG readbacks
-mb_Input_Coils[226]:=vgMON_GCC_01.xHV_DIS;  //VG readbacks
-mb_Input_Coils[227]:=vgDIA_GCC_01.xAT_VAC;  //VG readbacks
-mb_Input_Coils[228]:=vgDIA_GCC_01.xHV_DIS;  //VG readbacks
-mb_Input_Coils[229]:=vgSB2_GCC_01.xAT_VAC;  //VG readbacks
-mb_Input_Coils[230]:=vgSB2_GCC_01.xHV_DIS;  //VG readbacks
-mb_Input_Coils[231]:=vgDG1_GCC_01.xAT_VAC;  //VG readbacks
-mb_Input_Coils[232]:=vgDG1_GCC_01.xHV_DIS;  //VG readbacks
-mb_Input_Coils[233]:=vgDG2_GCC_01.xAT_VAC;  //VG readbacks
-mb_Input_Coils[234]:=vgDG2_GCC_01.xHV_DIS;  //VG readbacks
-mb_Input_Coils[235]:=vgDVD_GCC_02.xPRESS_OK;  //VG readbacks
-mb_Input_Coils[236]:=vgDVD_GCC_04.xPRESS_OK;  //VG readbacks
-mb_Input_Coils[237]:=vgMON_GCC_01.xPRESS_OK;  //VG readbacks
-mb_Input_Coils[238]:=vgDIA_GCC_01.xPRESS_OK;  //VG readbacks
-mb_Input_Coils[239]:=vgSB2_GCC_01.xPRESS_OK;  //VG readbacks
-mb_Input_Coils[240]:=vgDG1_GCC_01.xPRESS_OK;  //VG readbacks
-mb_Input_Coils[241]:=vgDG2_GCC_01.xPRESS_OK;  //VG readbacks
+mb_Input_Coils[220]:=FALSE;  //VG readbacks
+mb_Input_Coils[221]:=FALSE;  //VG readbacks
+mb_Input_Coils[222]:=FALSE;  //VG readbacks
+mb_Input_Coils[223]:=FALSE;  //VG readbacks
+mb_Input_Coils[224]:=FALSE;  //VG readbacks
+mb_Input_Coils[225]:=FALSE;  //VG readbacks
+mb_Input_Coils[226]:=FALSE;  //VG readbacks
+mb_Input_Coils[227]:=FALSE;  //VG readbacks
+mb_Input_Coils[228]:=FALSE;  //VG readbacks
+mb_Input_Coils[229]:=FALSE;  //VG readbacks
+mb_Input_Coils[230]:=FALSE;  //VG readbacks
+mb_Input_Coils[231]:=FALSE;  //VG readbacks
+mb_Input_Coils[232]:=FALSE;  //VG readbacks
+mb_Input_Coils[233]:=FALSE;  //VG readbacks
+mb_Input_Coils[234]:=FALSE;  //VG readbacks
+mb_Input_Coils[235]:=FALSE;  //VG readbacks
+mb_Input_Coils[236]:=FALSE;  //VG readbacks
+mb_Input_Coils[237]:=FALSE;  //VG readbacks
+mb_Input_Coils[238]:=FALSE;  //VG readbacks
+mb_Input_Coils[239]:=FALSE;  //VG readbacks
+mb_Input_Coils[240]:=FALSE;  //VG readbacks
+mb_Input_Coils[241]:=FALSE;
 mb_Input_Coils[242]:=FALSE;  //VG readbacks
 mb_Input_Coils[243]:=FALSE;  //VG readbacks
 mb_Input_Coils[244]:=FALSE;  //VG readbacks
@@ -268,6 +268,5 @@ mb_Input_Coils[253]:=FALSE;  //VG readbacks
 mb_Input_Coils[254]:=FALSE;  //VG readbacks
 mb_Input_Coils[255]:=FALSE;  //VG readbacks]]></ST>
     </Implementation>
-    <ObjectProperties />
   </POU>
 </TcPlcObject>

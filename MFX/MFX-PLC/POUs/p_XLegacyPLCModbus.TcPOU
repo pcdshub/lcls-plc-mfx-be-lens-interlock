@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.26">
-  <POU Name="p_XLegacyPLCModbus" Id="{584bfb6d-db40-4fd3-ab21-119692ccb33c}">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="p_XLegacyPLCModbus" Id="{584bfb6d-db40-4fd3-ab21-119692ccb33c}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_XLegacyPLCModbus
 VAR
 	fbLegacyPLCInputCoilsRx	:	FB_MBReadCoils;
@@ -30,7 +30,7 @@ ftReset(CLK:=fbLegacyPLCInputCoilsRx.bBusy);
 
 fbLegacyPLCInputCoilsRx.bExecute := TRUE;
 
-fbLegacyPLCInputCoilsRx(sIPAddr:='172.21.36.66', nTCPPort:=502, nQuantity:=32, nMBAddr:=8#6000, cbLength:=SIZEOF(i_xLegacyPLC_CnBits),  pDestAddr:=ADR(i_xLegacyPLC_CnBits), tTimeout:=T#10S);
+fbLegacyPLCInputCoilsRx(sIPAddr:='172.21.62.99', nTCPPort:=502, nQuantity:=32, nMBAddr:=8#6000, cbLength:=SIZEOF(i_xLegacyPLC_CnBits),  pDestAddr:=ADR(i_xLegacyPLC_CnBits), tTimeout:=T#10S);
 
 IF fbLegacyPLCInputCoilsRx.bError THEN
 	//run some error code for modbus
@@ -58,6 +58,5 @@ END_IF
  
 ]]></ST>
     </Implementation>
-    <ObjectProperties />
   </POU>
 </TcPlcObject>
