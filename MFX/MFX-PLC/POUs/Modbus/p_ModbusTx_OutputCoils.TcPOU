@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.26">
-  <POU Name="p_ModbusTx_OutputCoils" Id="{1a6865a2-a335-47b5-a016-a57799560c5b}">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="p_ModbusTx_OutputCoils" Id="{1a6865a2-a335-47b5-a016-a57799560c5b}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusTx_OutputCoils
 VAR
 	vccSC3_VCC_02: INT;
@@ -8,7 +8,7 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[mb_Output_Coils[0]:=FALSE;  //System Controls
-mb_Output_Coils[1]:=g_stSystem.xOverrideMode;  //System Controls
+mb_Output_Coils[1]:=FALSE;  //System Controls
 mb_Output_Coils[2]:=FALSE;  //System Controls
 mb_Output_Coils[3]:=FALSE;  //System Controls
 mb_Output_Coils[4]:=FALSE;  //System Controls
@@ -17,12 +17,12 @@ mb_Output_Coils[6]:=FALSE;  //System Controls
 mb_Output_Coils[7]:=FALSE;  //System Controls
 mb_Output_Coils[8]:=FALSE;  //System Controls
 mb_Output_Coils[9]:=FALSE;  //System Controls
-mb_Output_Coils[10]:=vgcMXT_VGC_04.xOPN_SW;  //Valve switch controls
-mb_Output_Coils[11]:=vgcDVD_VGC_01.xOPN_SW;  //Valve switch controls
-mb_Output_Coils[12]:=vgcDIA_VGC_01.xOPN_SW;  //Valve switch controls
-mb_Output_Coils[13]:=vgcDIA_VGC_02.xOPN_SW;  //Valve switch controls
-mb_Output_Coils[14]:=vgcDG1_VGC_01.xOPN_SW;  //Valve switch controls
-mb_Output_Coils[15]:=vgcDG1_VGC_02.xOPN_SW;  //Valve switch controls
+mb_Output_Coils[10]:=FALSE;  //Valve switch controls
+mb_Output_Coils[11]:=FALSE;  //Valve switch controls
+mb_Output_Coils[12]:=FALSE;  //Valve switch controls
+mb_Output_Coils[13]:=FALSE;  //Valve switch controls
+mb_Output_Coils[14]:=FALSE;  //Valve switch controls
+mb_Output_Coils[15]:=FALSE;  //Valve switch controls
 mb_Output_Coils[16]:=FALSE;  //Valve switch controls
 mb_Output_Coils[17]:=FALSE;  //Valve switch controls
 mb_Output_Coils[18]:=FALSE;  //Valve switch controls
@@ -127,13 +127,13 @@ mb_Output_Coils[117]:=FALSE;  //Turbo Controls
 mb_Output_Coils[118]:=FALSE;  //Turbo Controls
 mb_Output_Coils[119]:=FALSE;  //Turbo Controls
 //mb_Output_Coils[120]:=vgMXT_GCC_06.xHV_SW;  //CC HV Enable
-mb_Output_Coils[121]:=vgDVD_GCC_02.xHV_SW;  //CC HV Enable
-mb_Output_Coils[122]:=vgDVD_GCC_04.xHV_SW;  //CC HV Enable
-mb_Output_Coils[123]:=vgMON_GCC_01.xHV_SW;  //CC HV Enable
-mb_Output_Coils[124]:=vgDIA_GCC_01.xHV_SW;  //CC HV Enable
-mb_Output_Coils[125]:=vgSB2_GCC_01.xHV_SW;  //CC HV Enable
-mb_Output_Coils[126]:=vgDG1_GCC_01.xHV_SW;  //CC HV Enable
-mb_Output_Coils[127]:=vgDG2_GCC_01.xHV_SW;  //CC HV Enable
+mb_Output_Coils[121]:=FALSE;  //CC HV Enable
+mb_Output_Coils[122]:=FALSE;  //CC HV Enable
+mb_Output_Coils[123]:=FALSE;  //CC HV Enable
+mb_Output_Coils[124]:=FALSE;  //CC HV Enable
+mb_Output_Coils[125]:=FALSE;  //CC HV Enable
+mb_Output_Coils[126]:=FALSE;  //CC HV Enable
+mb_Output_Coils[127]:=FALSE;  //CC HV Enable
 mb_Output_Coils[128]:=FALSE;  //CC HV Enable
 mb_Output_Coils[129]:=FALSE;  //CC HV Enable
 mb_Output_Coils[130]:=FALSE;  //CC HV Enable
@@ -263,6 +263,5 @@ mb_Output_Coils[253]:=FALSE;  //
 mb_Output_Coils[254]:=FALSE;  //
 mb_Output_Coils[255]:=FALSE;  //]]></ST>
     </Implementation>
-    <ObjectProperties />
   </POU>
 </TcPlcObject>

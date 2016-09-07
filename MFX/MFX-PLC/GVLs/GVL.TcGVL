@@ -9,8 +9,8 @@
 	q_xHEARTBEAT_ALIVE: BOOL;//Whether heartbeat has updated
 	q_xLAST_MESSAGE: WORD;   //Message to IOC
 	q_xFAULTED: BOOL; //Whether Lens Interlock has tripped
-	q_xLIMIT_MODE : INT;     //Limit mode being evaluated
-	q_xCURRENT_LIMIT : REAL; //Limit value being used
+	q_iLIMIT_MODE : INT;     //Limit mode being evaluated
+	q_rCURRENT_LIMIT : REAL; //Limit value being used
 	
 	i_xMFX_LENS01 : LENS_STRUCT; //First transfocator lens
 	i_xMFX_LENS02 : LENS_STRUCT; //Second transfocator lens
@@ -26,11 +26,11 @@
 	i_xXRT_LENS02 : LENS_STRUCT; //Second prefocus lens
 	i_xXRT_LENS03 : LENS_STRUCT; //Third prefocus lens
 	
-	i_xPREFOCUS_LIMIT: REAL; //Limit of the pre-focused MFX lenses
-	i_xMFX_ONLY_LIMIT: REAL; //Limit of only the MFX lenses
-	i_xXRT_ONLY_LIMIT: REAL; //Limit of only the XRT lenses
+	i_rPREFOCUS_LIMIT: REAL; //Limit of the pre-focused MFX lenses
+	i_rMFX_ONLY_LIMIT: REAL; //Limit of only the MFX lenses
+	i_rXRT_ONLY_LIMIT: REAL; //Limit of only the XRT lenses
 
-	i_xBEAM_FOCUS: REAL; //Current calculated focal point
+	i_rBEAM_FOCUS: REAL; //Current calculated focal point
 	
 	i_xIOC_HEARTBEAT: BOOL; //Current status of heartbeat
 

@@ -16,15 +16,10 @@ VAR_OUTPUT
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF BEAT THEN
-	TIME_ON(IN:=BEAT,PT:=DEADTIME);
-	ALIVE:=TIME_ON.Q;
-END_IF
+      <ST><![CDATA[TIME_ON(IN:=BEAT,PT:=DEADTIME);
+TIME_OFF(IN:=BEAT,PT:=DEADTIME);
 
-IF NOT BEAT THEN
-	TIME_OFF(IN:=BEAT,PT:=DEADTIME);
-	ALIVE:=TIME_OFF.Q;
-END_IF]]></ST>
+ALIVE := TIME_ON.Q AND TIME_OFF.Q;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

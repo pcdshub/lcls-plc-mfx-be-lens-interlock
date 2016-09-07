@@ -6,8 +6,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//MEMCPY(destAddr:=ADR(mb_PLC_Memory[10]), srcAddr:=ADR(vgMXT_GCC_06.rPRESS), n:=SIZEOF(vgMXT_GCC_06.rPRESS));  //VG pressure readbacks
-//MEMCPY(destAddr:=ADR(mb_PLC_Memory[12]), srcAddr:=ADR(vgDVD_GCC_02.rPRESS), n:=SIZEOF(vgDVD_GCC_02.rPRESS));  //VG pressure readbacks
+      <ST><![CDATA[MEMCPY(destAddr:=ADR(mb_PLC_Memory[100]), srcAddr:=ADR(q_iLIMIT_MODE), n:=SIZEOF(q_iLIMIT_MODE));  //VG pressure readbacks
+MEMCPY(destAddr:=ADR(mb_PLC_Memory[200]), srcAddr:=ADR(q_rCURRENT_LIMIT), n:=SIZEOF(q_rCURRENT_LIMIT));  //VG pressure readbacks
 //MEMCPY(destAddr:=ADR(mb_PLC_Memory[14]), srcAddr:=ADR(vgDVD_GCC_04.rPRESS), n:=SIZEOF(vgDVD_GCC_04.rPRESS));  //VG pressure readbacks
 //MEMCPY(destAddr:=ADR(mb_PLC_Memory[16]), srcAddr:=ADR(vgMON_GCC_01.rPRESS), n:=SIZEOF(vgMON_GCC_01.rPRESS));  //VG pressure readbacks
 //MEMCPY(destAddr:=ADR(mb_PLC_Memory[18]), srcAddr:=ADR(vgDIA_GCC_01.rPRESS), n:=SIZEOF(vgDIA_GCC_01.rPRESS));  //VG pressure readbacks

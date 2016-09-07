@@ -11,9 +11,9 @@ VAR_OUTPUT
 	xHV_DIS: BOOL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[mb_Input_Coils[0]:=FALSE;  //default
-mb_Input_Coils[1]:=FALSE;  //default
-mb_Input_Coils[2]:=FALSE;  //default
+      <ST><![CDATA[mb_Input_Coils[0]:=q_xHEARTBEAT_ALIVE;  //default
+mb_Input_Coils[1]:=q_xFAULTED;  //default
+mb_Input_Coils[2]:=q_xLENSES_KNOWN;  //default
 mb_Input_Coils[3]:=FALSE;  //default
 mb_Input_Coils[4]:=FALSE;  //default
 mb_Input_Coils[5]:=FALSE;  //default
@@ -252,7 +252,7 @@ mb_Input_Coils[237]:=FALSE;  //VG readbacks
 mb_Input_Coils[238]:=FALSE;  //VG readbacks
 mb_Input_Coils[239]:=FALSE;  //VG readbacks
 mb_Input_Coils[240]:=FALSE;  //VG readbacks
-mb_Input_Coils[241]:=FALSE;
+mb_Input_Coils[241]:=FALSE;  //VG readbacks
 mb_Input_Coils[242]:=FALSE;  //VG readbacks
 mb_Input_Coils[243]:=FALSE;  //VG readbacks
 mb_Input_Coils[244]:=FALSE;  //VG readbacks

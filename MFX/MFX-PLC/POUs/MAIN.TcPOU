@@ -36,11 +36,13 @@ p_MPSSup();
 	Modbus Map Receive
 	IMPORTANT: This is the LAST subroutine to be called. 
 *)
+
 p_ModbusTx_InputCoils();
-p_ModbusTx_OutputCoils();
-p_ModbusTx_InputReg();
+//p_ModbusTx_OutputCoils();
+//p_ModbusTx_InputReg();
 //p_ModbusTx_OutputReg();
 p_ModbusTx_PLCMemory();
+
 ]]></ST>
     </Implementation>
   </POU>
