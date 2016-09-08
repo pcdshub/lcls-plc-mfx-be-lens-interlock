@@ -34,7 +34,8 @@
 	
 	i_xIOC_HEARTBEAT: BOOL; //Current status of heartbeat
 
-
+	// Clear Fault Flags
+	i_xFAULT_CLEAR: BOOL;
 	
 	LOTO_Override: BOOL := TRUE;
 	/// test mb_Input_Coils[0] with "modpoll -r 32769 -t 1 127.0.0.1" 
@@ -47,7 +48,6 @@
 	mb_Output_Registers: ARRAY[0..255] OF WORD;
 	/// test mb_PLC_Memory[0] with "modpoll -r 12289 -t 4 127.0.0.1" 
 	mb_PLC_Memory AT %MW0: ARRAY[0..1000] OF WORD;
-
 
 
 END_VAR]]></Declaration>

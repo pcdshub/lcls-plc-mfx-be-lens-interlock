@@ -17,7 +17,7 @@ g_stSystem.xOverrideMode:=mb_Output_Coils[1];  //System Controls
 //mb_Output_Coils[7];  //System Controls
 //mb_Output_Coils[8];  //System Controls
 //mb_Output_Coils[9];  //System Controls
-i_xMFX_LENS01.KNOWN:=mb_Output_Coils[10];  //Valve switch controls
+//i_xMFX_LENS01.KNOWN:=mb_Output_Coils[10];  //Valve switch controls
 i_xMFX_LENS02.KNOWN:=mb_Output_Coils[11];  //Valve switch controls
 i_xMFX_LENS03.KNOWN:=mb_Output_Coils[12];  //Valve switch controls
 i_xMFX_LENS04.KNOWN:=mb_Output_Coils[13];  //Valve switch controls
@@ -28,8 +28,8 @@ i_xMFX_LENS08.KNOWN:=mb_Output_Coils[17];  //Valve switch controls
 i_xMFX_LENS09.KNOWN:=mb_Output_Coils[18];  //Valve switch controls
 i_xMFX_LENS10.KNOWN:=mb_Output_Coils[19];  //Valve switch controls
 i_xXRT_LENS01.KNOWN:=mb_Output_Coils[20];
-i_xXRT_LENS01.KNOWN:=mb_Output_Coils[21];
-i_xXRT_LENS01.KNOWN:=mb_Output_Coils[22];
+i_xXRT_LENS02.KNOWN:=mb_Output_Coils[21];
+i_xXRT_LENS03.KNOWN:=mb_Output_Coils[22];
 //mb_Output_Coils[23];  //Valve switch controls
 //mb_Output_Coils[24];  //Valve switch controls
 //mb_Output_Coils[25];  //Valve switch controls
@@ -48,8 +48,8 @@ i_xMFX_LENS08.IN:=mb_Output_Coils[37];  //Valve switch controls
 i_xMFX_LENS09.IN:=mb_Output_Coils[38];  //Valve switch controls
 i_xMFX_LENS10.IN:=mb_Output_Coils[39];  //Valve switch controls
 i_xXRT_LENS01.IN:=mb_Output_Coils[40];
-i_xXRT_LENS01.IN:=mb_Output_Coils[41];
-i_xXRT_LENS01.IN:=mb_Output_Coils[42];
+i_xXRT_LENS02.IN:=mb_Output_Coils[41];
+i_xXRT_LENS03.IN:=mb_Output_Coils[42];
 //mb_Output_Coils[43];  //Valve switch controls
 //mb_Output_Coils[44];  //Valve switch controls
 //mb_Output_Coils[45];  //Valve switch controls
@@ -58,7 +58,7 @@ i_xXRT_LENS01.IN:=mb_Output_Coils[42];
 //mb_Output_Coils[48];  //Valve switch controls
 //mb_Output_Coils[49];  //Valve switch controls
 i_xIOC_HEARTBEAT:=mb_Output_Coils[50];  //Valve switch controls
-//mb_Output_Coils[51];  //Valve switch controls
+i_xFAULT_CLEAR  :=mb_Output_Coils[51];  //Valve switch controls
 //mb_Output_Coils[52];  //Valve switch controls
 //mb_Output_Coils[53];  //Valve switch controls
 //mb_Output_Coils[54];  //Valve switch controls

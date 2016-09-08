@@ -19,7 +19,7 @@ END_VAR
       <ST><![CDATA[TIME_ON(IN:=BEAT,PT:=DEADTIME);
 TIME_OFF(IN:=BEAT,PT:=DEADTIME);
 
-ALIVE := TIME_ON.Q AND TIME_OFF.Q;]]></ST>
+ALIVE := NOT TIME_ON.Q AND TIME_OFF.Q;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
