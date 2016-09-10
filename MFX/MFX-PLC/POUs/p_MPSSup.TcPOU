@@ -48,6 +48,7 @@ q_xXRT_LENSES_IN :=  i_xXRT_LENS01.IN
 //If Both lenses are used, compare to pre-focused limit
 IF q_xMFX_LENSES_IN AND q_xXRT_LENSES_IN THEN
 	q_iLIMIT_MODE := 3;
+	q_rCURRENT_LIMIT := i_rPREFOCUS_LIMIT;
 	IF  i_rPREFOCUS_LIMIT > i_rBEAM_FOCUS THEN
 		q_xMFX_LENS_MPSOK := 1;
 		q_xFAULTED := 0;
@@ -59,6 +60,7 @@ IF q_xMFX_LENSES_IN AND q_xXRT_LENSES_IN THEN
 //If only MFX lenses are in compare to MFX only limit
 ELSIF q_xMFX_LENSES_IN THEN
 	q_iLIMIT_MODE := 2;
+	q_rCURRENT_LIMIT := i_rMFX_ONLY_LIMIT;
 	IF i_rMFX_ONLY_LIMIT > i_rBEAM_FOCUS THEN
 		q_xMFX_LENS_MPSOK := 1;
 		q_xFAULTED := 0;
