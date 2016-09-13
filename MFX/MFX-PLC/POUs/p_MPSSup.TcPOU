@@ -5,16 +5,25 @@
 VAR
 	q_xMFX_LENS_MPSOK: BOOL;
 	BEAT: Heartbeat;
-
+	STATE_LATCH : RS;
+	LIMIT_LATCH : RS;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//Instantiate Heartbeat and check to see if IOC is alive
+      <ST><![CDATA[//Instantiate Latches
+STATE_LATCH(SET:=NOT q_xLENSES_KNOWN,RESET1:=i_xFAULT_CLEAR);
+q_xPOSITION_LATCH := STATE_LATCH.Q1;
+
+LIMIT_LATCH(SET:=q_xLIMIT_VIOLATED,RESET1:=i_xFAULT_CLEAR);
+q_xLIMIT_LATCH := LIMIT_LATCH.Q1;
+
+//Instantiate Heartbeat and check to see if IOC is alive
 BEAT(BEAT:=i_xIOC_HEARTBEAT,DEADTIME:=TIME#1.0S);
 q_xHEARTBEAT_ALIVE := BEAT.ALIVE;
+
 IF NOT BEAT.ALIVE THEN
 	q_xMFX_LENS_MPSOK := 0;
-	q_xFAULTED := 0;
+	q_xFAULTED := 1;
 	RETURN;
 END_IF
 
@@ -26,13 +35,7 @@ q_xLENSES_KNOWN := (   i_xMFX_LENS02.KNOWN   //i_xMFX_LENS01.KNOWN AND i_xMFX_LE
 					   AND i_xMFX_LENS08.KNOWN AND i_xMFX_LENS09.KNOWN
 					   AND i_xMFX_LENS10.KNOWN AND i_xXRT_LENS01.KNOWN
 					   AND i_xXRT_LENS02.KNOWN AND i_xXRT_LENS03.KNOWN);
-				
-IF NOT q_xLENSES_KNOWN THEN
-  q_xMFX_LENS_MPSOK := 0;
-  q_xFAULTED := 1;
-  RETURN;
-END_IF
-
+			
 //Determine which lens group/s are being used
 q_xMFX_LENSES_IN :=  i_xMFX_LENS02.IN  //i_xMFX_LENS01.IN OR i_xMFX_LENS02.IN
 				 	 OR i_xMFX_LENS03.IN OR i_xMFX_LENS04.IN 
@@ -45,16 +48,14 @@ q_xXRT_LENSES_IN :=  i_xXRT_LENS01.IN
 					 OR i_xXRT_LENS03.IN;
 
 
-//If Both lenses are used, compare to pre-focused limit
+//If both lenses are used, compare to pre-focused limit
 IF q_xMFX_LENSES_IN AND q_xXRT_LENSES_IN THEN
 	q_iLIMIT_MODE := 3;
 	q_rCURRENT_LIMIT := i_rPREFOCUS_LIMIT;
 	IF  i_rPREFOCUS_LIMIT > i_rBEAM_FOCUS THEN
-		q_xMFX_LENS_MPSOK := 1;
-		q_xFAULTED := 0;
+		q_xLIMIT_VIOLATED := 0;
 	ELSE
-		q_xMFX_LENS_MPSOK := 0;
-		q_xFAULTED := 1;
+		q_xLIMIT_VIOLATED := 1;
 	END_IF
 
 //If only MFX lenses are in compare to MFX only limit
@@ -62,11 +63,9 @@ ELSIF q_xMFX_LENSES_IN THEN
 	q_iLIMIT_MODE := 2;
 	q_rCURRENT_LIMIT := i_rMFX_ONLY_LIMIT;
 	IF i_rMFX_ONLY_LIMIT > i_rBEAM_FOCUS THEN
-		q_xMFX_LENS_MPSOK := 1;
-		q_xFAULTED := 0;
+		q_xLIMIT_VIOLATED := 0;
 	ELSE
-		q_xMFX_LENS_MPSOK := 0;
-		q_xFAULTED := 1;
+		q_xLIMIT_VIOLATED := 1;
 	END_IF
 
 //If only XRT lenses are in compare to XRT only limit
@@ -74,19 +73,25 @@ ELSIF q_xXRT_LENSES_IN THEN
 	q_iLIMIT_MODE := 1;
 	q_rCURRENT_LIMIT := i_rXRT_ONLY_LIMIT;
 	IF i_rXRT_ONLY_LIMIT < i_rBEAM_FOCUS THEN
-		q_xMFX_LENS_MPSOK := 1;
-		q_xFAULTED := 0;
+		q_xLIMIT_VIOLATED := 0;
 	ELSE
-		q_xMFX_LENS_MPSOK := 0;
-		q_xFAULTED := 1;
+		q_xLIMIT_VIOLATED := 1;
 	END_IF
-//IF no lenses are in, simply return 
+	
+//If no lenses are in, no limit to be violated 
 ELSE 
 	q_iLIMIT_MODE :=0;
 	q_rCURRENT_LIMIT := 0.0;
+	q_xLIMIT_VIOLATED := 0;
+END_IF
+
+//Convert to final summary
+IF NOT q_xLIMIT_VIOLATED AND q_xLENSES_KNOWN THEN
 	q_xMFX_LENS_MPSOK := 1;
 	q_xFAULTED := 0;
-	RETURN;
+ELSE
+	q_xMFX_LENS_MPSOK := 0;
+	q_xFAULTED := 1;
 END_IF
 
 ]]></ST>
