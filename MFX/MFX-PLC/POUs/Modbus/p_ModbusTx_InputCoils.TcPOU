@@ -14,7 +14,7 @@ END_VAR]]></Declaration>
       <ST><![CDATA[mb_Input_Coils[0]:=q_xHEARTBEAT_ALIVE;  //default
 mb_Input_Coils[1]:=q_xFAULTED;  //default
 mb_Input_Coils[2]:=q_xLENSES_KNOWN;  //default
-mb_Input_Coils[3]:=FALSE;  //default
+mb_Input_Coils[3]:=q_xLIMIT_VIOLATED;  //default
 mb_Input_Coils[4]:=FALSE;  //default
 mb_Input_Coils[5]:=FALSE;  //default
 mb_Input_Coils[6]:=FALSE;  //default
