@@ -15,8 +15,8 @@ END_VAR]]></Declaration>
 mb_Input_Coils[1]:=q_xFAULTED;  //default
 mb_Input_Coils[2]:=q_xLENSES_KNOWN;  //default
 mb_Input_Coils[3]:=q_xLIMIT_VIOLATED;  //default
-mb_Input_Coils[4]:=FALSE;  //default
-mb_Input_Coils[5]:=FALSE;  //default
+mb_Input_Coils[4]:=q_xPOSITION_LATCH;  //default
+mb_Input_Coils[5]:=q_xLIMIT_LATCH;  //default
 mb_Input_Coils[6]:=FALSE;  //default
 mb_Input_Coils[7]:=FALSE;  //default
 mb_Input_Coils[8]:=FALSE;  //default
