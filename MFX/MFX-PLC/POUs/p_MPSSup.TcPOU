@@ -3,7 +3,6 @@
   <POU Name="p_MPSSup" Id="{22fa257d-fc87-4b8c-8293-563a03fa02d7}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_MPSSup
 VAR
-	q_xMFX_LENS_MPSOK: BOOL;
 	BEAT: Heartbeat;
 	STATE_LATCH : RS;
 	LIMIT_LATCH : RS;

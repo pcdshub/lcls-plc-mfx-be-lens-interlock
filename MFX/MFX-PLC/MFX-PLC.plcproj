@@ -65,6 +65,10 @@
     <Compile Include="POUs\p_MPSSup.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\p_SoftIOMap.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
     <Compile Include="POUs\p_XLegacyPLCModbus.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -216,7 +220,7 @@
             <o t="UserList">
               <a n="Users" cet="User">
                 <o>
-                  <v n="Id">{8ecb9f7e-f15e-426a-82d9-b73c46472b1b}</v>
+                  <v n="Id">{7b6dfd4f-41c6-4148-ad99-bd5c22313764}</v>
                   <v n="Name">"Owner"</v>
                   <v n="FullName">""</v>
                   <v n="Description">""</v>
@@ -232,24 +236,24 @@
             <o t="GroupList">
               <a n="Groups" cet="Group">
                 <o>
-                  <v n="Id">{afd12757-5550-44f6-92be-0de109c6e4b9}</v>
+                  <v n="Id">{5fea25f6-d414-4083-b3a9-44022d3b41ea}</v>
                   <v n="Name">"Owner"</v>
                   <v n="Description">""</v>
                   <v n="IsEveryoneGroup">false</v>
                   <v n="IsOwnerGroup">true</v>
                   <l n="UserMembers" t="ArrayList" cet="Guid">
-                    <v>8ecb9f7e-f15e-426a-82d9-b73c46472b1b</v>
+                    <v>7b6dfd4f-41c6-4148-ad99-bd5c22313764</v>
                   </l>
                   <l n="GroupMembers" t="ArrayList" />
                 </o>
                 <o>
-                  <v n="Id">{e0ad2785-18dc-4e5e-856d-ab3790d637aa}</v>
+                  <v n="Id">{76e4bd4b-5e3a-4ed7-a90e-8d16e0ed487a}</v>
                   <v n="Name">"Everyone"</v>
                   <v n="Description">""</v>
                   <v n="IsEveryoneGroup">true</v>
                   <v n="IsOwnerGroup">false</v>
                   <l n="UserMembers" t="ArrayList" cet="Guid">
-                    <v>8ecb9f7e-f15e-426a-82d9-b73c46472b1b</v>
+                    <v>7b6dfd4f-41c6-4148-ad99-bd5c22313764</v>
                   </l>
                   <l n="GroupMembers" t="ArrayList" />
                 </o>
@@ -258,7 +262,7 @@
             <v>UserAuthentication</v>
             <o t="UserAuthentication">
               <d n="UserToPasswordHash" t="Hashtable" ckt="Guid" cvt="String">
-                <v>8ecb9f7e-f15e-426a-82d9-b73c46472b1b</v>
+                <v>7b6dfd4f-41c6-4148-ad99-bd5c22313764</v>
                 <v>d41d8cd98f00b204e9800998ecf8427e</v>
               </d>
             </o>

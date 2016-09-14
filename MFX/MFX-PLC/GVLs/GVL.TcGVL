@@ -11,6 +11,11 @@
 	q_xFAULTED: BOOL; //Whether Lens Interlock has tripped
 	q_iLIMIT_MODE : INT;     //Limit mode being evaluated
 	q_rCURRENT_LIMIT : REAL; //Limit value being used
+	q_xLIMIT_VIOLATED : BOOL;  //Whether limit has been violated
+	q_xPOSITION_LATCH    : BOOL; //Position Error Latch
+	q_xLIMIT_LATCH       : BOOL;
+	q_xMFX_LENS_MPSOK    : BOOL;
+	
 	
 	i_xMFX_LENS01 : LENS_STRUCT; //First transfocator lens
 	i_xMFX_LENS02 : LENS_STRUCT; //Second transfocator lens
@@ -33,7 +38,7 @@
 	i_rBEAM_FOCUS: REAL; //Current calculated focal point
 	
 	i_xIOC_HEARTBEAT: BOOL; //Current status of heartbeat
-
+	
 	// Clear Fault Flags
 	i_xFAULT_CLEAR: BOOL;
 	

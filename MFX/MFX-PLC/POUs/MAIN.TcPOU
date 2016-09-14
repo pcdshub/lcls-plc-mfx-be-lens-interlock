@@ -30,7 +30,7 @@ p_MPSSup();
 (* 	HARD-WIRED I/O UPDATE
 	Update IO 
 *)
-
+p_SoftIOMap();
 
 (* 	EPICS Tx UPDATE
 	Modbus Map Receive
