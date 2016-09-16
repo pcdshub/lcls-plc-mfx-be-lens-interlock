@@ -6,10 +6,11 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[MEMCPY(srcAddr:=ADR(mb_PLC_Memory[0]), destAddr:=ADR(i_rBEAM_FOCUS), n:=SIZEOF(i_rBEAM_FOCUS));  //VG pressure sp readbacks
+      <ST><![CDATA[MEMCPY(srcAddr:=ADR(mb_PLC_Memory[0]), destAddr:=ADR(i_rBEAM_FOCUS),     n:=SIZEOF(i_rBEAM_FOCUS));  //VG pressure sp readbacks
 MEMCPY(srcAddr:=ADR(mb_PLC_Memory[2]), destAddr:=ADR(i_rMFX_ONLY_LIMIT), n:=SIZEOF(i_rMFX_ONLY_LIMIT));  //VG pressure sp readbacks
 MEMCPY(srcAddr:=ADR(mb_PLC_Memory[4]), destAddr:=ADR(i_rXRT_ONLY_LIMIT), n:=SIZEOF(i_rXRT_ONLY_LIMIT));  //VG pressure sp readbacks
-MEMCPY(srcAddr:=ADR(mb_PLC_Memory[6]), destAddr:=ADR(i_rPREFOCUS_LIMIT),     n:=SIZEOF(i_rPREFOCUS_LIMIT));  //VG pressure sp readbackss]]></ST>
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[6]), destAddr:=ADR(i_rPREFOCUS_LIMIT), n:=SIZEOF(i_rPREFOCUS_LIMIT));  //VG pressure sp readbackss
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[8]), destAddr:=ADR(i_rXRT_FOCUS), n:=SIZEOF(i_rXRT_FOCUS));  //VG pressure sp readbackss]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

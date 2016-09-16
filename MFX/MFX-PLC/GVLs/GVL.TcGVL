@@ -36,7 +36,7 @@
 	i_rXRT_ONLY_LIMIT: REAL; //Limit of only the XRT lenses
 
 	i_rBEAM_FOCUS: REAL; //Current calculated focal point
-	
+	i_rXRT_FOCUS : REAL; //Current focal plane of the XRT
 	i_xIOC_HEARTBEAT: BOOL; //Current status of heartbeat
 	
 	// Clear Fault Flags
