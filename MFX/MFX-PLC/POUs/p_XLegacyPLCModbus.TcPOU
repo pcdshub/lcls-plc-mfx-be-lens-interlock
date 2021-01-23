@@ -3,11 +3,11 @@
   <POU Name="p_XLegacyPLCModbus" Id="{584bfb6d-db40-4fd3-ab21-119692ccb33c}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_XLegacyPLCModbus
 VAR
-	fbLegacyPLCInputCoilsRx	:	FB_MBReadCoils;
-	
-	i_xLegacyPLC_CnBits	:	ARRAY [0..20] OF BYTE;
-	
-	ftReset	: F_TRIG; 
+    fbLegacyPLCInputCoilsRx	:	FB_MBReadCoils;
+
+    i_xLegacyPLC_CnBits	:	ARRAY [0..20] OF BYTE;
+
+    ftReset	: F_TRIG;
 
 END_VAR
 ]]></Declaration>
@@ -33,29 +33,29 @@ fbLegacyPLCInputCoilsRx.bExecute := TRUE;
 fbLegacyPLCInputCoilsRx(sIPAddr:='172.21.62.99', nTCPPort:=502, nQuantity:=32, nMBAddr:=8#6000, cbLength:=SIZEOF(i_xLegacyPLC_CnBits),  pDestAddr:=ADR(i_xLegacyPLC_CnBits), tTimeout:=T#10S);
 
 IF fbLegacyPLCInputCoilsRx.bError THEN
-	//run some error code for modbus
-	//if there's a modbus error, set all incoming bits to zero, set 
-	// HXX PLC Relay coil C[10] is used for MXT:GCC:06.VacOK
-	i_xLegacyPLC_CnBits[0].0 := 0;
-	i_xLegacyPLC_CnBits[0].1 := 0;
-	i_xLegacyPLC_CnBits[0].2 := 0;
-	i_xLegacyPLC_CnBits[0].3 := 0;
-	i_xLegacyPLC_CnBits[0].4 := 0;
-	i_xLegacyPLC_CnBits[1].0 := 0;
-	i_xLegacyPLC_CnBits[1].1 := 0;
-	i_xLegacyPLC_CnBits[1].2 := 0;
-	
-	
-	
+    //run some error code for modbus
+    //if there's a modbus error, set all incoming bits to zero, set
+    // HXX PLC Relay coil C[10] is used for MXT:GCC:06.VacOK
+    i_xLegacyPLC_CnBits[0].0 := 0;
+    i_xLegacyPLC_CnBits[0].1 := 0;
+    i_xLegacyPLC_CnBits[0].2 := 0;
+    i_xLegacyPLC_CnBits[0].3 := 0;
+    i_xLegacyPLC_CnBits[0].4 := 0;
+    i_xLegacyPLC_CnBits[1].0 := 0;
+    i_xLegacyPLC_CnBits[1].1 := 0;
+    i_xLegacyPLC_CnBits[1].2 := 0;
+
+
+
 ELSIF ftReset.Q AND fbLegacyPLCInputCoilsRx.cbRead > 0 THEN
-	fbLegacyPLCInputCoilsRx.bExecute := FALSE;
-	
-	//i_xUSVacOK := i_xLegacyPLC_CnBits[1].0;
-	
+    fbLegacyPLCInputCoilsRx.bExecute := FALSE;
+
+    //i_xUSVacOK := i_xLegacyPLC_CnBits[1].0;
+
 ELSE
-	//more error code cause we didn't manage to read anything
+    //more error code cause we didn't manage to read anything
 END_IF
- 
+
 ]]></ST>
     </Implementation>
   </POU>

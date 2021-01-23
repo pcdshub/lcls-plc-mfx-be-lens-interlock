@@ -3,7 +3,7 @@
   <POU Name="p_ModbusTx_OutputCoils" Id="{1a6865a2-a335-47b5-a016-a57799560c5b}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusTx_OutputCoils
 VAR
-	vccSC3_VCC_02: INT;
+    vccSC3_VCC_02: INT;
 END_VAR
 ]]></Declaration>
     <Implementation>

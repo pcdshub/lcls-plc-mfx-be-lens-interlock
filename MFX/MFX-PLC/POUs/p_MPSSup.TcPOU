@@ -3,11 +3,11 @@
   <POU Name="p_MPSSup" Id="{22fa257d-fc87-4b8c-8293-563a03fa02d7}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_MPSSup
 VAR
-	BEAT: Heartbeat;
-	STATE_LATCH : RS;
-	LIMIT_LATCH : RS;
-	q_xXRT_VIOLATION : BOOL;
-	q_xMFX_VIOLATION : BOOL;
+    BEAT: Heartbeat;
+    STATE_LATCH : RS;
+    LIMIT_LATCH : RS;
+    q_xXRT_VIOLATION : BOOL;
+    q_xMFX_VIOLATION : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -23,76 +23,76 @@ BEAT(BEAT:=i_xIOC_HEARTBEAT,DEADTIME:=TIME#1.0S);
 q_xHEARTBEAT_ALIVE := BEAT.ALIVE;
 
 IF NOT BEAT.ALIVE THEN
-	q_xMFX_LENS_MPSOK := 0;
-	q_xFAULTED := 1;
-	RETURN;
+    q_xMFX_LENS_MPSOK := 0;
+    q_xFAULTED := 1;
+    RETURN;
 END_IF
 
 //Check no lens is unknown position
 q_xLENSES_KNOWN := (   i_xMFX_LENS02.KNOWN   //i_xMFX_LENS01.KNOWN AND i_xMFX_LENS02.KNOWN
-				 	   AND i_xMFX_LENS03.KNOWN 
-				       AND i_xMFX_LENS04.KNOWN AND i_xMFX_LENS05.KNOWN 
-					   AND i_xMFX_LENS06.KNOWN AND i_xMFX_LENS07.KNOWN
-					   AND i_xMFX_LENS08.KNOWN AND i_xMFX_LENS09.KNOWN
-					   AND i_xMFX_LENS10.KNOWN AND i_xXRT_LENS01.KNOWN
-					   AND i_xXRT_LENS02.KNOWN AND i_xXRT_LENS03.KNOWN);
+                        AND i_xMFX_LENS03.KNOWN
+                       AND i_xMFX_LENS04.KNOWN AND i_xMFX_LENS05.KNOWN
+                       AND i_xMFX_LENS06.KNOWN AND i_xMFX_LENS07.KNOWN
+                       AND i_xMFX_LENS08.KNOWN AND i_xMFX_LENS09.KNOWN
+                       AND i_xMFX_LENS10.KNOWN AND i_xXRT_LENS01.KNOWN
+                       AND i_xXRT_LENS02.KNOWN AND i_xXRT_LENS03.KNOWN);
 
-					   
+
 //Determine which lens group/s are being used
 q_xMFX_LENSES_IN :=  i_xMFX_LENS02.IN  //i_xMFX_LENS01.IN OR i_xMFX_LENS02.IN
-				 	 OR i_xMFX_LENS03.IN OR i_xMFX_LENS04.IN 
-					 OR i_xMFX_LENS05.IN OR i_xMFX_LENS06.IN
-					 OR i_xMFX_LENS07.IN OR i_xMFX_LENS08.IN
-					 OR i_xMFX_LENS09.IN OR i_xMFX_LENS10.IN;
+                      OR i_xMFX_LENS03.IN OR i_xMFX_LENS04.IN
+                     OR i_xMFX_LENS05.IN OR i_xMFX_LENS06.IN
+                     OR i_xMFX_LENS07.IN OR i_xMFX_LENS08.IN
+                     OR i_xMFX_LENS09.IN OR i_xMFX_LENS10.IN;
 
-q_xXRT_LENSES_IN :=  i_xXRT_LENS01.IN 
-				     OR i_xXRT_LENS02.IN
-					 OR i_xXRT_LENS03.IN;
+q_xXRT_LENSES_IN :=  i_xXRT_LENS01.IN
+                     OR i_xXRT_LENS02.IN
+                     OR i_xXRT_LENS03.IN;
 
 
 
 
 //Check XRT lenses all by themselves
 IF q_xXRT_LENSES_IN THEN
-	q_rCURRENT_LIMIT := i_rXRT_ONLY_LIMIT;
-	q_iLIMIT_MODE := 1;
-	IF i_rXRT_FOCUS = 0.0 OR i_rXRT_ONLY_LIMIT <= i_rXRT_FOCUS THEN
-		q_xXRT_VIOLATION := 0;
-	ELSE
-		q_xXRT_VIOLATION := 1;
-	END_IF
+    q_rCURRENT_LIMIT := i_rXRT_ONLY_LIMIT;
+    q_iLIMIT_MODE := 1;
+    IF i_rXRT_FOCUS = 0.0 OR i_rXRT_ONLY_LIMIT <= i_rXRT_FOCUS THEN
+        q_xXRT_VIOLATION := 0;
+    ELSE
+        q_xXRT_VIOLATION := 1;
+    END_IF
 ELSE
-	q_xXRT_VIOLATION := 0;
+    q_xXRT_VIOLATION := 0;
 END_IF
 
 
 IF q_xXRT_LENSES_IN AND q_xMFX_LENSES_IN THEN
-	q_iLIMIT_MODE := 3;
-	q_rCURRENT_LIMIT := i_rPREFOCUS_LIMIT;
-	IF  i_rPREFOCUS_LIMIT > i_rBEAM_FOCUS THEN
-		q_xMFX_VIOLATION := 0;
-	ELSE
-		q_xMFX_VIOLATION := 1;
-	END_IF
+    q_iLIMIT_MODE := 3;
+    q_rCURRENT_LIMIT := i_rPREFOCUS_LIMIT;
+    IF  i_rPREFOCUS_LIMIT > i_rBEAM_FOCUS THEN
+        q_xMFX_VIOLATION := 0;
+    ELSE
+        q_xMFX_VIOLATION := 1;
+    END_IF
 END_IF
 
 //If only MFX lenses are in compare to MFX only limit
 IF NOT q_xXRT_LENSES_IN AND q_xMFX_LENSES_IN THEN
-	q_iLIMIT_MODE := 2;
-	q_rCURRENT_LIMIT := i_rMFX_ONLY_LIMIT;
-	IF i_rMFX_ONLY_LIMIT > i_rBEAM_FOCUS THEN
-		q_xMFX_VIOLATION := 0;
-	ELSE
-		q_xMFX_VIOLATION := 1;
-	END_IF
+    q_iLIMIT_MODE := 2;
+    q_rCURRENT_LIMIT := i_rMFX_ONLY_LIMIT;
+    IF i_rMFX_ONLY_LIMIT > i_rBEAM_FOCUS THEN
+        q_xMFX_VIOLATION := 0;
+    ELSE
+        q_xMFX_VIOLATION := 1;
+    END_IF
 END_IF
 
-//If no lenses are in, no limit to be violated 
+//If no lenses are in, no limit to be violated
 IF NOT q_xMFX_LENSES_IN AND NOT q_xXRT_LENSES_IN THEN
-	q_iLIMIT_MODE :=0;
-	q_rCURRENT_LIMIT := 0.0;
-	q_xMFX_VIOLATION := 0;
-	q_xXRT_VIOLATION := 0;
+    q_iLIMIT_MODE :=0;
+    q_rCURRENT_LIMIT := 0.0;
+    q_xMFX_VIOLATION := 0;
+    q_xXRT_VIOLATION := 0;
 END_IF
 
 //Summarize both lens groups
@@ -100,11 +100,11 @@ q_xLIMIT_VIOLATED := q_xMFX_VIOLATION OR q_xXRT_VIOLATION;
 
 //Convert to final summary
 IF NOT q_xLIMIT_VIOLATED AND q_xLENSES_KNOWN THEN
-	q_xMFX_LENS_MPSOK := 1;
-	q_xFAULTED := 0;
+    q_xMFX_LENS_MPSOK := 1;
+    q_xFAULTED := 0;
 ELSE
-	q_xMFX_LENS_MPSOK := 0;
-	q_xFAULTED := 1;
+    q_xMFX_LENS_MPSOK := 0;
+    q_xFAULTED := 1;
 END_IF
 
 ]]></ST>

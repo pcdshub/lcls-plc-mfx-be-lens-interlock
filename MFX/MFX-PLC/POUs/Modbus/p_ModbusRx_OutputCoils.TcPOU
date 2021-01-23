@@ -3,7 +3,7 @@
   <POU Name="p_ModbusRx_OutputCoils" Id="{943c36cb-adb4-42b1-982e-b281da4eed9b}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusRx_OutputCoils
 VAR
-	
+
 END_VAR
 ]]></Declaration>
     <Implementation>

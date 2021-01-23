@@ -19,8 +19,8 @@ END_VAR
 //	i_xR46_40el1008s02c06 AT %I*: BOOL;
 //	i_xR46_40el1008s02c07 AT %I*: BOOL;
 //	i_xR46_40el1008s02c08 AT %I*: BOOL;
-	
-	i_xR47_32kl2794s01c01:= q_xMFX_LENS_MPSOK; //AT %Q*: BOOL;
+
+    i_xR47_32kl2794s01c01:= q_xMFX_LENS_MPSOK; //AT %Q*: BOOL;
 //	q_xR46_40el2008s03c02 AT %Q*: BOOL;
 //	q_xR46_40el2008s03c03 AT %Q*: BOOL;
 //	q_xR46_40el2008s03c04 AT %Q*: BOOL;
