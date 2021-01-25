@@ -1,0 +1,9 @@
+
+Links
+-----
+
+.. csv-table::
+    :header: Owner A, Item A, Owner B, Item B
+    :align: center
+
+        TIPC^MFX-PLC^MFX-PLC Instance, PlcTask Outputs^GVL_IO.i_xR47_32kl2794s01c01, TIID^Device 2 (CX-BK)^Box 1 (CX-BK), Term 2 (KL2794)^Channel 1^Output
