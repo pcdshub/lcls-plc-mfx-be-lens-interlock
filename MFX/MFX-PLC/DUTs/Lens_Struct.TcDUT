@@ -3,8 +3,8 @@
   <DUT Name="Lens_Struct" Id="{36c64e89-932e-4d90-91ea-396f68cbc675}">
     <Declaration><![CDATA[TYPE Lens_Struct :
 STRUCT
-	IN :    BOOL;
-	KNOWN : BOOL;
+    IN :    BOOL;
+    KNOWN : BOOL;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

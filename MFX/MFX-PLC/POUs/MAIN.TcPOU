@@ -3,8 +3,8 @@
   <POU Name="MAIN" Id="{8f63f011-6378-4f32-beaf-4437ace2efcc}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	myBoolean : BOOL;
-END_VAR 
+    myBoolean : BOOL;
+END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[(* Modbus receive *)
@@ -15,12 +15,12 @@ p_ModbusRx_PLCMemory();
 p_XLegacyPLCModbus();
 
 (* 	HARD-WIRED I/O UPDATE
-	Update IO 
+    Update IO
 *)
 
 
 (* 	RESOLVE LOGIC
-	Device Control & Monitoring 
+    Device Control & Monitoring
 *)
 
 
@@ -28,13 +28,13 @@ p_XLegacyPLCModbus();
 p_MPSSup();
 
 (* 	HARD-WIRED I/O UPDATE
-	Update IO 
+    Update IO
 *)
 p_SoftIOMap();
 
 (* 	EPICS Tx UPDATE
-	Modbus Map Receive
-	IMPORTANT: This is the LAST subroutine to be called. 
+    Modbus Map Receive
+    IMPORTANT: This is the LAST subroutine to be called.
 *)
 
 p_ModbusTx_InputCoils();

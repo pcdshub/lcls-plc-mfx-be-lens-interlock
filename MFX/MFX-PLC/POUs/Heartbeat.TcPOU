@@ -3,16 +3,16 @@
   <POU Name="Heartbeat" Id="{bb1dec25-e01c-4031-9939-182a9d36637a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Heartbeat
 VAR_INPUT
-	BEAT      : BOOL; (*Heartbeat to monitor*)
-	DEADTIME  : TIME; (*Acceptable deadtime*)
-	
+    BEAT      : BOOL; (*Heartbeat to monitor*)
+    DEADTIME  : TIME; (*Acceptable deadtime*)
+
 END_VAR
 
 VAR_OUTPUT
-	TIME_ON :TON;
-	TIME_OFF :TOF;
-	ALIVE : BOOL;     (*Whether Hearbeat is alive*)
-	
+    TIME_ON :TON;
+    TIME_OFF :TOF;
+    ALIVE : BOOL;     (*Whether Hearbeat is alive*)
+
 END_VAR
 ]]></Declaration>
     <Implementation>

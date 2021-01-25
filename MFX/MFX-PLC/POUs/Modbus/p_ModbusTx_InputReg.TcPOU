@@ -3,7 +3,7 @@
   <POU Name="p_ModbusTx_InputReg" Id="{1531d535-cff0-4bc5-94f7-4996acc25643}">
     <Declaration><![CDATA[PROGRAM p_ModbusTx_InputReg
 VAR
-	
+
 END_VAR
 ]]></Declaration>
     <Implementation>
