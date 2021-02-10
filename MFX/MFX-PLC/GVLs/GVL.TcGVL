@@ -1,47 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
   <GVL Name="GVL" Id="{14f7e4c4-1971-4a0b-b8fc-55754218cf88}">
     <Declaration><![CDATA[VAR_GLOBAL
-    /// User Memory Variables
-    q_xLENSES_KNOWN: BOOL;   //All of the lenses are in a known state
-    q_xMFX_LENSES_IN: BOOL;  //One of the MFX lenses are in
-    q_xXRT_LENSES_IN: BOOL;  //One of the XRT lenses are in
-    q_xHEARTBEAT_ALIVE: BOOL;//Whether heartbeat has updated
-    q_xLAST_MESSAGE: WORD;   //Message to IOC
-    q_xFAULTED: BOOL; //Whether Lens Interlock has tripped
-    q_iLIMIT_MODE : INT;     //Limit mode being evaluated
-    q_rCURRENT_LIMIT : REAL; //Limit value being used
-    q_xLIMIT_VIOLATED : BOOL;  //Whether limit has been violated
-    q_xPOSITION_LATCH    : BOOL; //Position Error Latch
-    q_xLIMIT_LATCH       : BOOL;
-    q_xMFX_LENS_MPSOK    : BOOL;
+    (* Fault Handling *)
+    //////////////////////////////////
+    bHEARTBEATALIVE   : BOOL;  //Whether heartbeat has updated
+    bFAULT    AT %Q*  : BOOL;    //Whether Lens Interlock has tripped
+    bTRIP_MPS AT %Q*  : BOOL; //Bit output to MPS
+    bLIMIT_VIOLATED   : BOOL;  //Whether limit has been violated
+    bSTATE_FAULT      : BOOL;  //Whether lens is in an unknown state
 
+    //Limit Latches
+    q_xPOSITION_LATCH : BOOL;  //Position Error Latch
+    q_xLIMIT_LATCH    : BOOL;  //Limit Latch
+    i_xFAULT_CLEAR    : BOOL;  //Clear fault bit
 
-    i_xMFX_LENS01 : LENS_STRUCT; //First transfocator lens
-    i_xMFX_LENS02 : LENS_STRUCT; //Second transfocator lens
-    i_xMFX_LENS03 : LENS_STRUCT; //Third transfocator lens
-    i_xMFX_LENS04 : LENS_STRUCT; //Fourth transfocator lens
-    i_xMFX_LENS05 : LENS_STRUCT; //Fifth transfocator lens
-    i_xMFX_LENS06 : LENS_STRUCT; //Sixth transfocator lens
-    i_xMFX_LENS07 : LENS_STRUCT; //Seventh transfocator lens
-    i_xMFX_LENS08 : LENS_STRUCT; //Eighth transfocator lens
-    i_xMFX_LENS09 : LENS_STRUCT; //Ninth transfocator lens
-    i_xMFX_LENS10 : LENS_STRUCT; //Tenth transfocator lens
-    i_xXRT_LENS01 : LENS_STRUCT; //First prefocus lens
-    i_xXRT_LENS02 : LENS_STRUCT; //Second prefocus lens
-    i_xXRT_LENS03 : LENS_STRUCT; //Third prefocus lens
+    (*Lens Information *)
+    ////////////////////////////////
+    XRT_LENSES : ARRAY[1..10] OF LENS; //Set of XRT Lenses
+    TFS_LENSES : ARRAY[1..10] OF LENS; //Set of TFS Lenses
+    XRT_RADIUS : REAL; //Current Radius of XRT lenses
+    TFS_RADIUS : REAL; //Current Radius of TFS lenses
 
-    i_rPREFOCUS_LIMIT: REAL; //Limit of the pre-focused MFX lenses
-    i_rMFX_ONLY_LIMIT: REAL; //Limit of only the MFX lenses
-    i_rXRT_ONLY_LIMIT: REAL; //Limit of only the XRT lenses
+    (* Limit Information *)
+    /////////////////////////////////
+    XRT_LIMIT : RADII_LIMIT;
+    TFS_LIMIT : RADII_LIMIT;
 
-    i_rBEAM_FOCUS: REAL; //Current calculated focal point
-    i_rXRT_FOCUS : REAL; //Current focal plane of the XRT
+    (* Heartbeat *)
+    ////////////////////////////////
     i_xIOC_HEARTBEAT: BOOL; //Current status of heartbeat
 
-    // Clear Fault Flags
-    i_xFAULT_CLEAR: BOOL;
-
+    (* Modbus *)
+    ///////////////////////////////
     LOTO_Override: BOOL := TRUE;
     /// test mb_Input_Coils[0] with "modpoll -r 32769 -t 1 127.0.0.1"
     mb_Input_Coils: ARRAY[0..255] OF BOOL;

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TcModuleClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2009/05/TcModuleClass" Hash="{CCF375EC-F40D-1990-79F4-4B5BA4732EAE}" GeneratedBy="TwinCAT XAE Plc">
+<TcModuleClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2009/05/TcModuleClass" Hash="{DA0C8CE4-CDC8-C9A1-946E-7E5D7F1A51A5}" GeneratedBy="TwinCAT XAE Plc">
   <DataTypes>
     <DataType>
       <Name Namespace="Tc2_System">E_WATCHDOG_TIME_CONFIG</Name>
@@ -17,175 +17,6 @@
         <Text>eWATCHDOG_TIME_MINUTES</Text>
         <Enum>2</Enum>
       </EnumInfo>
-    </DataType>
-    <DataType>
-      <Name Namespace="LCLSVacuumLib">System_Struct</Name>
-      <BitSize>40</BitSize>
-      <SubItem>
-        <Name>xswAlmRst</Name>
-        <Type>BOOL</Type>
-        <Comment> Global Alarm Reset - EPICS Command </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>0</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xAtVacuum</Name>
-        <Type>BOOL</Type>
-        <Comment> System At Vacuum </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>8</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xFirstScan</Name>
-        <Type>BOOL</Type>
-        <Comment> Bit set for one scan only during startup. Used for initialization. </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>16</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xOverrideMode</Name>
-        <Type>BOOL</Type>
-        <Comment>This bit is set when using the override features of the system</Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>24</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xIOState</Name>
-        <Type>BOOL</Type>
-        <Comment> ECat Bus Health </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>32</BitOffs>
-      </SubItem>
-    </DataType>
-    <DataType>
-      <Name Namespace="LCLSVacuumLib">ST_VG</Name>
-      <BitSize>320</BitSize>
-      <SubItem>
-        <Name>rPRESS</Name>
-        <Type>REAL</Type>
-        <Comment> A general gauge structure is used to make the rest of the interlocking simpler. There are some parameters for cold cathodes that are not used by pirani.
-These features aren't disabled, they just aren't used, think child/parent classes. 
- Readbacks </Comment>
-        <BitSize>32</BitSize>
-        <BitOffs>0</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>iPRESS_R</Name>
-        <Type>INT</Type>
-        <BitSize>16</BitSize>
-        <BitOffs>32</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xAT_VAC</Name>
-        <Type>BOOL</Type>
-        <BitSize>8</BitSize>
-        <BitOffs>48</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xPRESS_OK</Name>
-        <Type>BOOL</Type>
-        <BitSize>8</BitSize>
-        <BitOffs>56</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>wState</Name>
-        <Type>WORD</Type>
-        <Comment>current gauge state, to be used as replacement for press OK bit in the future.</Comment>
-        <BitSize>16</BitSize>
-        <BitOffs>64</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xHV_DIS</Name>
-        <Type>BOOL</Type>
-        <Comment> Controls </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>80</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xHV_SW</Name>
-        <Type>BOOL</Type>
-        <BitSize>8</BitSize>
-        <BitOffs>88</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>wHV_RO</Name>
-        <Type>WORD</Type>
-        <BitSize>16</BitSize>
-        <BitOffs>96</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xBAKEOUT</Name>
-        <Type>BOOL</Type>
-        <Comment> Bakeout bit </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>112</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>iTYPE</Name>
-        <Type>INT</Type>
-        <Comment>eTYPE: Gauge_Type := PG907;</Comment>
-        <BitSize>16</BitSize>
-        <BitOffs>128</BitOffs>
-        <Default>
-          <Value>0</Value>
-        </Default>
-      </SubItem>
-      <SubItem>
-        <Name>wPG</Name>
-        <Type>WORD</Type>
-        <BitSize>16</BitSize>
-        <BitOffs>144</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xTurnOnTime</Name>
-        <Type>BOOL</Type>
-        <Comment> Turn on Timers for cold cathode warmup </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>160</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>iVacSp</Name>
-        <Type>INT</Type>
-        <Comment> At vacuum setpoint for all gauges</Comment>
-        <BitSize>16</BitSize>
-        <BitOffs>176</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>rVAC_SP</Name>
-        <Type>REAL</Type>
-        <BitSize>32</BitSize>
-        <BitOffs>192</BitOffs>
-        <Default>
-          <Value>0.5</Value>
-        </Default>
-      </SubItem>
-      <SubItem>
-        <Name>rPRO_SP</Name>
-        <Type>REAL</Type>
-        <Comment> Protection setpoint for ion gauges at which the gauge turns off, not used for pirani </Comment>
-        <BitSize>32</BitSize>
-        <BitOffs>224</BitOffs>
-        <Default>
-          <Value>0.01</Value>
-        </Default>
-      </SubItem>
-      <SubItem>
-        <Name>rHYS_PR</Name>
-        <Type>REAL</Type>
-        <Comment> Protection setpoint hysteresis </Comment>
-        <BitSize>32</BitSize>
-        <BitOffs>256</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>rFULL_SCALE</Name>
-        <Type>REAL</Type>
-        <Comment> Full scale pressure in Torr for baratron pressure conversion </Comment>
-        <BitSize>32</BitSize>
-        <BitOffs>288</BitOffs>
-        <Default>
-          <Value>1000</Value>
-        </Default>
-      </SubItem>
     </DataType>
     <DataType>
       <Name Namespace="Tc2_ModbusSrv">FB_MBReadCoils</Name>
@@ -210,6 +41,9 @@ These features aren't disabled, they just aren't used, think child/parent classe
         <Comment> Port number of the target device </Comment>
         <BitSize>16</BitSize>
         <BitOffs>160</BitOffs>
+        <Default>
+          <Value>502</Value>
+        </Default>
         <Properties>
           <Property>
             <Name>ItemType</Name>
@@ -403,13 +237,27 @@ These features aren't disabled, they just aren't used, think child/parent classe
           </Property>
         </Properties>
       </SubItem>
+      <SubItem>
+        <Name>M</Name>
+        <Type>BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>48</BitOffs>
+        <Default>
+          <Value>1</Value>
+        </Default>
+        <Properties>
+          <Property>
+            <Name>conditionalshow</Name>
+          </Property>
+        </Properties>
+      </SubItem>
       <Properties>
         <Property>
           <Name>PouType</Name>
           <Value>FunctionBlock</Value>
         </Property>
         <Property>
-          <Name>hide_all_locals</Name>
+          <Name>conditionalshow_all_locals</Name>
         </Property>
       </Properties>
     </DataType>
@@ -562,7 +410,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
       </Properties>
     </DataType>
     <DataType>
-      <Name>Heartbeat</Name>
+      <Name>FB_HEARTBEAT</Name>
       <BitSize>576</BitSize>
       <SubItem>
         <Name>BEAT</Name>
@@ -683,124 +531,170 @@ These features aren't disabled, they just aren't used, think child/parent classe
       </Properties>
     </DataType>
     <DataType>
-      <Name>Lens_Struct</Name>
-      <BitSize>16</BitSize>
+      <Name>LENS</Name>
+      <BitSize>64</BitSize>
       <SubItem>
         <Name>IN</Name>
         <Type>BOOL</Type>
+        <Comment>Inserted state of the Lens</Comment>
         <BitSize>8</BitSize>
         <BitOffs>0</BitOffs>
       </SubItem>
       <SubItem>
         <Name>KNOWN</Name>
         <Type>BOOL</Type>
-        <BitSize>8</BitSize>
-        <BitOffs>8</BitOffs>
-      </SubItem>
-    </DataType>
-    <DataType>
-      <Name GUID="{18071995-0000-0000-0000-000000000041}" TcBaseType="true" HideSubItems="true" CName="AmsNetId">AMSNETID</Name>
-      <BitSize>48</BitSize>
-      <BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
-      <ArrayInfo>
-        <LBound>0</LBound>
-        <Elements>6</Elements>
-      </ArrayInfo>
-      <Format>
-        <Printf>%d.%d.%d.%d.%d.%d</Printf>
-        <Parameter>[0]</Parameter>
-        <Parameter>[1]</Parameter>
-        <Parameter>[2]</Parameter>
-        <Parameter>[3]</Parameter>
-        <Parameter>[4]</Parameter>
-        <Parameter>[5]</Parameter>
-      </Format>
-    </DataType>
-    <DataType>
-      <Name Namespace="LCLSVacuumLib">ST_VGC</Name>
-      <BitSize>96</BitSize>
-      <SubItem>
-        <Name>i_xOpnLS</Name>
-        <Type>BOOL</Type>
-        <Comment> Readbacks </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>0</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>i_xClsLS</Name>
-        <Type>BOOL</Type>
+        <Comment>Whether state of Lens is definite</Comment>
         <BitSize>8</BitSize>
         <BitOffs>8</BitOffs>
       </SubItem>
       <SubItem>
-        <Name>xOPN_SW</Name>
-        <Type>BOOL</Type>
-        <Comment> EPICS Controls </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>16</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xAlmRst</Name>
-        <Type>BOOL</Type>
-        <BitSize>8</BitSize>
-        <BitOffs>24</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xOvrdOpn</Name>
-        <Type>BOOL</Type>
-        <BitSize>8</BitSize>
+        <Name>RADIUS</Name>
+        <Type>REAL</Type>
+        <Comment>Current radius of lens</Comment>
+        <BitSize>32</BitSize>
         <BitOffs>32</BitOffs>
       </SubItem>
+    </DataType>
+    <DataType>
+      <Name>RADII_LIMIT</Name>
+      <BitSize>64</BitSize>
       <SubItem>
-        <Name>xDP_OK</Name>
-        <Type>BOOL</Type>
-        <Comment> Managed by the VGC function (FB_VGC) </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>40</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>xEXT_OK</Name>
-        <Type>BOOL</Type>
-        <Comment> External interlock for custom interlocking in addition to regular DP ilk, this must be set true, or the interlock condition before calling the FB_VGC </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>48</BitOffs>
+        <Name>LOW_LIMIT</Name>
+        <Type>REAL</Type>
+        <Comment>Lowest allowed radius</Comment>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
         <Default>
           <Value>0</Value>
         </Default>
       </SubItem>
       <SubItem>
-        <Name>xOPN_OK</Name>
-        <Type>BOOL</Type>
-        <Comment> Final SUM of DP_OK and EXT_OK, needed because it allows the DP ilk to be switched off, see FB_VGC.Dis_DPIlk </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>56</BitOffs>
+        <Name>HIGH_LIMIT</Name>
+        <Type>REAL</Type>
+        <Comment>Highest allowed radius</Comment>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+        <Default>
+          <Value>10000</Value>
+        </Default>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name>FB_LENS_SYSTEM</Name>
+      <BitSize>1184</BitSize>
+      <SubItem>
+        <Name>LENSES</Name>
+        <Type>LENS</Type>
+        <ArrayInfo>
+          <LBound>1</LBound>
+          <Elements>10</Elements>
+        </ArrayInfo>
+        <Comment>Array of lens structures</Comment>
+        <BitSize>640</BitSize>
+        <BitOffs>32</BitOffs>
+        <Properties>
+          <Property>
+            <Name>ItemType</Name>
+            <Value>Input</Value>
+          </Property>
+        </Properties>
       </SubItem>
       <SubItem>
-        <Name>xOPN_DO</Name>
-        <Type>BOOL</Type>
-        <Comment> Controls </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>64</BitOffs>
+        <Name>COUNT</Name>
+        <Type>INT</Type>
+        <Comment>Number of lenses</Comment>
+        <BitSize>16</BitSize>
+        <BitOffs>672</BitOffs>
+        <Properties>
+          <Property>
+            <Name>ItemType</Name>
+            <Value>Input</Value>
+          </Property>
+        </Properties>
       </SubItem>
       <SubItem>
-        <Name>xERR_DifPres</Name>
-        <Type>BOOL</Type>
-        <Comment> Alarm Outpus </Comment>
-        <BitSize>8</BitSize>
-        <BitOffs>72</BitOffs>
+        <Name>RADII_LIMIT</Name>
+        <Type>RADII_LIMIT</Type>
+        <Comment>Maximum allowed radius</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>704</BitOffs>
+        <Properties>
+          <Property>
+            <Name>ItemType</Name>
+            <Value>Input</Value>
+          </Property>
+        </Properties>
       </SubItem>
       <SubItem>
-        <Name>xERR_LstVac</Name>
+        <Name>UNKNOWN_FAULT</Name>
         <Type>BOOL</Type>
+        <Comment>Fault for unknown lens state</Comment>
         <BitSize>8</BitSize>
-        <BitOffs>80</BitOffs>
+        <BitOffs>768</BitOffs>
+        <Properties>
+          <Property>
+            <Name>ItemType</Name>
+            <Value>Output</Value>
+          </Property>
+        </Properties>
       </SubItem>
       <SubItem>
-        <Name>xAlmSum</Name>
+        <Name>LIMIT_FAULT</Name>
         <Type>BOOL</Type>
+        <Comment>Fault for radii outside limits</Comment>
         <BitSize>8</BitSize>
-        <BitOffs>88</BitOffs>
+        <BitOffs>776</BitOffs>
+        <Properties>
+          <Property>
+            <Name>ItemType</Name>
+            <Value>Output</Value>
+          </Property>
+        </Properties>
       </SubItem>
+      <SubItem>
+        <Name>EFF_RADII</Name>
+        <Type>REAL</Type>
+        <Comment>Calculated effective radii</Comment>
+        <BitSize>32</BitSize>
+        <BitOffs>800</BitOffs>
+        <Properties>
+          <Property>
+            <Name>ItemType</Name>
+            <Value>Output</Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>INDEX</Name>
+        <Type>INT</Type>
+        <Comment>Increment for loop</Comment>
+        <BitSize>16</BitSize>
+        <BitOffs>832</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>KNOWN</Name>
+        <Type>INT</Type>
+        <Comment>Number of known lenses</Comment>
+        <BitSize>16</BitSize>
+        <BitOffs>848</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>RADII</Name>
+        <Type>REAL</Type>
+        <ArrayInfo>
+          <LBound>1</LBound>
+          <Elements>10</Elements>
+        </ArrayInfo>
+        <Comment>Inserted Radii</Comment>
+        <BitSize>320</BitSize>
+        <BitOffs>864</BitOffs>
+      </SubItem>
+      <Properties>
+        <Property>
+          <Name>PouType</Name>
+          <Value>FunctionBlock</Value>
+        </Property>
+      </Properties>
     </DataType>
     <DataType>
       <Name>VERSION</Name>
@@ -910,6 +804,11 @@ These features aren't disabled, they just aren't used, think child/parent classe
         <Type GUID="{00000030-0000-0000-E000-000000000064}">ITComObjectServer</Type>
         <BitSize X64="64">32</BitSize>
         <BitOffs>256</BitOffs>
+        <Properties>
+          <Property>
+            <Name>TcComInterface</Name>
+          </Property>
+        </Properties>
       </SubItem>
       <SubItem>
         <Name>AppName</Name>
@@ -1010,26 +909,229 @@ These features aren't disabled, they just aren't used, think child/parent classe
       </Hides>
     </DataType>
     <DataType>
-      <Name GUID="{5456DAC5-9FA5-4A6B-B497-840FCC690FDD}" Namespace="PLC" TcBaseType="true">PlcLicenseInfo</Name>
-      <BitSize>1024</BitSize>
+      <Name>_Implicit_KindOfTask</Name>
+      <BitSize>16</BitSize>
+      <BaseType>INT</BaseType>
+      <EnumInfo>
+        <Text>_implicit_cyclic</Text>
+        <Enum>0</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text>_implicit_event</Text>
+        <Enum>1</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text>_implicit_external</Text>
+        <Enum>2</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text>_implicit_freewheeling</Text>
+        <Enum>3</Enum>
+      </EnumInfo>
+    </DataType>
+    <DataType>
+      <Name>_Implicit_Jitter_Distribution</Name>
+      <BitSize>48</BitSize>
       <SubItem>
-        <Name>LicenseId</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000021}">GUID</Type>
-        <BitSize>128</BitSize>
+        <Name>wRangeMax</Name>
+        <Type>WORD</Type>
+        <BitSize>16</BitSize>
         <BitOffs>0</BitOffs>
       </SubItem>
       <SubItem>
-        <Name>Instances</Name>
-        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <Name>wCountJitterNeg</Name>
+        <Type>WORD</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>16</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>wCountJitterPos</Name>
+        <Type>WORD</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <Properties>
+        <Property>
+          <Name>hide</Name>
+        </Property>
+      </Properties>
+    </DataType>
+    <DataType>
+      <Name>_Implicit_Task_Info</Name>
+      <BitSize>704</BitSize>
+      <SubItem>
+        <Name>dwVersion</Name>
+        <Type>DWORD</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>pszName</Name>
+        <Type PointerTo="1">STRING(80)</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>nPriority</Name>
+        <Type>INT</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>KindOf</Name>
+        <Type>_Implicit_KindOfTask</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>80</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>bWatchdog</Name>
+        <Type>BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>bProfilingTask</Name>
+        <Type>BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>104</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>dwEventFunctionPointer</Name>
+        <Type PointerTo="1">BYTE</Type>
         <BitSize>32</BitSize>
         <BitOffs>128</BitOffs>
       </SubItem>
       <SubItem>
-        <Name>LicenseName</Name>
-        <Type GUID="{18071995-0000-0000-0000-00010000005F}">STRING(95)</Type>
-        <BitSize>768</BitSize>
+        <Name>pszExternalEvent</Name>
+        <Type PointerTo="1">STRING(80)</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>dwTaskEntryFunctionPointer</Name>
+        <Type PointerTo="1">BYTE</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>dwWatchdogSensitivity</Name>
+        <Type>DWORD</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>224</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>dwInterval</Name>
+        <Type>DWORD</Type>
+        <BitSize>32</BitSize>
         <BitOffs>256</BitOffs>
       </SubItem>
+      <SubItem>
+        <Name>dwWatchdogTime</Name>
+        <Type>DWORD</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>288</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>dwLastCycleTime</Name>
+        <Type>DWORD</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>320</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>dwAverageCycleTime</Name>
+        <Type>DWORD</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>352</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>dwMaxCycleTime</Name>
+        <Type>DWORD</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>384</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>dwMinCycleTime</Name>
+        <Type>DWORD</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>416</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>diJitter</Name>
+        <Type>DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>448</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>diJitterMin</Name>
+        <Type>DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>480</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>diJitterMax</Name>
+        <Type>DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>512</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>dwCycleCount</Name>
+        <Type>DWORD</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>544</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>wTaskStatus</Name>
+        <Type>WORD</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>576</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>wNumOfJitterDistributions</Name>
+        <Type>WORD</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>592</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>pJitterDistribution</Name>
+        <Type PointerTo="1">_Implicit_Jitter_Distribution</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>608</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>bWithinSPSTimeSlicing</Name>
+        <Type>BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>640</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>byDummy</Name>
+        <Type>BYTE</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>648</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>bShouldBlock</Name>
+        <Type>BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>656</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>bActive</Name>
+        <Type>BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>664</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>dwIECCycleCount</Name>
+        <Type>DWORD</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>672</BitOffs>
+      </SubItem>
+      <Properties>
+        <Property>
+          <Name>hide</Name>
+        </Property>
+      </Properties>
     </DataType>
   </DataTypes>
   <Modules>
@@ -1049,75 +1151,13 @@ These features aren't disabled, they just aren't used, think child/parent classe
       <Parameters/>
       <DataAreas>
         <DataArea>
-          <AreaNo AreaType="InputDst" CreateSymbols="true">0</AreaNo>
-          <Name>PlcTask Inputs</Name>
-          <ContextId>0</ContextId>
-          <ByteSize>655360</ByteSize>
-          <Symbol>
-            <Name>GVL_IO.g_aEcatMaster1</Name>
-            <Comment> AMS NetID</Comment>
-            <BitSize>48</BitSize>
-            <BaseType GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4121856</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_IO.i_iR46_40el3064s01c01</Name>
-            <Comment> Generic PLC Rail </Comment>
-            <BitSize>16</BitSize>
-            <BaseType>INT</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4121904</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_IO.i_iR46_40el3064s01c02</Name>
-            <BitSize>16</BitSize>
-            <BaseType>INT</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4121920</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_IO.i_iR46_40el3064s01c03</Name>
-            <BitSize>16</BitSize>
-            <BaseType>INT</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4121936</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_IO.i_iR46_40el3064s01c04</Name>
-            <BitSize>16</BitSize>
-            <BaseType>INT</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4121952</BitOffs>
-          </Symbol>
-        </DataArea>
-        <DataArea>
           <AreaNo AreaType="OutputSrc" CreateSymbols="true">1</AreaNo>
           <Name>PlcTask Outputs</Name>
           <ContextId>0</ContextId>
           <ByteSize>655360</ByteSize>
           <Symbol>
-            <Name>GVL_IO.i_xR47_32kl2794s01c01</Name>
+            <Name>GVL.bFAULT</Name>
+            <Comment>Whether Lens Interlock has tripped</Comment>
             <BitSize>8</BitSize>
             <BaseType>BOOL</BaseType>
             <Properties>
@@ -1125,10 +1165,11 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4121968</BitOffs>
+            <BitOffs>4107248</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>GVL_IO.i_xR47_32kl2794s01c02</Name>
+            <Name>GVL.bTRIP_MPS</Name>
+            <Comment>Bit output to MPS</Comment>
             <BitSize>8</BitSize>
             <BaseType>BOOL</BaseType>
             <Properties>
@@ -1136,29 +1177,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4121976</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_IO.i_xR47_32kl2794s01c03</Name>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4121984</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_IO.i_xR47_32kl2794s01c04</Name>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4121992</BitOffs>
+            <BitOffs>4107256</BitOffs>
           </Symbol>
         </DataArea>
         <DataArea>
@@ -1201,7 +1220,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096128</BitOffs>
+            <BitOffs>4096224</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_EVENTLOG</Name>
@@ -1216,7 +1235,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096144</BitOffs>
+            <BitOffs>4096240</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_RTIME</Name>
@@ -1231,7 +1250,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096160</BitOffs>
+            <BitOffs>4096256</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_IO</Name>
@@ -1246,7 +1265,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096176</BitOffs>
+            <BitOffs>4096272</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_NC</Name>
@@ -1260,7 +1279,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096192</BitOffs>
+            <BitOffs>4096288</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_NCSAF</Name>
@@ -1274,7 +1293,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096208</BitOffs>
+            <BitOffs>4096304</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_NCSVB</Name>
@@ -1288,7 +1307,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096224</BitOffs>
+            <BitOffs>4096320</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_ISG</Name>
@@ -1302,7 +1321,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096240</BitOffs>
+            <BitOffs>4096336</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_CNC</Name>
@@ -1316,7 +1335,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096256</BitOffs>
+            <BitOffs>4096352</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_LINE</Name>
@@ -1330,7 +1349,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096272</BitOffs>
+            <BitOffs>4096368</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_PLC</Name>
@@ -1344,7 +1363,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096288</BitOffs>
+            <BitOffs>4096384</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_PLC_RTS1</Name>
@@ -1359,7 +1378,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096304</BitOffs>
+            <BitOffs>4096400</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_PLC_RTS2</Name>
@@ -1374,7 +1393,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096320</BitOffs>
+            <BitOffs>4096416</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_PLC_RTS3</Name>
@@ -1389,7 +1408,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096336</BitOffs>
+            <BitOffs>4096432</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_PLC_RTS4</Name>
@@ -1404,7 +1423,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096352</BitOffs>
+            <BitOffs>4096448</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_CAM</Name>
@@ -1418,7 +1437,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096368</BitOffs>
+            <BitOffs>4096464</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R0_CAMTOOL</Name>
@@ -1433,7 +1452,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096384</BitOffs>
+            <BitOffs>4096480</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R3_SYSSERV</Name>
@@ -1448,7 +1467,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096400</BitOffs>
+            <BitOffs>4096496</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R3_SCOPESERVER</Name>
@@ -1463,7 +1482,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096416</BitOffs>
+            <BitOffs>4096512</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_INVALID</Name>
@@ -1478,7 +1497,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096432</BitOffs>
+            <BitOffs>4096528</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_IDLE</Name>
@@ -1492,7 +1511,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096448</BitOffs>
+            <BitOffs>4096544</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_RESET</Name>
@@ -1506,7 +1525,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096464</BitOffs>
+            <BitOffs>4096560</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_INIT</Name>
@@ -1520,7 +1539,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096480</BitOffs>
+            <BitOffs>4096576</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_START</Name>
@@ -1534,7 +1553,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096496</BitOffs>
+            <BitOffs>4096592</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_RUN</Name>
@@ -1548,7 +1567,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096512</BitOffs>
+            <BitOffs>4096608</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_STOP</Name>
@@ -1562,7 +1581,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096528</BitOffs>
+            <BitOffs>4096624</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_SAVECFG</Name>
@@ -1576,7 +1595,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096544</BitOffs>
+            <BitOffs>4096640</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_LOADCFG</Name>
@@ -1590,7 +1609,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096560</BitOffs>
+            <BitOffs>4096656</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_POWERFAILURE</Name>
@@ -1604,7 +1623,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096576</BitOffs>
+            <BitOffs>4096672</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_POWERGOOD</Name>
@@ -1618,7 +1637,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096592</BitOffs>
+            <BitOffs>4096688</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_ERROR</Name>
@@ -1632,7 +1651,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096608</BitOffs>
+            <BitOffs>4096704</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_SHUTDOWN</Name>
@@ -1646,7 +1665,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096624</BitOffs>
+            <BitOffs>4096720</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_SUSPEND</Name>
@@ -1660,7 +1679,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096640</BitOffs>
+            <BitOffs>4096736</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_RESUME</Name>
@@ -1674,7 +1693,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096656</BitOffs>
+            <BitOffs>4096752</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_CONFIG</Name>
@@ -1689,7 +1708,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096672</BitOffs>
+            <BitOffs>4096768</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_RECONFIG</Name>
@@ -1704,7 +1723,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096688</BitOffs>
+            <BitOffs>4096784</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_STOPPING</Name>
@@ -1718,7 +1737,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096704</BitOffs>
+            <BitOffs>4096800</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_INCOMPATIBLE</Name>
@@ -1732,7 +1751,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096720</BitOffs>
+            <BitOffs>4096816</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_EXCEPTION</Name>
@@ -1746,7 +1765,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096736</BitOffs>
+            <BitOffs>4096832</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSSTATE_MAXSTATES</Name>
@@ -1761,7 +1780,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096752</BitOffs>
+            <BitOffs>4096848</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYMTAB</Name>
@@ -1776,7 +1795,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096768</BitOffs>
+            <BitOffs>4096864</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYMNAME</Name>
@@ -1791,7 +1810,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096800</BitOffs>
+            <BitOffs>4096896</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYMVAL</Name>
@@ -1806,7 +1825,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096832</BitOffs>
+            <BitOffs>4096928</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYM_HNDBYNAME</Name>
@@ -1820,7 +1839,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096864</BitOffs>
+            <BitOffs>4096960</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYM_VALBYNAME</Name>
@@ -1834,7 +1853,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096896</BitOffs>
+            <BitOffs>4096992</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYM_VALBYHND</Name>
@@ -1848,7 +1867,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096928</BitOffs>
+            <BitOffs>4097024</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYM_RELEASEHND</Name>
@@ -1862,7 +1881,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096960</BitOffs>
+            <BitOffs>4097056</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYM_INFOBYNAME</Name>
@@ -1876,7 +1895,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4096992</BitOffs>
+            <BitOffs>4097088</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYM_VERSION</Name>
@@ -1890,7 +1909,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097024</BitOffs>
+            <BitOffs>4097120</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYM_INFOBYNAMEEX</Name>
@@ -1904,7 +1923,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097056</BitOffs>
+            <BitOffs>4097152</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYM_DOWNLOAD</Name>
@@ -1918,7 +1937,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097088</BitOffs>
+            <BitOffs>4097184</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYM_UPLOAD</Name>
@@ -1932,7 +1951,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097120</BitOffs>
+            <BitOffs>4097216</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYM_UPLOADINFO</Name>
@@ -1946,7 +1965,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097152</BitOffs>
+            <BitOffs>4097248</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_SYMNOTE</Name>
@@ -1961,7 +1980,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097184</BitOffs>
+            <BitOffs>4097280</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_IOIMAGE_RWIB</Name>
@@ -1976,7 +1995,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097216</BitOffs>
+            <BitOffs>4097312</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_IOIMAGE_RWIX</Name>
@@ -1991,7 +2010,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097248</BitOffs>
+            <BitOffs>4097344</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_IOIMAGE_RISIZE</Name>
@@ -2006,7 +2025,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097280</BitOffs>
+            <BitOffs>4097376</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_IOIMAGE_RWOB</Name>
@@ -2021,7 +2040,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097312</BitOffs>
+            <BitOffs>4097408</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_IOIMAGE_RWOX</Name>
@@ -2036,7 +2055,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097344</BitOffs>
+            <BitOffs>4097440</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_IOIMAGE_ROSIZE</Name>
@@ -2051,7 +2070,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097376</BitOffs>
+            <BitOffs>4097472</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_IOIMAGE_CLEARI</Name>
@@ -2066,7 +2085,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097408</BitOffs>
+            <BitOffs>4097504</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_IOIMAGE_CLEARO</Name>
@@ -2081,7 +2100,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097440</BitOffs>
+            <BitOffs>4097536</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_IOIMAGE_RWIOB</Name>
@@ -2096,7 +2115,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097472</BitOffs>
+            <BitOffs>4097568</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIGRP_DEVICE_DATA</Name>
@@ -2111,7 +2130,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097504</BitOffs>
+            <BitOffs>4097600</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIOFFS_DEVDATA_ADSSTATE</Name>
@@ -2126,7 +2145,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097536</BitOffs>
+            <BitOffs>4097632</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSIOFFS_DEVDATA_DEVSTATE</Name>
@@ -2141,7 +2160,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097568</BitOffs>
+            <BitOffs>4097664</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_OPENCREATE</Name>
@@ -2156,7 +2175,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097600</BitOffs>
+            <BitOffs>4097696</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_OPENREAD</Name>
@@ -2171,7 +2190,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097632</BitOffs>
+            <BitOffs>4097728</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_OPENWRITE</Name>
@@ -2186,7 +2205,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097664</BitOffs>
+            <BitOffs>4097760</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_CREATEFILE</Name>
@@ -2201,7 +2220,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097696</BitOffs>
+            <BitOffs>4097792</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_CLOSEHANDLE</Name>
@@ -2216,7 +2235,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097728</BitOffs>
+            <BitOffs>4097824</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FOPEN</Name>
@@ -2230,7 +2249,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097760</BitOffs>
+            <BitOffs>4097856</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FCLOSE</Name>
@@ -2244,7 +2263,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097792</BitOffs>
+            <BitOffs>4097888</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FREAD</Name>
@@ -2258,7 +2277,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097824</BitOffs>
+            <BitOffs>4097920</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FWRITE</Name>
@@ -2272,7 +2291,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097856</BitOffs>
+            <BitOffs>4097952</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FSEEK</Name>
@@ -2286,7 +2305,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097888</BitOffs>
+            <BitOffs>4097984</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FTELL</Name>
@@ -2300,7 +2319,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097920</BitOffs>
+            <BitOffs>4098016</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FGETS</Name>
@@ -2314,7 +2333,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097952</BitOffs>
+            <BitOffs>4098048</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FPUTS</Name>
@@ -2328,7 +2347,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4097984</BitOffs>
+            <BitOffs>4098080</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FSCANF</Name>
@@ -2342,7 +2361,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098016</BitOffs>
+            <BitOffs>4098112</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FPRINTF</Name>
@@ -2356,7 +2375,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098048</BitOffs>
+            <BitOffs>4098144</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FEOF</Name>
@@ -2370,7 +2389,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098080</BitOffs>
+            <BitOffs>4098176</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FDELETE</Name>
@@ -2384,7 +2403,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098112</BitOffs>
+            <BitOffs>4098208</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_FRENAME</Name>
@@ -2398,7 +2417,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098144</BitOffs>
+            <BitOffs>4098240</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_MKDIR</Name>
@@ -2412,7 +2431,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098176</BitOffs>
+            <BitOffs>4098272</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_RMDIR</Name>
@@ -2426,7 +2445,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098208</BitOffs>
+            <BitOffs>4098304</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_REG_HKEYLOCALMACHINE</Name>
@@ -2440,7 +2459,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098240</BitOffs>
+            <BitOffs>4098336</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_SENDEMAIL</Name>
@@ -2454,7 +2473,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098272</BitOffs>
+            <BitOffs>4098368</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_TIMESERVICES</Name>
@@ -2468,7 +2487,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098304</BitOffs>
+            <BitOffs>4098400</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_STARTPROCESS</Name>
@@ -2482,7 +2501,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098336</BitOffs>
+            <BitOffs>4098432</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSERVICE_CHANGENETID</Name>
@@ -2496,7 +2515,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098368</BitOffs>
+            <BitOffs>4098464</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TIMESERVICE_DATEANDTIME</Name>
@@ -2511,7 +2530,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098400</BitOffs>
+            <BitOffs>4098496</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TIMESERVICE_SYSTEMTIMES</Name>
@@ -2525,7 +2544,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098432</BitOffs>
+            <BitOffs>4098528</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TIMESERVICE_RTCTIMEDIFF</Name>
@@ -2539,7 +2558,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098464</BitOffs>
+            <BitOffs>4098560</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TIMESERVICE_ADJUSTTIMETORTC</Name>
@@ -2553,7 +2572,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098496</BitOffs>
+            <BitOffs>4098592</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TIMESERVICE_TIMEZONINFORMATION</Name>
@@ -2567,7 +2586,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098528</BitOffs>
+            <BitOffs>4098624</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSLOG_MSGTYPE_HINT</Name>
@@ -2582,7 +2601,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098560</BitOffs>
+            <BitOffs>4098656</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSLOG_MSGTYPE_WARN</Name>
@@ -2597,7 +2616,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098592</BitOffs>
+            <BitOffs>4098688</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSLOG_MSGTYPE_ERROR</Name>
@@ -2612,7 +2631,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098624</BitOffs>
+            <BitOffs>4098720</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSLOG_MSGTYPE_LOG</Name>
@@ -2627,7 +2646,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098656</BitOffs>
+            <BitOffs>4098752</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSLOG_MSGTYPE_MSGBOX</Name>
@@ -2642,7 +2661,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098688</BitOffs>
+            <BitOffs>4098784</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSLOG_MSGTYPE_RESOURCE</Name>
@@ -2656,7 +2675,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098720</BitOffs>
+            <BitOffs>4098816</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.ADSLOG_MSGTYPE_STRING</Name>
@@ -2670,7 +2689,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098752</BitOffs>
+            <BitOffs>4098848</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.BOOTDATAFLAGS_RETAIN_LOADED</Name>
@@ -2685,7 +2704,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098784</BitOffs>
+            <BitOffs>4098880</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.BOOTDATAFLAGS_RETAIN_INVALID</Name>
@@ -2700,7 +2719,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098792</BitOffs>
+            <BitOffs>4098888</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.BOOTDATAFLAGS_RETAIN_REQUESTED</Name>
@@ -2714,7 +2733,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098800</BitOffs>
+            <BitOffs>4098896</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.BOOTDATAFLAGS_PERSISTENT_LOADED</Name>
@@ -2729,7 +2748,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098808</BitOffs>
+            <BitOffs>4098904</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.BOOTDATAFLAGS_PERSISTENT_INVALID</Name>
@@ -2744,7 +2763,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098816</BitOffs>
+            <BitOffs>4098912</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSTATEFLAGS_BSOD</Name>
@@ -2759,7 +2778,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098824</BitOffs>
+            <BitOffs>4098920</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.SYSTEMSTATEFLAGS_RTVIOLATION</Name>
@@ -2774,7 +2793,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098832</BitOffs>
+            <BitOffs>4098928</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.nWatchdogTime</Name>
@@ -2786,7 +2805,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098840</BitOffs>
+            <BitOffs>4098936</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.FOPEN_MODEREAD</Name>
@@ -2801,7 +2820,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098848</BitOffs>
+            <BitOffs>4098944</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.FOPEN_MODEWRITE</Name>
@@ -2816,7 +2835,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098880</BitOffs>
+            <BitOffs>4098976</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.FOPEN_MODEAPPEND</Name>
@@ -2831,7 +2850,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098912</BitOffs>
+            <BitOffs>4099008</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.FOPEN_MODEPLUS</Name>
@@ -2846,7 +2865,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098944</BitOffs>
+            <BitOffs>4099040</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.FOPEN_MODEBINARY</Name>
@@ -2861,7 +2880,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4098976</BitOffs>
+            <BitOffs>4099072</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.FOPEN_MODETEXT</Name>
@@ -2876,7 +2895,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099008</BitOffs>
+            <BitOffs>4099104</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENTFLAG_PRIOCLASS</Name>
@@ -2891,7 +2910,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099264</BitOffs>
+            <BitOffs>4099360</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENTFLAG_FMTSELF</Name>
@@ -2906,7 +2925,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099280</BitOffs>
+            <BitOffs>4099376</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENTFLAG_LOG</Name>
@@ -2921,7 +2940,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099296</BitOffs>
+            <BitOffs>4099392</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENTFLAG_MSGBOX</Name>
@@ -2936,7 +2955,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099312</BitOffs>
+            <BitOffs>4099408</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENTFLAG_SRCID</Name>
@@ -2951,7 +2970,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099328</BitOffs>
+            <BitOffs>4099424</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENTFLAG_AUTOFMTALL</Name>
@@ -2965,7 +2984,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099344</BitOffs>
+            <BitOffs>4099440</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENTSTATE_INVALID</Name>
@@ -2980,7 +2999,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099360</BitOffs>
+            <BitOffs>4099456</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENTSTATE_SIGNALED</Name>
@@ -2995,7 +3014,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099376</BitOffs>
+            <BitOffs>4099472</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENTSTATE_RESET</Name>
@@ -3010,7 +3029,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099392</BitOffs>
+            <BitOffs>4099488</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENTSTATE_CONFIRMED</Name>
@@ -3025,7 +3044,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099408</BitOffs>
+            <BitOffs>4099504</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENTSTATE_RESETCON</Name>
@@ -3040,7 +3059,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099424</BitOffs>
+            <BitOffs>4099520</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENT_SRCNAMESIZE</Name>
@@ -3054,7 +3073,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099440</BitOffs>
+            <BitOffs>4099536</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.TCEVENT_FMTPRGSIZE</Name>
@@ -3068,18 +3087,35 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099456</BitOffs>
+            <BitOffs>4099552</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.eWatchdogConfig</Name>
             <BitSize>16</BitSize>
             <BaseType Namespace="Tc2_System">E_WATCHDOG_TIME_CONFIG</BaseType>
+            <Default>
+              <Value>0</Value>
+            </Default>
             <Properties>
               <Property>
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099472</BitOffs>
+            <BitOffs>4099568</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Global_Variables.PI</Name>
+            <BitSize>64</BitSize>
+            <BaseType>LREAL</BaseType>
+            <Default>
+              <Value>3.14159265358979</Value>
+            </Default>
+            <Properties>
+              <Property>
+                <Name>TcVarGlobal</Name>
+              </Property>
+            </Properties>
+            <BitOffs>4099584</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.DEFAULT_ADS_TIMEOUT</Name>
@@ -3094,21 +3130,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099488</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Global_Variables.PI</Name>
-            <BitSize>64</BitSize>
-            <BaseType>LREAL</BaseType>
-            <Default>
-              <Value>3.14159265358979</Value>
-            </Default>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4099520</BitOffs>
+            <BitOffs>4099648</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.MAX_STRING_LENGTH</Name>
@@ -3123,7 +3145,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4099584</BitOffs>
+            <BitOffs>4099680</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.AMSPORT_R3_MODBUSSERV</Name>
@@ -3137,7 +3159,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4100256</BitOffs>
+            <BitOffs>4100224</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.MODBUS_TCP_PORT</Name>
@@ -3151,7 +3173,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4100272</BitOffs>
+            <BitOffs>4100240</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.MB_MAXSIZE</Name>
@@ -3165,7 +3187,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4100288</BitOffs>
+            <BitOffs>4100256</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.MBADS_IGR_CLOSEALL</Name>
@@ -3179,7 +3201,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4100320</BitOffs>
+            <BitOffs>4100288</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Global_Variables.MBADS_IGR_UDP_FLAG</Name>
@@ -3193,55 +3215,13 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4100352</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Global_Variables.g_iSizeOfGGOArray</Name>
-            <BitSize>16</BitSize>
-            <BaseType>INT</BaseType>
-            <Default>
-              <Value>50</Value>
-            </Default>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4100384</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Global_Variables.g_stSystem</Name>
-            <BitSize>40</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">System_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4100400</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>MAIN.myBoolean</Name>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
-            <BitOffs>4100440</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Global_Variables.g_DummyVG</Name>
-            <BitSize>320</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VG</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4100448</BitOffs>
+            <BitOffs>4100320</BitOffs>
           </Symbol>
           <Symbol>
             <Name>p_XLegacyPLCModbus.fbLegacyPLCInputCoilsRx</Name>
             <BitSize>2080</BitSize>
             <BaseType Namespace="Tc2_ModbusSrv">FB_MBReadCoils</BaseType>
-            <BitOffs>4105408</BitOffs>
+            <BitOffs>4104992</BitOffs>
           </Symbol>
           <Symbol>
             <Name>p_XLegacyPLCModbus.i_xLegacyPLC_CnBits</Name>
@@ -3251,17 +3231,11 @@ These features aren't disabled, they just aren't used, think child/parent classe
               <LBound>0</LBound>
               <Elements>21</Elements>
             </ArrayInfo>
-            <BitOffs>4107488</BitOffs>
+            <BitOffs>4107072</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>p_ModbusTx_InputCoils.xHV_DIS</Name>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
-            <BitOffs>4107656</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.q_xLENSES_KNOWN</Name>
-            <Comment> User Memory Variables</Comment>
+            <Name>GVL.bHEARTBEATALIVE</Name>
+            <Comment>///////////////////////////////</Comment>
             <BitSize>8</BitSize>
             <BaseType>BOOL</BaseType>
             <Properties>
@@ -3269,94 +3243,46 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4107664</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.q_xMFX_LENSES_IN</Name>
-            <Comment>One of the MFX lenses are in</Comment>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4107672</BitOffs>
+            <BitOffs>4107240</BitOffs>
           </Symbol>
           <Symbol>
             <Name>p_XLegacyPLCModbus.ftReset</Name>
             <BitSize>64</BitSize>
             <BaseType Namespace="Tc2_Standard">F_TRIG</BaseType>
-            <BitOffs>4107680</BitOffs>
+            <BitOffs>4107264</BitOffs>
           </Symbol>
           <Symbol>
             <Name>p_MPSSup.BEAT</Name>
             <BitSize>576</BitSize>
-            <BaseType>Heartbeat</BaseType>
-            <BitOffs>4108384</BitOffs>
+            <BaseType>FB_HEARTBEAT</BaseType>
+            <BitOffs>4108128</BitOffs>
           </Symbol>
           <Symbol>
             <Name>p_MPSSup.STATE_LATCH</Name>
             <BitSize>64</BitSize>
             <BaseType Namespace="Tc2_Standard">RS</BaseType>
-            <BitOffs>4108960</BitOffs>
+            <BitOffs>4108704</BitOffs>
           </Symbol>
           <Symbol>
             <Name>p_MPSSup.LIMIT_LATCH</Name>
             <BitSize>64</BitSize>
             <BaseType Namespace="Tc2_Standard">RS</BaseType>
-            <BitOffs>4109024</BitOffs>
+            <BitOffs>4108768</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>GVL.q_xXRT_LENSES_IN</Name>
-            <Comment>One of the XRT lenses are in</Comment>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109088</BitOffs>
+            <Name>p_MPSSup.XRT_LENS_SYSTEM</Name>
+            <BitSize>1184</BitSize>
+            <BaseType>FB_LENS_SYSTEM</BaseType>
+            <BitOffs>4108832</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>GVL.q_xHEARTBEAT_ALIVE</Name>
-            <Comment>Whether heartbeat has updated</Comment>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109096</BitOffs>
+            <Name>p_MPSSup.TFS_LENS_SYSTEM</Name>
+            <BitSize>1184</BitSize>
+            <BaseType>FB_LENS_SYSTEM</BaseType>
+            <BitOffs>4110016</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>GVL.q_xLAST_MESSAGE</Name>
-            <Comment>Message to IOC</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>WORD</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109104</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.q_xFAULTED</Name>
-            <Comment>Whether Lens Interlock has tripped</Comment>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109120</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.q_xLIMIT_VIOLATED</Name>
+            <Name>GVL.bLIMIT_VIOLATED</Name>
             <Comment>Whether limit has been violated</Comment>
             <BitSize>8</BitSize>
             <BaseType>BOOL</BaseType>
@@ -3365,31 +3291,19 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4109128</BitOffs>
+            <BitOffs>4111200</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>GVL.q_iLIMIT_MODE</Name>
-            <Comment>Limit mode being evaluated</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>INT</BaseType>
+            <Name>GVL.bSTATE_FAULT</Name>
+            <Comment>Whether lens is in an unknown state</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
             <Properties>
               <Property>
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4109136</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.q_rCURRENT_LIMIT</Name>
-            <Comment>Limit value being used</Comment>
-            <BitSize>32</BitSize>
-            <BaseType>REAL</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109152</BitOffs>
+            <BitOffs>4111208</BitOffs>
           </Symbol>
           <Symbol>
             <Name>GVL.q_xPOSITION_LATCH</Name>
@@ -3401,10 +3315,11 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4109184</BitOffs>
+            <BitOffs>4111216</BitOffs>
           </Symbol>
           <Symbol>
             <Name>GVL.q_xLIMIT_LATCH</Name>
+            <Comment>Limit Latch</Comment>
             <BitSize>8</BitSize>
             <BaseType>BOOL</BaseType>
             <Properties>
@@ -3412,190 +3327,11 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4109192</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.q_xMFX_LENS_MPSOK</Name>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109200</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xMFX_LENS01</Name>
-            <Comment>First transfocator lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109208</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xMFX_LENS02</Name>
-            <Comment>Second transfocator lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109224</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xMFX_LENS03</Name>
-            <Comment>Third transfocator lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109240</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xMFX_LENS04</Name>
-            <Comment>Fourth transfocator lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109256</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xMFX_LENS05</Name>
-            <Comment>Fifth transfocator lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109272</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xMFX_LENS06</Name>
-            <Comment>Sixth transfocator lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109288</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xMFX_LENS07</Name>
-            <Comment>Seventh transfocator lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109304</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xMFX_LENS08</Name>
-            <Comment>Eighth transfocator lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109320</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xMFX_LENS09</Name>
-            <Comment>Ninth transfocator lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109336</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xMFX_LENS10</Name>
-            <Comment>Tenth transfocator lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109352</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xXRT_LENS01</Name>
-            <Comment>First prefocus lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109368</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xXRT_LENS02</Name>
-            <Comment>Second prefocus lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109384</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xXRT_LENS03</Name>
-            <Comment>Third prefocus lens</Comment>
-            <BitSize>16</BitSize>
-            <BaseType>Lens_Struct</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109400</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_xIOC_HEARTBEAT</Name>
-            <Comment>Current status of heartbeat</Comment>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4109416</BitOffs>
+            <BitOffs>4111224</BitOffs>
           </Symbol>
           <Symbol>
             <Name>GVL.i_xFAULT_CLEAR</Name>
-            <Comment> Clear Fault Flags</Comment>
+            <Comment>Clear fault bit</Comment>
             <BitSize>8</BitSize>
             <BaseType>BOOL</BaseType>
             <Properties>
@@ -3603,10 +3339,23 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4109424</BitOffs>
+            <BitOffs>4111232</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>GVL.i_xIOC_HEARTBEAT</Name>
+            <Comment>/////////////////////////////</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcVarGlobal</Name>
+              </Property>
+            </Properties>
+            <BitOffs>4111240</BitOffs>
           </Symbol>
           <Symbol>
             <Name>GVL.LOTO_Override</Name>
+            <Comment>////////////////////////////</Comment>
             <BitSize>8</BitSize>
             <BaseType>BOOL</BaseType>
             <Default>
@@ -3617,11 +3366,43 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4109432</BitOffs>
+            <BitOffs>4111248</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>GVL.i_rPREFOCUS_LIMIT</Name>
-            <Comment>Limit of the pre-focused MFX lenses</Comment>
+            <Name>GVL.XRT_LENSES</Name>
+            <Comment>/////////////////////////////</Comment>
+            <BitSize>640</BitSize>
+            <BaseType>LENS</BaseType>
+            <ArrayInfo>
+              <LBound>1</LBound>
+              <Elements>10</Elements>
+            </ArrayInfo>
+            <Properties>
+              <Property>
+                <Name>TcVarGlobal</Name>
+              </Property>
+            </Properties>
+            <BitOffs>4111264</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>GVL.TFS_LENSES</Name>
+            <Comment>Set of TFS Lenses</Comment>
+            <BitSize>640</BitSize>
+            <BaseType>LENS</BaseType>
+            <ArrayInfo>
+              <LBound>1</LBound>
+              <Elements>10</Elements>
+            </ArrayInfo>
+            <Properties>
+              <Property>
+                <Name>TcVarGlobal</Name>
+              </Property>
+            </Properties>
+            <BitOffs>4111904</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>GVL.XRT_RADIUS</Name>
+            <Comment>Current Radius of XRT lenses</Comment>
             <BitSize>32</BitSize>
             <BaseType>REAL</BaseType>
             <Properties>
@@ -3629,11 +3410,11 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4109440</BitOffs>
+            <BitOffs>4112544</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>GVL.i_rMFX_ONLY_LIMIT</Name>
-            <Comment>Limit of only the MFX lenses</Comment>
+            <Name>GVL.TFS_RADIUS</Name>
+            <Comment>Current Radius of TFS lenses</Comment>
             <BitSize>32</BitSize>
             <BaseType>REAL</BaseType>
             <Properties>
@@ -3641,31 +3422,30 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4109472</BitOffs>
+            <BitOffs>4112576</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>GVL.i_rXRT_ONLY_LIMIT</Name>
-            <Comment>Limit of only the XRT lenses</Comment>
-            <BitSize>32</BitSize>
-            <BaseType>REAL</BaseType>
+            <Name>GVL.XRT_LIMIT</Name>
+            <Comment>//////////////////////////////</Comment>
+            <BitSize>64</BitSize>
+            <BaseType>RADII_LIMIT</BaseType>
             <Properties>
               <Property>
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4109504</BitOffs>
+            <BitOffs>4112608</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>GVL.i_rBEAM_FOCUS</Name>
-            <Comment>Current calculated focal point</Comment>
-            <BitSize>32</BitSize>
-            <BaseType>REAL</BaseType>
+            <Name>GVL.TFS_LIMIT</Name>
+            <BitSize>64</BitSize>
+            <BaseType>RADII_LIMIT</BaseType>
             <Properties>
               <Property>
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4109536</BitOffs>
+            <BitOffs>4112672</BitOffs>
           </Symbol>
           <Symbol>
             <Name>GVL.mb_Input_Coils</Name>
@@ -3681,7 +3461,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4109568</BitOffs>
+            <BitOffs>4112736</BitOffs>
           </Symbol>
           <Symbol>
             <Name>GVL.mb_Output_Coils</Name>
@@ -3697,7 +3477,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4111616</BitOffs>
+            <BitOffs>4114784</BitOffs>
           </Symbol>
           <Symbol>
             <Name>GVL.mb_Input_Registers</Name>
@@ -3713,7 +3493,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4113664</BitOffs>
+            <BitOffs>4116832</BitOffs>
           </Symbol>
           <Symbol>
             <Name>GVL.mb_Output_Registers</Name>
@@ -3729,74 +3509,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4117760</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgcMXT_VGC_04</Name>
-            <Comment>VGC</Comment>
-            <BitSize>96</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VGC</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4122000</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgcDVD_VGC_01</Name>
-            <BitSize>96</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VGC</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4122096</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgcDIA_VGC_01</Name>
-            <BitSize>96</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VGC</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4122192</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgcDIA_VGC_02</Name>
-            <BitSize>96</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VGC</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4122288</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgcDG1_VGC_01</Name>
-            <BitSize>96</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VGC</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4122384</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgcDG1_VGC_02</Name>
-            <BitSize>96</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VGC</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4122480</BitOffs>
+            <BitOffs>4120928</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Constants.bLittleEndian</Name>
@@ -3811,132 +3524,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4122584</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgMFX_GPI_D1</Name>
-            <Comment> dummy Pirani Gauge</Comment>
-            <BitSize>320</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VG</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4122592</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgMXT_GCC_06</Name>
-            <BitSize>320</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VG</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4122912</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgDVD_GCC_02</Name>
-            <BitSize>320</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VG</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4123232</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgDVD_GCC_04</Name>
-            <BitSize>320</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VG</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4123552</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgMON_GCC_01</Name>
-            <BitSize>320</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VG</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4123872</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgDIA_GCC_01</Name>
-            <BitSize>320</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VG</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4124192</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgSB2_GCC_01</Name>
-            <Comment>vgDownstream : ST_VG;</Comment>
-            <BitSize>320</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VG</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4124512</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgDG1_GCC_01</Name>
-            <BitSize>320</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VG</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4124832</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL_Variables_Devices.vgDG2_GCC_01</Name>
-            <BitSize>320</BitSize>
-            <BaseType Namespace="LCLSVacuumLib">ST_VG</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4125152</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Constants.RuntimeVersion</Name>
-            <Comment> Does the target support an FPU</Comment>
-            <BitSize>64</BitSize>
-            <BaseType>VERSION</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4125472</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Constants.CompilerVersion</Name>
-            <Comment> Does the target support an FPU</Comment>
-            <BitSize>64</BitSize>
-            <BaseType>VERSION</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4125536</BitOffs>
+            <BitOffs>4125024</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Constants.bSimulationMode</Name>
@@ -3951,21 +3539,67 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4125600</BitOffs>
+            <BitOffs>4125032</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>Constants.bFPUSupport</Name>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
+            <Name>Constants.RuntimeVersion</Name>
+            <Comment> Does the target support an FPU</Comment>
+            <BitSize>64</BitSize>
+            <BaseType>VERSION</BaseType>
             <Default>
-              <Value>1</Value>
+              <SubItem>
+                <Name>uiMajor</Name>
+                <Value>3</Value>
+              </SubItem>
+              <SubItem>
+                <Name>uiMinor</Name>
+                <Value>5</Value>
+              </SubItem>
+              <SubItem>
+                <Name>uiServicePack</Name>
+                <Value>6</Value>
+              </SubItem>
+              <SubItem>
+                <Name>uiPatch</Name>
+                <Value>0</Value>
+              </SubItem>
             </Default>
             <Properties>
               <Property>
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4125608</BitOffs>
+            <BitOffs>4125040</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Constants.CompilerVersion</Name>
+            <Comment> Does the target support an FPU</Comment>
+            <BitSize>64</BitSize>
+            <BaseType>VERSION</BaseType>
+            <Default>
+              <SubItem>
+                <Name>uiMajor</Name>
+                <Value>3</Value>
+              </SubItem>
+              <SubItem>
+                <Name>uiMinor</Name>
+                <Value>5</Value>
+              </SubItem>
+              <SubItem>
+                <Name>uiServicePack</Name>
+                <Value>8</Value>
+              </SubItem>
+              <SubItem>
+                <Name>uiPatch</Name>
+                <Value>40</Value>
+              </SubItem>
+            </Default>
+            <Properties>
+              <Property>
+                <Name>TcVarGlobal</Name>
+              </Property>
+            </Properties>
+            <BitOffs>4125104</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Constants.nRegisterSize</Name>
@@ -3980,7 +3614,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4125616</BitOffs>
+            <BitOffs>4125168</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Constants.nPackMode</Name>
@@ -3995,19 +3629,49 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4125632</BitOffs>
+            <BitOffs>4125184</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>p_MPSSup.q_xXRT_VIOLATION</Name>
+            <Name>Constants.bFPUSupport</Name>
             <BitSize>8</BitSize>
             <BaseType>BOOL</BaseType>
-            <BitOffs>4125648</BitOffs>
+            <Default>
+              <Value>1</Value>
+            </Default>
+            <Properties>
+              <Property>
+                <Name>TcVarGlobal</Name>
+              </Property>
+            </Properties>
+            <BitOffs>4125200</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>p_MPSSup.q_xMFX_VIOLATION</Name>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
-            <BitOffs>4125656</BitOffs>
+            <Name>Constants.RuntimeVersionNumeric</Name>
+            <BitSize>32</BitSize>
+            <BaseType>DWORD</BaseType>
+            <Default>
+              <Value>50660864</Value>
+            </Default>
+            <Properties>
+              <Property>
+                <Name>TcVarGlobal</Name>
+              </Property>
+            </Properties>
+            <BitOffs>4125216</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Constants.CompilerVersionNumeric</Name>
+            <BitSize>32</BitSize>
+            <BaseType>DWORD</BaseType>
+            <Default>
+              <Value>50661416</Value>
+            </Default>
+            <Properties>
+              <Property>
+                <Name>TcVarGlobal</Name>
+              </Property>
+            </Properties>
+            <BitOffs>4125248</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TwinCAT_SystemInfoVarList._AppInfo</Name>
@@ -4021,7 +3685,7 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4125664</BitOffs>
+            <BitOffs>4125280</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TwinCAT_SystemInfoVarList._TaskInfo</Name>
@@ -4039,46 +3703,44 @@ These features aren't disabled, they just aren't used, think child/parent classe
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4127744</BitOffs>
+            <BitOffs>4127360</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>TwinCAT_SystemInfoVarList._DummyLicenseInfo</Name>
-            <BitSize>1024</BitSize>
-            <BaseType GUID="{5456DAC5-9FA5-4A6B-B497-840FCC690FDD}">PlcLicenseInfo</BaseType>
+            <Name>TwinCAT_SystemInfoVarList.__PlcTask</Name>
+            <BitSize>704</BitSize>
+            <BaseType>_Implicit_Task_Info</BaseType>
+            <Default>
+              <SubItem>
+                <Name>dwVersion</Name>
+                <Value>2</Value>
+              </SubItem>
+            </Default>
             <Properties>
               <Property>
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>4128768</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>GVL.i_rXRT_FOCUS</Name>
-            <Comment>Current focal plane of the XRT</Comment>
-            <BitSize>32</BitSize>
-            <BaseType>REAL</BaseType>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>4438016</BitOffs>
+            <BitOffs>4128384</BitOffs>
           </Symbol>
         </DataArea>
       </DataAreas>
       <Deployment/>
       <Properties>
         <Property>
+          <Name>ApplicationName</Name>
+          <Value>Port_851</Value>
+        </Property>
+        <Property>
           <Name>ChangeDate</Name>
-          <Value>2016-09-15T21:16:03</Value>
+          <Value>2018-05-10T10:14:03</Value>
         </Property>
         <Property>
           <Name>GeneratedCodeSize</Name>
-          <Value>32768</Value>
+          <Value>45056</Value>
         </Property>
         <Property>
           <Name>GlobalDataSize</Name>
-          <Value>12288</Value>
+          <Value>24576</Value>
         </Property>
       </Properties>
     </Module>

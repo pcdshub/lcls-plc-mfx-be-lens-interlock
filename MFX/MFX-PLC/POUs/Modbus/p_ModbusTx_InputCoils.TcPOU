@@ -1,22 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
   <POU Name="p_ModbusTx_InputCoils" Id="{b7e18312-80ba-4297-9b98-214f322b6e9d}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusTx_InputCoils
 VAR
-
 END_VAR
-
 VAR_OUTPUT
-
-    xHV_DIS: BOOL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[mb_Input_Coils[0]:=q_xHEARTBEAT_ALIVE;  //default
-mb_Input_Coils[1]:=q_xFAULTED;  //default
-mb_Input_Coils[2]:=q_xLENSES_KNOWN;  //default
-mb_Input_Coils[3]:=q_xLIMIT_VIOLATED;  //default
-mb_Input_Coils[4]:=q_xPOSITION_LATCH;  //default
-mb_Input_Coils[5]:=q_xLIMIT_LATCH;  //default
+      <ST><![CDATA[mb_Input_Coils[0]:=bHEARTBEATALIVE;  //default
+mb_Input_Coils[1]:=bFAULT;          //default
+mb_Input_Coils[2]:=bSTATE_FAULT;     //default
+mb_Input_Coils[3]:=bLIMIT_VIOLATED;   //default
+mb_Input_Coils[4]:=q_xPOSITION_LATCH;   //default
+mb_Input_Coils[5]:=q_xLIMIT_LATCH;      //default
 mb_Input_Coils[6]:=FALSE;  //default
 mb_Input_Coils[7]:=FALSE;  //default
 mb_Input_Coils[8]:=FALSE;  //default
