@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+  <POU Name="FB_HEARTBEAT" Id="{bb1dec25-e01c-4031-9939-182a9d36637a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_HEARTBEAT
+VAR_INPUT
+    BEAT      : BOOL; (*Heartbeat to monitor*)
+    DEADTIME  : TIME; (*Acceptable deadtime*)
+
+END_VAR
+
+VAR_OUTPUT
+    TIME_ON  : TON;
+    TIME_OFF : TOF;
+    ALIVE    : BOOL;     (*Whether Hearbeat is alive*)
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*Hearbeat Monitor
+
+Monitor a bit which flips back and forth between 0 and 1 .If the deadtime
+passes a certain time limit, report the heartbeat as dead
+*)
+//Timers
+TIME_ON(IN:=BEAT,PT:=DEADTIME);
+TIME_OFF(IN:=BEAT,PT:=DEADTIME);
+//Alive
+ALIVE := NOT TIME_ON.Q AND TIME_OFF.Q;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

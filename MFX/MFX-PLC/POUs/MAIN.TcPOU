@@ -1,46 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
   <POU Name="MAIN" Id="{8f63f011-6378-4f32-beaf-4437ace2efcc}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-    myBoolean : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[(* Modbus receive *)
-//p_ModbusRx_OutputReg();
+      <ST><![CDATA[(*  EPICS Rx UPDATE
+    Modbus receive
+*)
 p_ModbusRx_OutputCoils();
 p_ModbusRx_PLCMemory();
-
 p_XLegacyPLCModbus();
+(* Ensure Lens Radii (microns) *)
+XRT_LENSES[1].RADIUS := 750.0;
+XRT_LENSES[2].RADIUS := 428.6;
+XRT_LENSES[3].RADIUS := 333.3;
 
-(* 	HARD-WIRED I/O UPDATE
-    Update IO
-*)
+TFS_LENSES[1].RADIUS  := 0.0;
+TFS_LENSES[2].RADIUS  := 500.0;
+TFS_LENSES[3].RADIUS  := 300.0;
+TFS_LENSES[4].RADIUS  := 250.0;
+TFS_LENSES[5].RADIUS  := 200.0;
+TFS_LENSES[6].RADIUS  := 125.0;
+TFS_LENSES[7].RADIUS  := 62.5;
+TFS_LENSES[8].RADIUS  := 50.0;
+TFS_LENSES[9].RADIUS  := 50.0;
+TFS_LENSES[10].RADIUS := 50.0;
 
-
-(* 	RESOLVE LOGIC
-    Device Control & Monitoring
-*)
-
-
-//p_TurboSup();
+(*  MPS LOGIC SUMMARY *)
 p_MPSSup();
 
-(* 	HARD-WIRED I/O UPDATE
-    Update IO
-*)
-p_SoftIOMap();
 
 (* 	EPICS Tx UPDATE
-    Modbus Map Receive
+    Modbus Map Report
     IMPORTANT: This is the LAST subroutine to be called.
 *)
-
 p_ModbusTx_InputCoils();
-//p_ModbusTx_OutputCoils();
-//p_ModbusTx_InputReg();
-//p_ModbusTx_OutputReg();
 p_ModbusTx_PLCMemory();
 
 ]]></ST>

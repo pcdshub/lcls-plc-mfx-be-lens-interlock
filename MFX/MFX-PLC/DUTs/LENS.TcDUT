@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+  <DUT Name="LENS" Id="{36c64e89-932e-4d90-91ea-396f68cbc675}">
+    <Declaration><![CDATA[TYPE LENS :
+STRUCT
+    IN     : BOOL; //Inserted state of the Lens
+    KNOWN  : BOOL; //Whether state of Lens is definite
+    RADIUS : REAL; //Current radius of lens
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

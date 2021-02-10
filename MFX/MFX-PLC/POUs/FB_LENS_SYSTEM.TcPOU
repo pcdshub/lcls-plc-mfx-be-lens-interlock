@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+  <POU Name="FB_LENS_SYSTEM" Id="{17806ffa-fff7-4bba-a8b4-71fc59888d71}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_LENS_SYSTEM
+VAR_INPUT
+    LENSES : ARRAY[1..10] OF LENS;  //Array of lens structures
+    COUNT  : INT;                   //Number of lenses
+    RADII_LIMIT  : RADII_LIMIT;     //Maximum allowed radius
+END_VAR
+VAR_OUTPUT
+    UNKNOWN_FAULT : BOOL;         //Fault for unknown lens state
+    LIMIT_FAULT   : BOOL;         //Fault for radii outside limits
+    EFF_RADII     : REAL; //Calculated effective radii
+END_VAR
+VAR
+    INDEX : INT;                  //Increment for loop
+    KNOWN : INT;                  //Number of known lenses
+    RADII : ARRAY[1..10] OF REAL; //Inserted Radii
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* FB_LENS_SYSTEM
+
+Monitor an array of lens objects, updating the effective radius and positions of each.
+Both the position of the lenses and the combined radius can cause a fault which is
+communicated to the MPS system.
+
+*)
+
+//Check positions of lenses
+///////////////////////////
+KNOWN := 0; //Tally of known lenses
+
+FOR INDEX := 1 TO COUNT BY 1 DO
+    //Inserted lenses are inserted into array
+    IF LENSES[INDEX].IN THEN
+        RADII[INDEX] := LENSES[INDEX].RADIUS;
+    //Removed lenses are set to 0.0
+    ELSE
+        RADII[INDEX] := 0.0;
+    END_IF
+
+    //Count all known lenses
+    IF LENSES[INDEX].KNOWN THEN
+        KNOWN := KNOWN +1;
+    END_IF
+END_FOR;
+
+//Make sure we have accounted for all lenses
+UNKNOWN_FAULT := NOT (COUNT=KNOWN);
+
+//Calculate effective radii of inserted lens
+//////////////////////////////////////////////
+EFF_RADII := F_EFF_RADIUS(RADII:=RADII, COUNT:=COUNT);
+
+//Check limitation
+////////////////////
+
+//Inserted
+IF EFF_RADII > 0.0 THEN
+    LIMIT_FAULT := NOT (RADII_LIMIT.LOW_LIMIT <= EFF_RADII
+                           AND EFF_RADII <= RADII_LIMIT.HIGH_LIMIT);
+
+//All lenses removed
+ELSE
+    LIMIT_FAULT := FALSE;
+END_IF
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

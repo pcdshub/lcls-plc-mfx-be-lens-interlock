@@ -1,113 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
   <POU Name="p_MPSSup" Id="{22fa257d-fc87-4b8c-8293-563a03fa02d7}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_MPSSup
 VAR
-    BEAT: Heartbeat;
+    BEAT: FB_HEARTBEAT;
     STATE_LATCH : RS;
     LIMIT_LATCH : RS;
-    q_xXRT_VIOLATION : BOOL;
-    q_xMFX_VIOLATION : BOOL;
+    XRT_LENS_SYSTEM : FB_LENS_SYSTEM;
+    TFS_LENS_SYSTEM : FB_LENS_SYSTEM;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//Instantiate Latches
-STATE_LATCH(SET:=NOT q_xLENSES_KNOWN,RESET1:=i_xFAULT_CLEAR);
+///////////////////////////////////
+
+//Unknown position latches
+STATE_LATCH(SET:=bSTATE_FAULT, RESET1:=i_xFAULT_CLEAR);
 q_xPOSITION_LATCH := STATE_LATCH.Q1;
 
-LIMIT_LATCH(SET:=q_xLIMIT_VIOLATED,RESET1:=i_xFAULT_CLEAR);
+//Violated limit latch
+LIMIT_LATCH(SET:=bLIMIT_VIOLATED, RESET1:=i_xFAULT_CLEAR);
 q_xLIMIT_LATCH := LIMIT_LATCH.Q1;
 
-//Instantiate Heartbeat and check to see if IOC is alive
+//IOC Heartbeat
+///////////////////////////////////////////////
 BEAT(BEAT:=i_xIOC_HEARTBEAT,DEADTIME:=TIME#1.0S);
-q_xHEARTBEAT_ALIVE := BEAT.ALIVE;
+bHEARTBEATALIVE := BEAT.ALIVE;
 
-IF NOT BEAT.ALIVE THEN
-    q_xMFX_LENS_MPSOK := 0;
-    q_xFAULTED := 1;
-    RETURN;
-END_IF
+//XRT LENS SYSTEM
+///////////////////////////
+XRT_LENS_SYSTEM(LENSES:=XRT_LENSES, COUNT:=3, RADII_LIMIT:=XRT_LIMIT);
+XRT_RADIUS := XRT_LENS_SYSTEM.EFF_RADII;
 
-//Check no lens is unknown position
-q_xLENSES_KNOWN := (   i_xMFX_LENS02.KNOWN   //i_xMFX_LENS01.KNOWN AND i_xMFX_LENS02.KNOWN
-                        AND i_xMFX_LENS03.KNOWN
-                       AND i_xMFX_LENS04.KNOWN AND i_xMFX_LENS05.KNOWN
-                       AND i_xMFX_LENS06.KNOWN AND i_xMFX_LENS07.KNOWN
-                       AND i_xMFX_LENS08.KNOWN AND i_xMFX_LENS09.KNOWN
-                       AND i_xMFX_LENS10.KNOWN AND i_xXRT_LENS01.KNOWN
-                       AND i_xXRT_LENS02.KNOWN AND i_xXRT_LENS03.KNOWN);
+//TFS LENS SYSTEM
+///////////////////////////
+TFS_LENS_SYSTEM(LENSES:=TFS_LENSES, COUNT:=10, RADII_LIMIT:=TFS_LIMIT);
+TFS_RADIUS := TFS_LENS_SYSTEM.EFF_RADII;
 
+//Summarize faults
+///////////////////////////
 
-//Determine which lens group/s are being used
-q_xMFX_LENSES_IN :=  i_xMFX_LENS02.IN  //i_xMFX_LENS01.IN OR i_xMFX_LENS02.IN
-                      OR i_xMFX_LENS03.IN OR i_xMFX_LENS04.IN
-                     OR i_xMFX_LENS05.IN OR i_xMFX_LENS06.IN
-                     OR i_xMFX_LENS07.IN OR i_xMFX_LENS08.IN
-                     OR i_xMFX_LENS09.IN OR i_xMFX_LENS10.IN;
+//Limit Violations
+bLIMIT_VIOLATED := XRT_LENS_SYSTEM.LIMIT_FAULT OR TFS_LENS_SYSTEM.LIMIT_FAULT;
 
-q_xXRT_LENSES_IN :=  i_xXRT_LENS01.IN
-                     OR i_xXRT_LENS02.IN
-                     OR i_xXRT_LENS03.IN;
+//State Violations
+bSTATE_FAULT := XRT_LENS_SYSTEM.UNKNOWN_FAULT OR TFS_LENS_SYSTEM.UNKNOWN_FAULT;
 
-
-
-
-//Check XRT lenses all by themselves
-IF q_xXRT_LENSES_IN THEN
-    q_rCURRENT_LIMIT := i_rXRT_ONLY_LIMIT;
-    q_iLIMIT_MODE := 1;
-    IF i_rXRT_FOCUS = 0.0 OR i_rXRT_ONLY_LIMIT <= i_rXRT_FOCUS THEN
-        q_xXRT_VIOLATION := 0;
-    ELSE
-        q_xXRT_VIOLATION := 1;
-    END_IF
-ELSE
-    q_xXRT_VIOLATION := 0;
-END_IF
-
-
-IF q_xXRT_LENSES_IN AND q_xMFX_LENSES_IN THEN
-    q_iLIMIT_MODE := 3;
-    q_rCURRENT_LIMIT := i_rPREFOCUS_LIMIT;
-    IF  i_rPREFOCUS_LIMIT > i_rBEAM_FOCUS THEN
-        q_xMFX_VIOLATION := 0;
-    ELSE
-        q_xMFX_VIOLATION := 1;
-    END_IF
-END_IF
-
-//If only MFX lenses are in compare to MFX only limit
-IF NOT q_xXRT_LENSES_IN AND q_xMFX_LENSES_IN THEN
-    q_iLIMIT_MODE := 2;
-    q_rCURRENT_LIMIT := i_rMFX_ONLY_LIMIT;
-    IF i_rMFX_ONLY_LIMIT > i_rBEAM_FOCUS THEN
-        q_xMFX_VIOLATION := 0;
-    ELSE
-        q_xMFX_VIOLATION := 1;
-    END_IF
-END_IF
-
-//If no lenses are in, no limit to be violated
-IF NOT q_xMFX_LENSES_IN AND NOT q_xXRT_LENSES_IN THEN
-    q_iLIMIT_MODE :=0;
-    q_rCURRENT_LIMIT := 0.0;
-    q_xMFX_VIOLATION := 0;
-    q_xXRT_VIOLATION := 0;
-END_IF
-
-//Summarize both lens groups
-q_xLIMIT_VIOLATED := q_xMFX_VIOLATION OR q_xXRT_VIOLATION;
-
-//Convert to final summary
-IF NOT q_xLIMIT_VIOLATED AND q_xLENSES_KNOWN THEN
-    q_xMFX_LENS_MPSOK := 1;
-    q_xFAULTED := 0;
-ELSE
-    q_xMFX_LENS_MPSOK := 0;
-    q_xFAULTED := 1;
-END_IF
-
-]]></ST>
+//Final Summary
+bFAULT := bLIMIT_VIOLATED OR bSTATE_FAULT OR NOT bHEARTBEATALIVE;
+bTRIP_MPS := NOT bFAULT;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
