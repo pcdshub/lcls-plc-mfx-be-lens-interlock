@@ -35,7 +35,7 @@
     (* Heartbeat *)
     ////////////////////////////////
     i_xIOC_HEARTBEAT: BOOL; //Current status of heartbeat
-	i_fPhotonEnergy : LREAL; // Current photon energy
+	i_fPhotonEnergy : REAL; // Current photon energy (keep REAL for modbus compatibility)
 
     (* Modbus *)
     ///////////////////////////////
