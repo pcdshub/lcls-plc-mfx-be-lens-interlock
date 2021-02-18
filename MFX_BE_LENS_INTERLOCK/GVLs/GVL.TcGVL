@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <GVL Name="GVL" Id="{14f7e4c4-1971-4a0b-b8fc-55754218cf88}">
     <Declaration><![CDATA[VAR_GLOBAL
     (* Fault Handling *)
@@ -22,14 +22,20 @@
     XRT_RADIUS : REAL; //Current Radius of XRT lenses
     TFS_RADIUS : REAL; //Current Radius of TFS lenses
 
-    (* Limit Information *)
-    /////////////////////////////////
-    XRT_LIMIT : RADII_LIMIT;
-    TFS_LIMIT : RADII_LIMIT;
+    (* Effective radius trip regions - per XRT lens configuration *)
+    ////////////////////////////////////////////////////////////////
+    NO_LENS_LIMIT : RADII_LIMIT;
+    LENS1_LIMIT : RADII_LIMIT;
+    LENS2_LIMIT : RADII_LIMIT;
+    LENS3_LIMIT : RADII_LIMIT;
 
+	fMinEnergies : ARRAY[0..3] OF LREAL;
+	afbRequiresLensEnergyRange : ARRAY[0..3] OF ST_FloatRange;
+ 
     (* Heartbeat *)
     ////////////////////////////////
     i_xIOC_HEARTBEAT: BOOL; //Current status of heartbeat
+	i_fPhotonEnergy : LREAL; // Current photon energy
 
     (* Modbus *)
     ///////////////////////////////
@@ -44,7 +50,6 @@
     mb_Output_Registers: ARRAY[0..255] OF WORD;
     /// test mb_PLC_Memory[0] with "modpoll -r 12289 -t 4 127.0.0.1"
     mb_PLC_Memory AT %MW0: ARRAY[0..1000] OF WORD;
-
 
 END_VAR]]></Declaration>
   </GVL>

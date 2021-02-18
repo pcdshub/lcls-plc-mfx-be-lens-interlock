@@ -5,19 +5,17 @@
 VAR_INPUT
     LENSES : ARRAY[1..10] OF LENS;  //Array of lens structures
     COUNT  : INT;                   //Number of lenses
-    RADII_LIMIT  : RADII_LIMIT;     //Maximum allowed radius
 END_VAR
 VAR_OUTPUT
     UNKNOWN_FAULT : BOOL;         //Fault for unknown lens state
-    LIMIT_FAULT   : BOOL;         //Fault for radii outside limits
     EFF_RADII     : REAL; //Calculated effective radii
+	IN_COUNT 	  : INT;
 END_VAR
 VAR
     INDEX : INT;                  //Increment for loop
     KNOWN : INT;                  //Number of known lenses
     RADII : ARRAY[1..10] OF REAL; //Inserted Radii
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[(* FB_LENS_SYSTEM
 
@@ -30,11 +28,13 @@ communicated to the MPS system.
 //Check positions of lenses
 ///////////////////////////
 KNOWN := 0; //Tally of known lenses
+IN_COUNT := 0;
 
 FOR INDEX := 1 TO COUNT BY 1 DO
     IF LENSES[INDEX].IN THEN
     	//Inserted lenses are inserted into array
         RADII[INDEX] := LENSES[INDEX].RADIUS;
+		IN_COUNT := IN_COUNT + 1;
     ELSE
 	    //Removed lenses are set to 0.0
         RADII[INDEX] := 0.0;
@@ -51,21 +51,7 @@ UNKNOWN_FAULT := NOT (COUNT=KNOWN);
 
 // Calculate effective radii of inserted lens
 //////////////////////////////////////////////
-EFF_RADII := F_EFF_RADIUS(RADII:=RADII, COUNT:=COUNT);
-
-// Check limitation
-////////////////////
-
-IF EFF_RADII > 0.0 AND RADII_LIMIT.TRIP_HIGH > RADII_LIMIT.TRIP_LOW THEN
-	// Lens inserted and trip region specified:
-    LIMIT_FAULT := NOT (RADII_LIMIT.TRIP_LOW <= EFF_RADII
-                           AND EFF_RADII <= RADII_LIMIT.TRIP_HIGH);
-
-ELSE
-	// All lenses removed
-    LIMIT_FAULT := FALSE;
-END_IF
-]]></ST>
+EFF_RADII := F_EFF_RADIUS(RADII:=RADII, COUNT:=COUNT);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -77,7 +77,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{F9A6733B-2E5C-4A3B-AE67-D9B0F8BC0E61}" Name="MFX_BE_LENS_INTERLOCK" PrjFilePath="MFX_BE_LENS_INTERLOCK\MFX_BE_LENS_INTERLOCK.plcproj" TmcFilePath="MFX_BE_LENS_INTERLOCK\MFX_BE_LENS_INTERLOCK.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MFX-PLC\MFX-PLC.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MFX_BE_LENS_INTERLOCK\MFX_BE_LENS_INTERLOCK.tmc">
 					<Name>MFX_BE_LENS_INTERLOCK Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2">

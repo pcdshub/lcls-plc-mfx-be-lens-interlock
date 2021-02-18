@@ -21,6 +21,9 @@
     <Compile Include="DUTs\RADII_LIMIT.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\ST_FloatRange.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GlobalTextList.TcGTLO">
       <SubType>Code</SubType>
     </Compile>
@@ -65,9 +68,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\p_XLegacyPLCModbus.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Visualization Manager.TcVMO">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

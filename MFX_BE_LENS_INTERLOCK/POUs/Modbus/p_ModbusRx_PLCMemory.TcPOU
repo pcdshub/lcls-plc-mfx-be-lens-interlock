@@ -6,9 +6,29 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[MEMCPY(srcAddr:=ADR(mb_PLC_Memory[0]), destAddr:=ADR(TFS_LIMIT.TRIP_HIGH), n:=SIZEOF(TFS_LIMIT.TRIP_HIGH));
-MEMCPY(srcAddr:=ADR(mb_PLC_Memory[2]), destAddr:=ADR(XRT_LIMIT.TRIP_LOW),  n:=SIZEOF(XRT_LIMIT.TRIP_LOW));
-]]></ST>
+      <ST><![CDATA[(*
+{"MFX:LENS:",  "XRT_ONLY:LOW" , "aoFLOAT_PORT",    "0", "FLOAT32_LE",  "1", "1000",  "0", "um"}
+{"MFX:LENS:",  "XRT_ONLY:HIGH", "aoFLOAT_PORT",    "2", "FLOAT32_LE",  "1", "1000",  "0", "um"}
+{"MFX:LENS:", "LENS1_750:LOW" , "aoFLOAT_PORT",    "4", "FLOAT32_LE",  "1", "1000",  "0", "um"}
+{"MFX:LENS:", "LENS1_750:HIGH", "aoFLOAT_PORT",    "6", "FLOAT32_LE",  "1", "1000",  "0", "um"}
+{"MFX:LENS:", "LENS2_428:LOW" , "aoFLOAT_PORT",    "8", "FLOAT32_LE",  "1", "1000",  "0", "um"}
+{"MFX:LENS:", "LENS2_428:HIGH", "aoFLOAT_PORT",   "10", "FLOAT32_LE",  "1", "1000",  "0", "um"}
+{"MFX:LENS:", "LENS3_333:LOW" , "aoFLOAT_PORT",   "12", "FLOAT32_LE",  "1", "1000",  "0", "um"}
+{"MFX:LENS:", "LENS3_333:HIGH", "aoFLOAT_PORT",   "14", "FLOAT32_LE",  "1", "1000",  "0", "um"}
+*)
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[ 0]), destAddr:=ADR(NO_LENS_LIMIT.TRIP_LOW), n:=SIZEOF(NO_LENS_LIMIT.TRIP_LOW));
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[ 2]), destAddr:=ADR(NO_LENS_LIMIT.TRIP_HIGH), n:=SIZEOF(NO_LENS_LIMIT.TRIP_HIGH));
+
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[ 4]), destAddr:=ADR(LENS1_LIMIT.TRIP_LOW), n:=SIZEOF(LENS1_LIMIT.TRIP_LOW));
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[ 6]), destAddr:=ADR(LENS1_LIMIT.TRIP_HIGH), n:=SIZEOF(LENS1_LIMIT.TRIP_HIGH));
+
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[ 8]), destAddr:=ADR(LENS2_LIMIT.TRIP_LOW), n:=SIZEOF(LENS2_LIMIT.TRIP_LOW));
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[10]), destAddr:=ADR(LENS2_LIMIT.TRIP_HIGH), n:=SIZEOF(LENS2_LIMIT.TRIP_HIGH));
+
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[12]), destAddr:=ADR(LENS3_LIMIT.TRIP_LOW), n:=SIZEOF(LENS3_LIMIT.TRIP_LOW));
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[14]), destAddr:=ADR(LENS3_LIMIT.TRIP_HIGH), n:=SIZEOF(LENS3_LIMIT.TRIP_HIGH));
+
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[16]), destAddr:=ADR(i_fPhotonEnergy), n:=SIZEOF(i_fPhotonEnergy));]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

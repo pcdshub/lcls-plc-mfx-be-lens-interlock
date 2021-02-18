@@ -12,14 +12,11 @@ END_VAR
 p_ModbusRx_OutputCoils();
 p_ModbusRx_PLCMemory();
 p_XLegacyPLCModbus();
-(* Ensure Lens Radii (microns) *)
+
+(* Hard-code Lens Radii (microns) *)
 XRT_LENSES[1].RADIUS := 750.0;
 XRT_LENSES[2].RADIUS := 428.6;
 XRT_LENSES[3].RADIUS := 333.3;
-
-(* XRT trip ranges are not used currently. *)
-XRT_LIMIT.TRIP_LOW = 0.0;
-XRT_LIMIT.TRIP_HIGH = 0.0;
 
 TFS_LENSES[1].RADIUS  := 0.0;   // A pinhole, not a lens.
 TFS_LENSES[2].RADIUS  := 500.0;
@@ -32,9 +29,34 @@ TFS_LENSES[8].RADIUS  := 50.0;
 TFS_LENSES[9].RADIUS  := 50.0;
 TFS_LENSES[10].RADIUS := 50.0;
 
+(* Additional trip settings 
+
+	Pre-focus 	Minimum energy [keV] 	Requires transfocator lens low [keV] 	Requires transfocator lens high [keV]
+	NO_LENS 	0 	n/a 	n/a
+	LENS3_333 	9.5 	9.5 	11.11
+	LENS2_428 	8.28 	8.28 	10.02
+	LENS1_750 	5.96 	5.96 	8.02
+
+*)
+fMinEnergies[0] := 0.0; (* No XRT lens *)
+fMinEnergies[1] := 9500.0; (* XRT Lens 1 *)
+fMinEnergies[2] := 8280.0; (* XRT lens 2 *)
+fMinEnergies[3] := 5960.0; (* XRT lens 3 *)
+
+afbRequiresLensEnergyRange[0].fLow := 0.0; (* No XRT lens / no restriction*)
+afbRequiresLensEnergyRange[0].fHigh := 0.0;
+
+afbRequiresLensEnergyRange[1].fLow := 9500.0; (* Lens 1: 9.5~11.11keV *)
+afbRequiresLensEnergyRange[1].fHigh := 11110.0;
+
+afbRequiresLensEnergyRange[2].fLow := 8280.0; (* Lens 2: 8.28 ~ 10.02 keV *)
+afbRequiresLensEnergyRange[2].fHigh := 10020.0;
+
+afbRequiresLensEnergyRange[3].fLow := 5960.0; (* Lens 3: 5.96 ~ 8.02 keV *)
+afbRequiresLensEnergyRange[3].fHigh := 8020.0;
+
 (*  MPS LOGIC SUMMARY *)
 p_MPSSup();
-
 
 (* 	EPICS Tx UPDATE
     Modbus Map Report

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="p_MPSSup" Id="{22fa257d-fc87-4b8c-8293-563a03fa02d7}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_MPSSup
 VAR
@@ -8,6 +8,18 @@ VAR
     LIMIT_LATCH : RS;
     XRT_LENS_SYSTEM : FB_LENS_SYSTEM;
     TFS_LENS_SYSTEM : FB_LENS_SYSTEM;
+	LIMIT_FAULT : BOOL;
+	RADII_LIMIT : REFERENCE TO RADII_LIMIT;
+	
+	bTableLimitFault : BOOL;
+	bMinEnergyFault : BOOL;
+	bRequiresTransfocatorFault : BOOL;
+	
+	fEnergyMin : LREAL;
+	fRequiresTransfocatorEnergyLow : LREAL;
+	fRequiresTransfocatorEnergyHigh : LREAL;
+ 
+	iLensIdx: INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -29,22 +41,86 @@ bHEARTBEATALIVE := BEAT.ALIVE;
 
 //XRT LENS SYSTEM
 ///////////////////////////
-XRT_LENS_SYSTEM(LENSES:=XRT_LENSES, COUNT:=3, RADII_LIMIT:=XRT_LIMIT);
-XRT_RADIUS := XRT_LENS_SYSTEM.EFF_RADII;
+XRT_LENS_SYSTEM(LENSES:=XRT_LENSES, COUNT:=3);
+XRT_RADIUS := XRT_LENS_SYSTEM.EFF_RADII; (* Propagated to EPICS *)
 
 //TFS LENS SYSTEM
 ///////////////////////////
-TFS_LENS_SYSTEM(LENSES:=TFS_LENSES, COUNT:=10, RADII_LIMIT:=TFS_LIMIT);
-TFS_RADIUS := TFS_LENS_SYSTEM.EFF_RADII;
+TFS_LENS_SYSTEM(LENSES:=TFS_LENSES, COUNT:=10);
+TFS_RADIUS := TFS_LENS_SYSTEM.EFF_RADII; (* Propagated to EPICS *)
+
+(* Reset our tracking variables *)
+bTableLimitFault := FALSE;
+bMinEnergyFault := FALSE;
+bRequiresTransfocatorFault := FALSE;
+
+(* Determine which XRT lens is inserted, and pick the correct range based on it. *)
+
+IF NOT XRT_LENS_SYSTEM.UNKNOWN_FAULT THEN
+	IF XRT_LENS_SYSTEM.LENSES[1].IN THEN
+		RADII_LIMIT REF= LENS1_LIMIT;
+		iLensIdx := 1;
+	ELSIF XRT_LENS_SYSTEM.LENSES[2].IN THEN
+		RADII_LIMIT REF= LENS2_LIMIT;
+		iLensIdx := 2;
+	ELSIF XRT_LENS_SYSTEM.LENSES[3].IN THEN
+		RADII_LIMIT REF= LENS3_LIMIT;
+		iLensIdx := 3;
+	ELSE
+		RADII_LIMIT REF= NO_LENS_LIMIT;
+		iLensIdx := 0;
+	END_IF
+	
+	fEnergyMin := fMinEnergies[iLensIdx];
+	fRequiresTransfocatorEnergyLow := afbRequiresLensEnergyRange[iLensIdx].fLow;
+	fRequiresTransfocatorEnergyHigh := afbRequiresLensEnergyRange[iLensIdx].fHigh;
+	
+	IF RADII_LIMIT.TRIP_HIGH > RADII_LIMIT.TRIP_LOW THEN
+		// Lens inserted and trip region specified:
+		bTableLimitFault := (
+			RADII_LIMIT.TRIP_LOW <= TFS_RADIUS AND TFS_RADIUS <= RADII_LIMIT.TRIP_HIGH
+		);
+	END_IF
+	
+	(*
+	Regardless of transfocator setting, the minimum energy must be 
+	greater than or equal to that shown in the table (Minimum energy [keV]).
+	Trip if below.
+	*)	
+	bMinEnergyFault := i_fPhotonEnergy < fEnergyMin;
+	
+	(*
+	When a pre-focusing lens is inserted, there exists a range of photon 
+	energies in which at least one transfocator lens must be inserted. 
+	If the current photon energy is within this (inclusive) range and no
+	lens is inserted, trip.
+	*)
+	IF fRequiresTransfocatorEnergyHigh > fRequiresTransfocatorEnergyLow THEN
+		(* Check that we're in the given photon energy range *)
+		IF fRequiresTransfocatorEnergyLow <= i_fPhotonEnergy AND i_fPhotonEnergy <= fRequiresTransfocatorEnergyHigh THEN
+			(* And if so, trip when IN_COUNT == 0 *)
+			bRequiresTransfocatorFault := (TFS_LENS_SYSTEM.IN_COUNT < 1);
+		END_IF
+	END_IF
+ 
+END_IF
+
 
 //Summarize faults
 ///////////////////////////
 
-//Limit Violations
-bLIMIT_VIOLATED := XRT_LENS_SYSTEM.LIMIT_FAULT OR TFS_LENS_SYSTEM.LIMIT_FAULT;
+bLIMIT_VIOLATED := (
+	bTableLimitFault OR         // Inside the table-defined trip range
+	bMinEnergyFault OR			// Below minimum required energy for XRT lens
+	bRequiresTransfocatorFault	// Require transfocator lens in this range
+);
 
 //State Violations
-bSTATE_FAULT := XRT_LENS_SYSTEM.UNKNOWN_FAULT OR TFS_LENS_SYSTEM.UNKNOWN_FAULT;
+bSTATE_FAULT := (
+	XRT_LENS_SYSTEM.UNKNOWN_FAULT OR  // XRT lens state unknown  
+	TFS_LENS_SYSTEM.UNKNOWN_FAULT OR  // Transfocator lens state unknown
+	XRT_LENS_SYSTEM.IN_COUNT > 1      // Unexpected lens count
+);
 
 //Final Summary
 bFAULT := bLIMIT_VIOLATED OR bSTATE_FAULT OR NOT bHEARTBEATALIVE;
