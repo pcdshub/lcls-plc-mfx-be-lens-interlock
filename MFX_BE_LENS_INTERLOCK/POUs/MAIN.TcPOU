@@ -29,13 +29,13 @@ TFS_LENSES[8].RADIUS  := 50.0;
 TFS_LENSES[9].RADIUS  := 50.0;
 TFS_LENSES[10].RADIUS := 50.0;
 
-(* Additional trip settings 
+(* Additional trip settings
 
-	Pre-focus 	Minimum energy [keV] 	Requires transfocator lens low [keV] 	Requires transfocator lens high [keV]
-	NO_LENS 	0 	n/a 	n/a
-	LENS3_333 	9.5 	9.5 	11.11
-	LENS2_428 	8.28 	8.28 	10.02
-	LENS1_750 	5.96 	5.96 	8.02
+    Pre-focus 	Minimum energy [keV] 	Requires transfocator lens low [keV] 	Requires transfocator lens high [keV]
+    NO_LENS 	0 	n/a 	n/a
+    LENS3_333 	9.5 	9.5 	11.11
+    LENS2_428 	8.28 	8.28 	10.02
+    LENS1_750 	5.96 	5.96 	8.02
 
 *)
 fMinEnergies[0] := 0.0; (* No XRT lens *)

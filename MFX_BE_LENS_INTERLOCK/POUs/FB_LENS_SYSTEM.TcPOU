@@ -9,7 +9,7 @@ END_VAR
 VAR_OUTPUT
     UNKNOWN_FAULT : BOOL;         //Fault for unknown lens state
     EFF_RADII     : REAL; //Calculated effective radii
-	IN_COUNT 	  : INT;
+    IN_COUNT 	  : INT;
 END_VAR
 VAR
     INDEX : INT;                  //Increment for loop
@@ -32,11 +32,11 @@ IN_COUNT := 0;
 
 FOR INDEX := 1 TO COUNT BY 1 DO
     IF LENSES[INDEX].IN THEN
-    	//Inserted lenses are inserted into array
+        //Inserted lenses are inserted into array
         RADII[INDEX] := LENSES[INDEX].RADIUS;
-		IN_COUNT := IN_COUNT + 1;
+        IN_COUNT := IN_COUNT + 1;
     ELSE
-	    //Removed lenses are set to 0.0
+        //Removed lenses are set to 0.0
         RADII[INDEX] := 0.0;
     END_IF
 

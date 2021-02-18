@@ -29,13 +29,13 @@
     LENS2_LIMIT : RADII_LIMIT;
     LENS3_LIMIT : RADII_LIMIT;
 
-	fMinEnergies : ARRAY[0..3] OF LREAL;
-	afbRequiresLensEnergyRange : ARRAY[0..3] OF ST_FloatRange;
- 
+    fMinEnergies : ARRAY[0..3] OF LREAL;
+    afbRequiresLensEnergyRange : ARRAY[0..3] OF ST_FloatRange;
+
     (* Heartbeat *)
     ////////////////////////////////
     i_xIOC_HEARTBEAT: BOOL; //Current status of heartbeat
-	i_fPhotonEnergy : REAL; // Current photon energy (keep REAL for modbus compatibility)
+    i_fPhotonEnergy : REAL; // Current photon energy (keep REAL for modbus compatibility)
 
     (* Modbus *)
     ///////////////////////////////

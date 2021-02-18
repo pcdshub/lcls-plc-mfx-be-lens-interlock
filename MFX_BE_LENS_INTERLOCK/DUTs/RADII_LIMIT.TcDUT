@@ -3,7 +3,7 @@
   <DUT Name="RADII_LIMIT" Id="{c1816cb3-ac1b-4d82-848e-a830039fe351}">
     <Declaration><![CDATA[TYPE RADII_LIMIT :
 STRUCT
-	// Trip occurs when the effective radius falls inbetween TRIP_LOW and TRIP_HIGH (inclusive).
+    // Trip occurs when the effective radius falls inbetween TRIP_LOW and TRIP_HIGH (inclusive).
     TRIP_LOW  : REAL := 0;     // Trip effective radius low
     TRIP_HIGH : REAL := 10000; // Trip effective radius high
 END_STRUCT
