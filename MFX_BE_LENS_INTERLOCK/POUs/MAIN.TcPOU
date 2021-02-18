@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="MAIN" Id="{8f63f011-6378-4f32-beaf-4437ace2efcc}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
@@ -17,7 +17,11 @@ XRT_LENSES[1].RADIUS := 750.0;
 XRT_LENSES[2].RADIUS := 428.6;
 XRT_LENSES[3].RADIUS := 333.3;
 
-TFS_LENSES[1].RADIUS  := 0.0;
+(* XRT trip ranges are not used currently. *)
+XRT_LIMIT.TRIP_LOW = 0.0;
+XRT_LIMIT.TRIP_HIGH = 0.0;
+
+TFS_LENSES[1].RADIUS  := 0.0;   // A pinhole, not a lens.
 TFS_LENSES[2].RADIUS  := 500.0;
 TFS_LENSES[3].RADIUS  := 300.0;
 TFS_LENSES[4].RADIUS  := 250.0;

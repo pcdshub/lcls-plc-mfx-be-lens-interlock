@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="p_ModbusRx_PLCMemory" Id="{0f58525f-8f65-498a-aa7e-c3ab518424d1}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusRx_PLCMemory
 VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[MEMCPY(srcAddr:=ADR(mb_PLC_Memory[0]), destAddr:=ADR(TFS_LIMIT.HIGH_LIMIT), n:=SIZEOF(TFS_LIMIT.HIGH_LIMIT));
-MEMCPY(srcAddr:=ADR(mb_PLC_Memory[2]), destAddr:=ADR(XRT_LIMIT.LOW_LIMIT),  n:=SIZEOF(XRT_LIMIT.LOW_LIMIT));
+      <ST><![CDATA[MEMCPY(srcAddr:=ADR(mb_PLC_Memory[0]), destAddr:=ADR(TFS_LIMIT.TRIP_HIGH), n:=SIZEOF(TFS_LIMIT.TRIP_HIGH));
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[2]), destAddr:=ADR(XRT_LIMIT.TRIP_LOW),  n:=SIZEOF(XRT_LIMIT.TRIP_LOW));
 ]]></ST>
     </Implementation>
   </POU>

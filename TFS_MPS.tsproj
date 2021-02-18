@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4020.39">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.30">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{85DC3E7A-8ADA-435B-9479-25573909A7DB}" Namespace="AX5000" TcBaseType="true">E_AX5000_P_0275_ActiveFeedbackAndMemory</Name>
@@ -62,7 +62,7 @@
 			</Hides>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{631809BE-EA5A-46CB-9D93-CB71A3A2DB24}" TargetNetId="5.33.121.86.1.1" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{56D74E66-7F71-405B-8FCA-05023A5E29A8}" TargetNetId="5.33.121.86.1.1" ShowHideConfigurations="#x106">
 		<System>
 			<Licenses>
 				<Target BkhfOrder="VE2196245">
@@ -76,9 +76,9 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{F9A6733B-2E5C-4A3B-AE67-D9B0F8BC0E61}" Name="MFX-PLC" PrjFilePath="MFX-PLC\MFX-PLC.plcproj" TmcFilePath="MFX-PLC\MFX-PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e">
-				<Instance Id="#x01010010" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2">
-					<Name>MFX-PLC Instance</Name>
+			<Project GUID="{F9A6733B-2E5C-4A3B-AE67-D9B0F8BC0E61}" Name="MFX_BE_LENS_INTERLOCK" PrjFilePath="MFX_BE_LENS_INTERLOCK\MFX_BE_LENS_INTERLOCK.plcproj" TmcFilePath="MFX_BE_LENS_INTERLOCK\MFX_BE_LENS_INTERLOCK.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MFX-PLC\MFX-PLC.tmc">
+					<Name>MFX_BE_LENS_INTERLOCK Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
@@ -105,7 +105,7 @@
 						</OwnerA>
 					</UnrestoredVarLinks>
 					<TaskPouOids>
-						<TaskPouOid Prio="20" OTCID="#x01010011"/>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
 					</TaskPouOids>
 				</Instance>
 			</Project>
@@ -197,8 +197,8 @@ Bit 15 = Acyc. Function atcive (e.g. K-Bus Reset)
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-0011-0101-1000-010130000403}" Id="#x02030010"/>
-		<OwnerA Name="TIPC^MFX-PLC^MFX-PLC Instance">
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500830000403}" Id="#x02030010"/>
+		<OwnerA Name="TIPC^MFX_BE_LENS_INTERLOCK^MFX_BE_LENS_INTERLOCK Instance">
 			<OwnerB Name="TIID^Device 2 (CX-BK)^Box 1 (CX-BK)">
 				<Link VarA="PlcTask Outputs^GVL.bTRIP_MPS" VarB="Term 2 (KL2794)^Channel 1^Output"/>
 			</OwnerB>

@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<VarLinks>
-  <OwnerA Name="OutputSrc" Prefix="TIPC^MFX-PLC^MFX-PLC Instance" Type="2">
-    <OwnerB Name="TIID^Device 2 (CX-BK)^Box 1 (CX-BK)">
-      <Link VarA="GVL.bTRIP_MPS" GrpA="PlcTask Outputs" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Term 2 (KL2794)^Channel 1^Output" Size="1"/>
-    </OwnerB>
-  </OwnerA>
-</VarLinks>

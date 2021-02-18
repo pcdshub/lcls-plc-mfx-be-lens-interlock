@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="FB_LENS_SYSTEM" Id="{17806ffa-fff7-4bba-a8b4-71fc59888d71}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_LENS_SYSTEM
 VAR_INPUT
@@ -32,37 +32,37 @@ communicated to the MPS system.
 KNOWN := 0; //Tally of known lenses
 
 FOR INDEX := 1 TO COUNT BY 1 DO
-    //Inserted lenses are inserted into array
     IF LENSES[INDEX].IN THEN
+    	//Inserted lenses are inserted into array
         RADII[INDEX] := LENSES[INDEX].RADIUS;
-    //Removed lenses are set to 0.0
     ELSE
+	    //Removed lenses are set to 0.0
         RADII[INDEX] := 0.0;
     END_IF
 
-    //Count all known lenses
+    // Count all known lenses
     IF LENSES[INDEX].KNOWN THEN
         KNOWN := KNOWN +1;
     END_IF
 END_FOR;
 
-//Make sure we have accounted for all lenses
+// Make sure we have accounted for all lenses
 UNKNOWN_FAULT := NOT (COUNT=KNOWN);
 
-//Calculate effective radii of inserted lens
+// Calculate effective radii of inserted lens
 //////////////////////////////////////////////
 EFF_RADII := F_EFF_RADIUS(RADII:=RADII, COUNT:=COUNT);
 
-//Check limitation
+// Check limitation
 ////////////////////
 
-//Inserted
-IF EFF_RADII > 0.0 THEN
-    LIMIT_FAULT := NOT (RADII_LIMIT.LOW_LIMIT <= EFF_RADII
-                           AND EFF_RADII <= RADII_LIMIT.HIGH_LIMIT);
+IF EFF_RADII > 0.0 AND RADII_LIMIT.TRIP_HIGH > RADII_LIMIT.TRIP_LOW THEN
+	// Lens inserted and trip region specified:
+    LIMIT_FAULT := NOT (RADII_LIMIT.TRIP_LOW <= EFF_RADII
+                           AND EFF_RADII <= RADII_LIMIT.TRIP_HIGH);
 
-//All lenses removed
 ELSE
+	// All lenses removed
     LIMIT_FAULT := FALSE;
 END_IF
 ]]></ST>
