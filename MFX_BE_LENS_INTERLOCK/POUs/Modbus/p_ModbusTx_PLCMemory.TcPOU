@@ -1,13 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="p_ModbusTx_PLCMemory" Id="{d85d0cac-5378-471f-b9d9-8f92ec2f478e}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusTx_PLCMemory
 VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[MEMCPY(destAddr:=ADR(mb_PLC_Memory[100]), srcAddr:=ADR(XRT_RADIUS), n:=SIZEOF(XRT_RADIUS));
+      <ST><![CDATA[(* Send status information over modbus to IOC *)
+
+(* The calculated effective radius *)
+MEMCPY(destAddr:=ADR(mb_PLC_Memory[100]), srcAddr:=ADR(XRT_RADIUS), n:=SIZEOF(XRT_RADIUS));
 MEMCPY(destAddr:=ADR(mb_PLC_Memory[102]), srcAddr:=ADR(TFS_RADIUS), n:=SIZEOF(TFS_RADIUS));
+
+(* Individual lens radius *)
 MEMCPY(destAddr:=ADR(mb_PLC_Memory[104]), srcAddr:=ADR(TFS_LENSES[1].RADIUS), n:=SIZEOF(TFS_LENSES[1].RADIUS));
 MEMCPY(destAddr:=ADR(mb_PLC_Memory[106]), srcAddr:=ADR(TFS_LENSES[2].RADIUS), n:=SIZEOF(TFS_LENSES[2].RADIUS));
 MEMCPY(destAddr:=ADR(mb_PLC_Memory[108]), srcAddr:=ADR(TFS_LENSES[3].RADIUS), n:=SIZEOF(TFS_LENSES[3].RADIUS));
@@ -21,14 +26,9 @@ MEMCPY(destAddr:=ADR(mb_PLC_Memory[122]), srcAddr:=ADR(TFS_LENSES[10].RADIUS), n
 MEMCPY(destAddr:=ADR(mb_PLC_Memory[124]), srcAddr:=ADR(XRT_LENSES[1].RADIUS), n:=SIZEOF(XRT_LENSES[1].RADIUS));
 MEMCPY(destAddr:=ADR(mb_PLC_Memory[126]), srcAddr:=ADR(XRT_LENSES[2].RADIUS), n:=SIZEOF(XRT_LENSES[2].RADIUS));
 MEMCPY(destAddr:=ADR(mb_PLC_Memory[128]), srcAddr:=ADR(XRT_LENSES[3].RADIUS), n:=SIZEOF(XRT_LENSES[3].RADIUS));
-//MEMCPY(destAddr:=ADR(mb_PLC_Memory[200]), srcAddr:=ADR(q_iLIMIT_MODE), n:=SIZEOF(q_iLIMIT_MODE));  //VG pressure readbacks
-//MEMCPY(destAddr:=ADR(mb_PLC_Memory[14]), srcAddr:=ADR(vgDVD_GCC_04.rPRESS), n:=SIZEOF(vgDVD_GCC_04.rPRESS));  //VG pressure readbacks
-//MEMCPY(destAddr:=ADR(mb_PLC_Memory[16]), srcAddr:=ADR(vgMON_GCC_01.rPRESS), n:=SIZEOF(vgMON_GCC_01.rPRESS));  //VG pressure readbacks
-//MEMCPY(destAddr:=ADR(mb_PLC_Memory[18]), srcAddr:=ADR(vgDIA_GCC_01.rPRESS), n:=SIZEOF(vgDIA_GCC_01.rPRESS));  //VG pressure readbacks
-//MEMCPY(destAddr:=ADR(mb_PLC_Memory[20]), srcAddr:=ADR(vgSB2_GCC_01.rPRESS), n:=SIZEOF(vgSB2_GCC_01.rPRESS));  //VG pressure readbacks
-//MEMCPY(destAddr:=ADR(mb_PLC_Memory[22]), srcAddr:=ADR(vgDG1_GCC_01.rPRESS), n:=SIZEOF(vgDG1_GCC_01.rPRESS));  //VG pressure readbacks
-//MEMCPY(destAddr:=ADR(mb_PLC_Memory[24]), srcAddr:=ADR(vgDG2_GCC_01.rPRESS), n:=SIZEOF(vgDG2_GCC_01.rPRESS));  //VG pressure readbacks
-]]></ST>
+
+MEMCPY(destAddr:=ADR(mb_PLC_Memory[130]), srcAddr:=ADR(q_stActiveLimit.TRIP_LOW), n:=SIZEOF(q_stActiveLimit.TRIP_LOW));
+MEMCPY(destAddr:=ADR(mb_PLC_Memory[132]), srcAddr:=ADR(q_stActiveLimit.TRIP_HIGH), n:=SIZEOF(q_stActiveLimit.TRIP_HIGH));]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

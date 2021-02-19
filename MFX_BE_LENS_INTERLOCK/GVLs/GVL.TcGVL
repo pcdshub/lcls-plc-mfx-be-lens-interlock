@@ -4,15 +4,18 @@
     <Declaration><![CDATA[VAR_GLOBAL
     (* Fault Handling *)
     //////////////////////////////////
-    bHEARTBEATALIVE   : BOOL;  //Whether heartbeat has updated
-    bFAULT    AT %Q*  : BOOL;    //Whether Lens Interlock has tripped
-    bTRIP_MPS AT %Q*  : BOOL; //Bit output to MPS
-    bLIMIT_VIOLATED   : BOOL;  //Whether limit has been violated
-    bSTATE_FAULT      : BOOL;  //Whether lens is in an unknown state
+    bHEARTBEATALIVE     : BOOL;  //Whether heartbeat has updated
+    bFAULT    AT %Q*    : BOOL;    //Whether Lens Interlock has tripped
+    bTRIP_MPS AT %Q*    : BOOL; //Bit output to MPS
+    q_bLimitSummaryFault: BOOL;  //Whether limit has been violated
+    bSTATE_FAULT        : BOOL;  //Whether lens is in an unknown state
 
-    //Limit Latches
-    q_xPOSITION_LATCH : BOOL;  //Position Error Latch
-    q_xLIMIT_LATCH    : BOOL;  //Limit Latch
+    //Fault Latches
+    q_xPOSITION_LATCH : BOOL;
+    q_xLIMIT_LATCH    : BOOL;
+	q_bTableLimitFaultLatch : BOOL;
+    q_bMinEnergyFaultLatch : BOOL;
+    q_bRequiresTransfocatorFaultLatch : BOOL;
     i_xFAULT_CLEAR    : BOOL;  //Clear fault bit
 
     (*Lens Information *)
@@ -27,8 +30,17 @@
     NO_LENS_LIMIT : RADII_LIMIT;
     LENS1_LIMIT : RADII_LIMIT;
     LENS2_LIMIT : RADII_LIMIT;
-    LENS3_LIMIT : RADII_LIMIT;
+    LENS3_LIMIT : RADII_LIMIT;	
+	
+	(* Feedback to the IOC *)
+    q_stActiveLimit : RADII_LIMIT;
+	
+	(* Current faults *)
+    bTableLimitFault : BOOL;
+    bMinEnergyFault : BOOL;
+    bRequiresTransfocatorFault : BOOL;
 
+	
     fMinEnergies : ARRAY[0..3] OF LREAL;
     afbRequiresLensEnergyRange : ARRAY[0..3] OF ST_FloatRange;
 

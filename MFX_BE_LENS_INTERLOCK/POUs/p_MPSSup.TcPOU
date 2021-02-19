@@ -4,16 +4,15 @@
     <Declaration><![CDATA[PROGRAM p_MPSSup
 VAR
     BEAT: FB_HEARTBEAT;
-    STATE_LATCH : RS;
-    LIMIT_LATCH : RS;
+    fbStateLatch : RS;
+    fbLimitLatch : RS;
+    fbTableLimitFaultLatch : RS;
+    fbMinEnergyFaultLatch : RS;
+    fbRequiresTransfocatorFaultLatch : RS;
     XRT_LENS_SYSTEM : FB_LENS_SYSTEM;
     TFS_LENS_SYSTEM : FB_LENS_SYSTEM;
     LIMIT_FAULT : BOOL;
-    RADII_LIMIT : REFERENCE TO RADII_LIMIT;
-
-    bTableLimitFault : BOOL;
-    bMinEnergyFault : BOOL;
-    bRequiresTransfocatorFault : BOOL;
+    stActiveLimit : REFERENCE TO RADII_LIMIT;
 
     fEnergyMin : LREAL;
     fRequiresTransfocatorEnergyLow : LREAL;
@@ -23,16 +22,23 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//Instantiate Latches
-///////////////////////////////////
+      <ST><![CDATA[// Latch fault state
+////////////////////
 
-//Unknown position latches
-STATE_LATCH(SET:=bSTATE_FAULT, RESET1:=i_xFAULT_CLEAR);
-q_xPOSITION_LATCH := STATE_LATCH.Q1;
+fbStateLatch(SET:=bSTATE_FAULT, RESET1:=i_xFAULT_CLEAR);
+q_xPOSITION_LATCH := fbStateLatch.Q1;
 
-//Violated limit latch
-LIMIT_LATCH(SET:=bLIMIT_VIOLATED, RESET1:=i_xFAULT_CLEAR);
-q_xLIMIT_LATCH := LIMIT_LATCH.Q1;
+fbLimitLatch(SET:=q_bLimitSummaryFault, RESET1:=i_xFAULT_CLEAR);
+q_xLIMIT_LATCH := fbLimitLatch.Q1;
+
+fbTableLimitFaultLatch(SET:=bTableLimitFault, RESET1:=i_xFAULT_CLEAR);
+q_bTableLimitFaultLatch := fbTableLimitFaultLatch.Q1;
+
+fbMinEnergyFaultLatch(SET:=bMinEnergyFault, RESET1:=i_xFAULT_CLEAR);
+q_bMinEnergyFaultLatch := fbMinEnergyFaultLatch.Q1;
+
+fbRequiresTransfocatorFaultLatch(SET:=bRequiresTransfocatorFault, RESET1:=i_xFAULT_CLEAR);
+q_bRequiresTransfocatorFaultLatch := fbRequiresTransfocatorFaultLatch.Q1;
 
 //IOC Heartbeat
 ///////////////////////////////////////////////
@@ -58,27 +64,30 @@ bRequiresTransfocatorFault := FALSE;
 
 IF NOT XRT_LENS_SYSTEM.UNKNOWN_FAULT THEN
     IF XRT_LENS_SYSTEM.LENSES[1].IN THEN
-        RADII_LIMIT REF= LENS1_LIMIT;
+        stActiveLimit REF= LENS1_LIMIT;
         iLensIdx := 1;
     ELSIF XRT_LENS_SYSTEM.LENSES[2].IN THEN
-        RADII_LIMIT REF= LENS2_LIMIT;
+        stActiveLimit REF= LENS2_LIMIT;
         iLensIdx := 2;
     ELSIF XRT_LENS_SYSTEM.LENSES[3].IN THEN
-        RADII_LIMIT REF= LENS3_LIMIT;
+        stActiveLimit REF= LENS3_LIMIT;
         iLensIdx := 3;
     ELSE
-        RADII_LIMIT REF= NO_LENS_LIMIT;
+        stActiveLimit REF= NO_LENS_LIMIT;
         iLensIdx := 0;
     END_IF
 
+	q_stActiveLimit.TRIP_LOW := stActiveLimit.TRIP_LOW;
+	q_stActiveLimit.TRIP_HIGH := stActiveLimit.TRIP_HIGH;
+	
     fEnergyMin := fMinEnergies[iLensIdx];
     fRequiresTransfocatorEnergyLow := afbRequiresLensEnergyRange[iLensIdx].fLow;
     fRequiresTransfocatorEnergyHigh := afbRequiresLensEnergyRange[iLensIdx].fHigh;
 
-    IF RADII_LIMIT.TRIP_HIGH > RADII_LIMIT.TRIP_LOW THEN
+    IF stActiveLimit.TRIP_HIGH > stActiveLimit.TRIP_LOW THEN
         // Lens inserted and trip region specified:
         bTableLimitFault := (
-            RADII_LIMIT.TRIP_LOW <= TFS_RADIUS AND TFS_RADIUS <= RADII_LIMIT.TRIP_HIGH
+            stActiveLimit.TRIP_LOW <= TFS_RADIUS AND TFS_RADIUS <= stActiveLimit.TRIP_HIGH
         );
     END_IF
 
@@ -105,11 +114,10 @@ IF NOT XRT_LENS_SYSTEM.UNKNOWN_FAULT THEN
 
 END_IF
 
-
 //Summarize faults
 ///////////////////////////
 
-bLIMIT_VIOLATED := (
+q_bLimitSummaryFault := (
     bTableLimitFault OR         // Inside the table-defined trip range
     bMinEnergyFault OR			// Below minimum required energy for XRT lens
     bRequiresTransfocatorFault	// Require transfocator lens in this range
@@ -123,7 +131,7 @@ bSTATE_FAULT := (
 );
 
 //Final Summary
-bFAULT := bLIMIT_VIOLATED OR bSTATE_FAULT OR NOT bHEARTBEATALIVE;
+bFAULT := q_bLimitSummaryFault OR bSTATE_FAULT OR NOT bHEARTBEATALIVE;
 bTRIP_MPS := NOT bFAULT;]]></ST>
     </Implementation>
   </POU>
