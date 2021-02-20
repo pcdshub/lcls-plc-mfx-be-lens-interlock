@@ -4,6 +4,7 @@
     <Declaration><![CDATA[PROGRAM p_MPSSup
 VAR
     BEAT: FB_HEARTBEAT;
+	fbFaultLatch : RS;
     fbStateLatch : RS;
     fbLimitLatch : RS;
     fbTableLimitFaultLatch : RS;
@@ -25,11 +26,14 @@ END_VAR
       <ST><![CDATA[// Latch fault state
 ////////////////////
 
-fbStateLatch(SET:=bSTATE_FAULT, RESET1:=i_xFAULT_CLEAR);
-q_xPOSITION_LATCH := fbStateLatch.Q1;
+fbFaultLatch(SET:=bFAULT, RESET1:=i_xFAULT_CLEAR);
+q_bFaultLatch := fbFaultLatch.Q1;
+
+fbStateLatch(SET:=bStateFault, RESET1:=i_xFAULT_CLEAR);
+q_bStateLatch := fbStateLatch.Q1;
 
 fbLimitLatch(SET:=q_bLimitSummaryFault, RESET1:=i_xFAULT_CLEAR);
-q_xLIMIT_LATCH := fbLimitLatch.Q1;
+q_bLimitSummaryFaultLatch := fbLimitLatch.Q1;
 
 fbTableLimitFaultLatch(SET:=bTableLimitFault, RESET1:=i_xFAULT_CLEAR);
 q_bTableLimitFaultLatch := fbTableLimitFaultLatch.Q1;
@@ -124,15 +128,30 @@ q_bLimitSummaryFault := (
 );
 
 //State Violations
-bSTATE_FAULT := (
+bStateFault := (
     XRT_LENS_SYSTEM.UNKNOWN_FAULT OR  // XRT lens state unknown
     TFS_LENS_SYSTEM.UNKNOWN_FAULT OR  // Transfocator lens state unknown
     XRT_LENS_SYSTEM.IN_COUNT > 1      // Unexpected lens count
 );
 
 //Final Summary
-bFAULT := q_bLimitSummaryFault OR bSTATE_FAULT OR NOT bHEARTBEATALIVE;
-bTRIP_MPS := NOT bFAULT;]]></ST>
+bFAULT := q_bLimitSummaryFault OR bStateFault OR NOT bHEARTBEATALIVE;
+
+// MPS trips when *LOW*. 
+// 	So: bTRIP_MPS (False) when bFAULT (True)
+// 	And bTRIP_MPS (True) when bFAULT (False)
+//bTRIP_MPS := NOT bFAULT;
+
+(******************************)
+(******************************)
+(******************************)
+(******************************)
+bTRIP_MPS := TRUE; (* TEMPORARY: Alex requested the PLC never trip MPS for his overnight experiments *)
+(* TODO: reviewers, this needs to be removed *)
+(******************************)
+(******************************)
+(******************************)
+(******************************)]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -6,7 +6,10 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[(*  EPICS Rx UPDATE
+      <ST><![CDATA[(* 16-bit cycle counter *)
+iCycleCount := iCycleCount + 1;
+
+(*  EPICS Rx UPDATE
     Modbus receive
 *)
 p_ModbusRx_OutputCoils();
@@ -63,6 +66,7 @@ p_MPSSup();
     IMPORTANT: This is the LAST subroutine to be called.
 *)
 p_ModbusTx_InputCoils();
+p_ModbusTx_InputReg();
 p_ModbusTx_PLCMemory();
 
 ]]></ST>

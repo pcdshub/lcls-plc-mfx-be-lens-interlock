@@ -85,14 +85,14 @@
 						<Var>
 							<Name>GVL.bFAULT</Name>
 							<Comment>
-								<![CDATA[Whether Lens Interlock has tripped]]>
+								<![CDATA[ [Active] Whether Lens Interlock has tripped]]>
 							</Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>GVL.bTRIP_MPS</Name>
 							<Comment>
-								<![CDATA[Bit output to MPS]]>
+								<![CDATA[ [Active] Bit output to MPS (trip when LOW)]]>
 							</Comment>
 							<Type>BOOL</Type>
 						</Var>

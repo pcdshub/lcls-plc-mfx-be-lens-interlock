@@ -4,19 +4,20 @@
     <Declaration><![CDATA[VAR_GLOBAL
     (* Fault Handling *)
     //////////////////////////////////
-    bHEARTBEATALIVE     : BOOL;  //Whether heartbeat has updated
-    bFAULT    AT %Q*    : BOOL;    //Whether Lens Interlock has tripped
-    bTRIP_MPS AT %Q*    : BOOL; //Bit output to MPS
-    q_bLimitSummaryFault: BOOL;  //Whether limit has been violated
-    bSTATE_FAULT        : BOOL;  //Whether lens is in an unknown state
-
+    bHEARTBEATALIVE     : BOOL;  // [Active] Whether heartbeat has updated
+    bFAULT    AT %Q*    : BOOL;  // [Active] Whether Lens Interlock has tripped
+    bTRIP_MPS AT %Q*    : BOOL;  // [Active] Bit output to MPS (trip when LOW)
+    q_bLimitSummaryFault: BOOL;  // [Active] Whether limit has been violated
+    bStateFault	        : BOOL;  // [Active] Whether lens is in an unknown state
+	
     //Fault Latches
-    q_xPOSITION_LATCH : BOOL;
-    q_xLIMIT_LATCH    : BOOL;
-	q_bTableLimitFaultLatch : BOOL;
-    q_bMinEnergyFaultLatch : BOOL;
-    q_bRequiresTransfocatorFaultLatch : BOOL;
-    i_xFAULT_CLEAR    : BOOL;  //Clear fault bit
+	q_bFaultLatch  						: BOOL; // Latch: summary for *any* fault
+    q_bStateLatch 						: BOOL;	// Latch: motor state/position unknown 
+    q_bLimitSummaryFaultLatch    		: BOOL; // Latch: Summary fault due to energy/lens combination [active]
+	q_bTableLimitFaultLatch 			: BOOL;	// Latch: Table disallowed range match
+    q_bMinEnergyFaultLatch 				: BOOL; // Latch: Minimum energy not met
+    q_bRequiresTransfocatorFaultLatch 	: BOOL; // Latch: Transfocator lens required to be inserted
+    i_xFAULT_CLEAR    					: BOOL;  //Clear fault bit
 
     (*Lens Information *)
     ////////////////////////////////
@@ -62,6 +63,7 @@
     mb_Output_Registers: ARRAY[0..255] OF WORD;
     /// test mb_PLC_Memory[0] with "modpoll -r 12289 -t 4 127.0.0.1"
     mb_PLC_Memory AT %MW0: ARRAY[0..1000] OF WORD;
+	iCycleCount : WORD;
 
 END_VAR]]></Declaration>
   </GVL>

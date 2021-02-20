@@ -28,7 +28,14 @@ MEMCPY(destAddr:=ADR(mb_PLC_Memory[126]), srcAddr:=ADR(XRT_LENSES[2].RADIUS), n:
 MEMCPY(destAddr:=ADR(mb_PLC_Memory[128]), srcAddr:=ADR(XRT_LENSES[3].RADIUS), n:=SIZEOF(XRT_LENSES[3].RADIUS));
 
 MEMCPY(destAddr:=ADR(mb_PLC_Memory[130]), srcAddr:=ADR(q_stActiveLimit.TRIP_LOW), n:=SIZEOF(q_stActiveLimit.TRIP_LOW));
-MEMCPY(destAddr:=ADR(mb_PLC_Memory[132]), srcAddr:=ADR(q_stActiveLimit.TRIP_HIGH), n:=SIZEOF(q_stActiveLimit.TRIP_HIGH));]]></ST>
+MEMCPY(destAddr:=ADR(mb_PLC_Memory[132]), srcAddr:=ADR(q_stActiveLimit.TRIP_HIGH), n:=SIZEOF(q_stActiveLimit.TRIP_HIGH));
+
+// MEMCPY(destAddr:=ADR(mb_PLC_Memory[134]), srcAddr:=ADR(iCycleCount), n:=SIZEOF(iCycleCount));
+// Abuse the FLOAT port to send along 16-bit cycle information:
+mb_PLC_Memory[134] := iCycleCount;
+mb_PLC_Memory[135] := 0;
+
+MEMCPY(destAddr:=ADR(mb_PLC_Memory[136]), srcAddr:=ADR(i_fPhotonEnergy), n:=SIZEOF(i_fPhotonEnergy));]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

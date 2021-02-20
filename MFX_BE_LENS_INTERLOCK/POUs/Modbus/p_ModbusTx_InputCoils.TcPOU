@@ -10,18 +10,21 @@ END_VAR]]></Declaration>
       <ST><![CDATA[(* Online/active values *)
 mb_Input_Coils[0]:=bHEARTBEATALIVE; 
 mb_Input_Coils[1]:=bFAULT;          
-mb_Input_Coils[2]:=bSTATE_FAULT;    
+mb_Input_Coils[2]:=bStateFault;    
 mb_Input_Coils[3]:=q_bLimitSummaryFault; 
 
 (* Latched fault information *)
-mb_Input_Coils[4]:=q_xPOSITION_LATCH;
-mb_Input_Coils[5]:=q_xLIMIT_LATCH;   
+mb_Input_Coils[4]:=q_bStateLatch;
+mb_Input_Coils[5]:=q_bLimitSummaryFaultLatch;   
 mb_Input_Coils[6]:=q_bMinEnergyFaultLatch;
 mb_Input_Coils[7]:=q_bRequiresTransfocatorFaultLatch;
 mb_Input_Coils[8]:=q_bTableLimitFaultLatch;
-mb_Input_Coils[9]:=FALSE;  //default
-mb_Input_Coils[10]:=FALSE;  //Valve position readbacks
-mb_Input_Coils[11]:=FALSE;  //Valve position readbacks
+
+(* Some more online values... This is why you leave a buffer. *)
+mb_Input_Coils[9]:=bMinEnergyFault;  //default
+mb_Input_Coils[10]:=bRequiresTransfocatorFault;  //Valve position readbacks
+mb_Input_Coils[11]:=bTableLimitFault;  //Valve position readbacks
+
 mb_Input_Coils[12]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[13]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[14]:=FALSE;  //Valve position readbacks
