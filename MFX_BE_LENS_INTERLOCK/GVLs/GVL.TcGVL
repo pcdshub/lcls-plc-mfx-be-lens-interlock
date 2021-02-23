@@ -2,23 +2,30 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <GVL Name="GVL" Id="{14f7e4c4-1971-4a0b-b8fc-55754218cf88}">
     <Declaration><![CDATA[VAR_GLOBAL
-    (* Fault Handling *)
-    //////////////////////////////////
-    bHEARTBEATALIVE     : BOOL;  // [Active] Whether heartbeat has updated
-    bFAULT    AT %Q*    : BOOL;  // [Active] Whether Lens Interlock has tripped
-    bTRIP_MPS AT %Q*    : BOOL;  // [Active] Bit output to MPS (trip when LOW)
-    q_bLimitSummaryFault: BOOL;  // [Active] Whether limit has been violated
-    bStateFault	        : BOOL;  // [Active] Whether lens is in an unknown state
-	
-    //Fault Latches
+	(* Fault handling - inputs *)
+    i_xFAULT_CLEAR    					: BOOL;  //Clear fault bit
+
+    (* Fault Handling - active faults *)
+    bHeartbeatAlive     		: BOOL; // [Active] Whether heartbeat has updated
+    bFAULT    AT %Q*    		: BOOL; // [Active] Whether Lens Interlock has tripped
+    bStateFault	        		: BOOL; // [Active] Whether lens is in an unknown state
+    bLimitSummaryFault			: BOOL; // [Active] Whether limit has been violated
+    bTableLimitFault 			: BOOL;	// [Active] Energy/lens combination disallowed in table
+    bMinEnergyFault 			: BOOL;	// [Active] Minimum energy not met
+    bRequiresTransfocatorFault 	: BOOL; // [Active] Transfocator lens required to be inserted 
+
+    (* Fault Handling - latched faults *)
+	q_bHeartbeatLatch					: BOOL; // Latch: heartbeat fault
 	q_bFaultLatch  						: BOOL; // Latch: summary for *any* fault
     q_bStateLatch 						: BOOL;	// Latch: motor state/position unknown 
-    q_bLimitSummaryFaultLatch    		: BOOL; // Latch: Summary fault due to energy/lens combination [active]
+    q_bLimitSummaryFaultLatch    		: BOOL; // Latch: Summary fault due to energy/lens combination
 	q_bTableLimitFaultLatch 			: BOOL;	// Latch: Table disallowed range match
     q_bMinEnergyFaultLatch 				: BOOL; // Latch: Minimum energy not met
     q_bRequiresTransfocatorFaultLatch 	: BOOL; // Latch: Transfocator lens required to be inserted
-    i_xFAULT_CLEAR    					: BOOL;  //Clear fault bit
 
+	(* Fault handling - MPS signals *)
+    bTRIP_MPS AT %Q*    		: BOOL;  // [Active] Bit output to MPS (trip when LOW)
+	
     (*Lens Information *)
     ////////////////////////////////
     XRT_LENSES : ARRAY[1..10] OF LENS; //Set of XRT Lenses
@@ -35,12 +42,6 @@
 	
 	(* Feedback to the IOC *)
     q_stActiveLimit : RADII_LIMIT;
-	
-	(* Current faults *)
-    bTableLimitFault : BOOL;
-    bMinEnergyFault : BOOL;
-    bRequiresTransfocatorFault : BOOL;
-
 	
     fMinEnergies : ARRAY[0..3] OF LREAL;
     afbRequiresLensEnergyRange : ARRAY[0..3] OF ST_FloatRange;

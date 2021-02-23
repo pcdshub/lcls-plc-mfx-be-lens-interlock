@@ -8,31 +8,29 @@ VAR_OUTPUT
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[(* Online/active values *)
-mb_Input_Coils[0]:=bHEARTBEATALIVE; 
+mb_Input_Coils[0]:=bHeartbeatAlive; 
 mb_Input_Coils[1]:=bFAULT;          
 mb_Input_Coils[2]:=bStateFault;    
-mb_Input_Coils[3]:=q_bLimitSummaryFault; 
+mb_Input_Coils[3]:=bLimitSummaryFault; 
+mb_Input_Coils[4]:=bMinEnergyFault;
+mb_Input_Coils[5]:=bRequiresTransfocatorFault;
+mb_Input_Coils[6]:=bTableLimitFault;
+mb_Input_Coils[7]:=FALSE;
+mb_Input_Coils[8]:=FALSE;
+mb_Input_Coils[9]:=FALSE;
 
 (* Latched fault information *)
-mb_Input_Coils[4]:=q_bStateLatch;
-mb_Input_Coils[5]:=q_bLimitSummaryFaultLatch;   
-mb_Input_Coils[6]:=q_bMinEnergyFaultLatch;
-mb_Input_Coils[7]:=q_bRequiresTransfocatorFaultLatch;
-mb_Input_Coils[8]:=q_bTableLimitFaultLatch;
+mb_Input_Coils[10]:=q_bHeartbeatLatch;
+mb_Input_Coils[11]:=q_bFaultLatch;
+mb_Input_Coils[12]:=q_bStateLatch;
+mb_Input_Coils[13]:=q_bLimitSummaryFaultLatch;   
+mb_Input_Coils[14]:=q_bMinEnergyFaultLatch;
+mb_Input_Coils[15]:=q_bRequiresTransfocatorFaultLatch;
+mb_Input_Coils[16]:=q_bTableLimitFaultLatch;
+mb_Input_Coils[17]:=FALSE;
+mb_Input_Coils[18]:=FALSE;
+mb_Input_Coils[19]:=FALSE;
 
-(* Some more online values... This is why you leave a buffer. *)
-mb_Input_Coils[9]:=bMinEnergyFault;  //default
-mb_Input_Coils[10]:=bRequiresTransfocatorFault;  //Valve position readbacks
-mb_Input_Coils[11]:=bTableLimitFault;  //Valve position readbacks
-
-mb_Input_Coils[12]:=FALSE;  //Valve position readbacks
-mb_Input_Coils[13]:=FALSE;  //Valve position readbacks
-mb_Input_Coils[14]:=FALSE;  //Valve position readbacks
-mb_Input_Coils[15]:=FALSE;  //Valve position readbacks
-mb_Input_Coils[16]:=FALSE;  //Valve position readbacks
-mb_Input_Coils[17]:=FALSE;  //Valve position readbacks
-mb_Input_Coils[18]:=FALSE;  //Valve position readbacks
-mb_Input_Coils[19]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[20]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[21]:=FALSE;  //Valve position readbacks
 mb_Input_Coils[22]:=FALSE;  //Valve position readbacks

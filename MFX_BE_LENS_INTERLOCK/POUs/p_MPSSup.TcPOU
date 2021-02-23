@@ -4,6 +4,7 @@
     <Declaration><![CDATA[PROGRAM p_MPSSup
 VAR
     BEAT: FB_HEARTBEAT;
+	fbHeartbeatLatch : RS;
 	fbFaultLatch : RS;
     fbStateLatch : RS;
     fbLimitLatch : RS;
@@ -29,10 +30,13 @@ END_VAR
 fbFaultLatch(SET:=bFAULT, RESET1:=i_xFAULT_CLEAR);
 q_bFaultLatch := fbFaultLatch.Q1;
 
+fbHeartbeatLatch(SET:=NOT bHeartbeatAlive, RESET1:=i_xFAULT_CLEAR);
+q_bHeartbeatLatch := fbHeartbeatLatch.Q1;
+
 fbStateLatch(SET:=bStateFault, RESET1:=i_xFAULT_CLEAR);
 q_bStateLatch := fbStateLatch.Q1;
 
-fbLimitLatch(SET:=q_bLimitSummaryFault, RESET1:=i_xFAULT_CLEAR);
+fbLimitLatch(SET:=bLimitSummaryFault, RESET1:=i_xFAULT_CLEAR);
 q_bLimitSummaryFaultLatch := fbLimitLatch.Q1;
 
 fbTableLimitFaultLatch(SET:=bTableLimitFault, RESET1:=i_xFAULT_CLEAR);
@@ -47,7 +51,7 @@ q_bRequiresTransfocatorFaultLatch := fbRequiresTransfocatorFaultLatch.Q1;
 //IOC Heartbeat
 ///////////////////////////////////////////////
 BEAT(BEAT:=i_xIOC_HEARTBEAT,DEADTIME:=TIME#1.0S);
-bHEARTBEATALIVE := BEAT.ALIVE;
+bHeartbeatAlive := BEAT.ALIVE;
 
 //XRT LENS SYSTEM
 ///////////////////////////
@@ -121,7 +125,7 @@ END_IF
 //Summarize faults
 ///////////////////////////
 
-q_bLimitSummaryFault := (
+bLimitSummaryFault := (
     bTableLimitFault OR         // Inside the table-defined trip range
     bMinEnergyFault OR			// Below minimum required energy for XRT lens
     bRequiresTransfocatorFault	// Require transfocator lens in this range
@@ -135,12 +139,12 @@ bStateFault := (
 );
 
 //Final Summary
-bFAULT := q_bLimitSummaryFault OR bStateFault OR NOT bHEARTBEATALIVE;
 
 // MPS trips when *LOW*. 
 // 	So: bTRIP_MPS (False) when bFAULT (True)
 // 	And bTRIP_MPS (True) when bFAULT (False)
-//bTRIP_MPS := NOT bFAULT;
+bFAULT := bLimitSummaryFault OR bStateFault OR NOT bHeartbeatAlive;
+bTRIP_MPS := NOT bFAULT;
 
 (******************************)
 (******************************)
