@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <POU Name="p_ModbusTx_InputReg" Id="{1531d535-cff0-4bc5-94f7-4996acc25643}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusTx_InputReg
 VAR
@@ -7,7 +7,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[mb_Input_Registers[0]:=iCycleCount;  //System info
+      <ST><![CDATA[mb_Input_Registers[0]:=0;  //System info
 mb_Input_Registers[1]:=0;  //System info
 mb_Input_Registers[2]:=0;  //System info
 mb_Input_Registers[3]:=0;  //System info

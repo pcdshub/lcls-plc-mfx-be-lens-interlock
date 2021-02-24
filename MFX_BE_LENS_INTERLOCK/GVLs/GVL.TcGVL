@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <GVL Name="GVL" Id="{14f7e4c4-1971-4a0b-b8fc-55754218cf88}">
     <Declaration><![CDATA[VAR_GLOBAL
 	(* Fault handling - inputs *)
-    i_xFAULT_CLEAR    					: BOOL;  //Clear fault bit
+    i_xFAULT_CLEAR    			: BOOL;  // Clear fault bit
+	i_iUpdateRequestSeq			: DINT;  // Parameter update request sequence number
 
     (* Fault Handling - active faults *)
     bHeartbeatAlive     		: BOOL; // [Active] Whether heartbeat has updated
@@ -23,6 +24,8 @@
     q_bMinEnergyFaultLatch 				: BOOL; // Latch: Minimum energy not met
     q_bRequiresTransfocatorFaultLatch 	: BOOL; // Latch: Transfocator lens required to be inserted
 
+	fbEnergyTables : FB_EnergyTables;
+	
 	(* Fault handling - MPS signals *)
     bTRIP_MPS AT %Q*    		: BOOL;  // [Active] Bit output to MPS (trip when LOW)
 	
@@ -32,6 +35,9 @@
     TFS_LENSES : ARRAY[1..10] OF LENS; //Set of TFS Lenses
     XRT_RADIUS : REAL; //Current Radius of XRT lenses
     TFS_RADIUS : REAL; //Current Radius of TFS lenses
+	
+    XRT_LENS_SYSTEM : FB_LENS_SYSTEM;
+    TFS_LENS_SYSTEM : FB_LENS_SYSTEM;
 
     (* Effective radius trip regions - per XRT lens configuration *)
     ////////////////////////////////////////////////////////////////

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <POU Name="p_ModbusRx_OutputCoils" Id="{943c36cb-adb4-42b1-982e-b281da4eed9b}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusRx_OutputCoils
 VAR
@@ -50,15 +50,15 @@ TFS_LENSES[10].IN:=mb_Output_Coils[39];  //Valve switch controls
 XRT_LENSES[01].IN:=mb_Output_Coils[40];
 XRT_LENSES[02].IN:=mb_Output_Coils[41];
 XRT_LENSES[03].IN:=mb_Output_Coils[42];
-//mb_Output_Coils[43];  //Valve switch controls
-//mb_Output_Coils[44];  //Valve switch controls
-//mb_Output_Coils[45];  //Valve switch controls
-//mb_Output_Coils[46];  //Valve switch controls
-//mb_Output_Coils[47];  //Valve switch controls
-//mb_Output_Coils[48];  //Valve switch controls
-//mb_Output_Coils[49];  //Valve switch controls
-i_xIOC_HEARTBEAT:=mb_Output_Coils[50];  //Valve switch controls
-i_xFAULT_CLEAR  :=mb_Output_Coils[51];  //Valve switch controls
+//mb_Output_Coils[43];
+//mb_Output_Coils[44];
+//mb_Output_Coils[45];
+//mb_Output_Coils[46];
+//mb_Output_Coils[47];
+//mb_Output_Coils[48];
+//mb_Output_Coils[49];
+i_xIOC_HEARTBEAT:=mb_Output_Coils[50];
+i_xFAULT_CLEAR  :=mb_Output_Coils[51];
 //mb_Output_Coils[52];  //Valve switch controls
 //mb_Output_Coils[53];  //Valve switch controls
 //mb_Output_Coils[54];  //Valve switch controls

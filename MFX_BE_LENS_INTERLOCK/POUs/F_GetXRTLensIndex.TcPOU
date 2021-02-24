@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
+  <POU Name="F_GetXRTLensIndex" Id="{22bf53bb-01f8-4801-a21c-3cae8ce3a262}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_GetXRTLensIndex : INT
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF XRT_LENS_SYSTEM.LENSES[1].IN THEN
+	F_GetXRTLensIndex := 1;
+ELSIF XRT_LENS_SYSTEM.LENSES[2].IN THEN
+	F_GetXRTLensIndex := 2;
+ELSIF XRT_LENS_SYSTEM.LENSES[3].IN THEN
+	F_GetXRTLensIndex := 3;
+ELSE
+	F_GetXRTLensIndex := 0;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

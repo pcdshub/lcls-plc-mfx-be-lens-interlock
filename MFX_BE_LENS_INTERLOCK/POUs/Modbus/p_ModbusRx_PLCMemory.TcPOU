@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <POU Name="p_ModbusRx_PLCMemory" Id="{0f58525f-8f65-498a-aa7e-c3ab518424d1}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusRx_PLCMemory
 VAR
@@ -28,7 +28,9 @@ MEMCPY(srcAddr:=ADR(mb_PLC_Memory[10]), destAddr:=ADR(LENS2_LIMIT.TRIP_HIGH), n:
 MEMCPY(srcAddr:=ADR(mb_PLC_Memory[12]), destAddr:=ADR(LENS3_LIMIT.TRIP_LOW), n:=SIZEOF(LENS3_LIMIT.TRIP_LOW));
 MEMCPY(srcAddr:=ADR(mb_PLC_Memory[14]), destAddr:=ADR(LENS3_LIMIT.TRIP_HIGH), n:=SIZEOF(LENS3_LIMIT.TRIP_HIGH));
 
-MEMCPY(srcAddr:=ADR(mb_PLC_Memory[16]), destAddr:=ADR(i_fPhotonEnergy), n:=SIZEOF(i_fPhotonEnergy));]]></ST>
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[16]), destAddr:=ADR(i_fPhotonEnergy), n:=SIZEOF(i_fPhotonEnergy));
+
+MEMCPY(srcAddr:=ADR(mb_PLC_Memory[18]), destAddr:=ADR(i_iUpdateRequestSeq), n:=SIZEOF(i_iUpdateRequestSeq));]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

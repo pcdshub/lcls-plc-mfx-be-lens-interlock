@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <POU Name="MAIN" Id="{8f63f011-6378-4f32-beaf-4437ace2efcc}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
@@ -8,6 +8,8 @@ END_VAR
     <Implementation>
       <ST><![CDATA[(* 16-bit cycle counter *)
 iCycleCount := iCycleCount + 1;
+
+fbEnergyTables();
 
 (*  EPICS Rx UPDATE
     Modbus receive
