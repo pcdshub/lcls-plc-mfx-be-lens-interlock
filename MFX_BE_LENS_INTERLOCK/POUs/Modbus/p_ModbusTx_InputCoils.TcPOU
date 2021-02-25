@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <POU Name="p_ModbusTx_InputCoils" Id="{b7e18312-80ba-4297-9b98-214f322b6e9d}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusTx_InputCoils
 VAR
@@ -7,7 +7,14 @@ END_VAR
 VAR_OUTPUT
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[(* Online/active values *)
+      <ST><![CDATA[(** NOTE: These values are mirrored in PLC memory output as well. **)
+(** From an EPICS client perspective, it's easier to keep the data 
+	in synchronization when sent in one packet. The IOC now uses
+	those values and these are vestigial for now. 
+**)
+
+
+(* Online/active values *)
 mb_Input_Coils[0]:=bHeartbeatAlive; 
 mb_Input_Coils[1]:=bFAULT;          
 mb_Input_Coils[2]:=bStateFault;    

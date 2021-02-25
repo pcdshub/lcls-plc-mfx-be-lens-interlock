@@ -118,7 +118,7 @@ IF NOT XRT_LENS_SYSTEM.UNKNOWN_FAULT THEN
 	END_IF
 
 END_IF
-
+  
 //Summarize faults
 ///////////////////////////
 

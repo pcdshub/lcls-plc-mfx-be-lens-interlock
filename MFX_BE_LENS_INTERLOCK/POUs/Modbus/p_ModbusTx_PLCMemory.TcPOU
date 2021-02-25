@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <POU Name="p_ModbusTx_PLCMemory" Id="{d85d0cac-5378-471f-b9d9-8f92ec2f478e}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM p_ModbusTx_PLCMemory
 VAR
@@ -35,7 +35,32 @@ MEMCPY(destAddr:=ADR(mb_PLC_Memory[132]), srcAddr:=ADR(q_stActiveLimit.TRIP_HIGH
 mb_PLC_Memory[134] := iCycleCount;
 mb_PLC_Memory[135] := 0;
 
-MEMCPY(destAddr:=ADR(mb_PLC_Memory[136]), srcAddr:=ADR(i_fPhotonEnergy), n:=SIZEOF(i_fPhotonEnergy));]]></ST>
+MEMCPY(destAddr:=ADR(mb_PLC_Memory[136]), srcAddr:=ADR(i_fPhotonEnergy), n:=SIZEOF(i_fPhotonEnergy));
+// 137 taken up by fPhotonEnergy
+
+(* Online/active values *)
+mb_PLC_Memory[138]:=BOOL_TO_WORD(bHeartbeatAlive); 
+mb_PLC_Memory[139]:=BOOL_TO_WORD(bFAULT);          
+mb_PLC_Memory[140]:=BOOL_TO_WORD(bStateFault);    
+mb_PLC_Memory[141]:=BOOL_TO_WORD(bLimitSummaryFault); 
+mb_PLC_Memory[142]:=BOOL_TO_WORD(bMinEnergyFault);
+mb_PLC_Memory[143]:=BOOL_TO_WORD(bRequiresTransfocatorFault);
+mb_PLC_Memory[144]:=BOOL_TO_WORD(bTableLimitFault);
+mb_PLC_Memory[145]:=BOOL_TO_WORD(FALSE);
+mb_PLC_Memory[146]:=BOOL_TO_WORD(FALSE);
+mb_PLC_Memory[147]:=BOOL_TO_WORD(FALSE);
+
+(* Latched fault information *)
+mb_PLC_Memory[148]:=BOOL_TO_WORD(q_bHeartbeatLatch);
+mb_PLC_Memory[149]:=BOOL_TO_WORD(q_bFaultLatch);
+mb_PLC_Memory[150]:=BOOL_TO_WORD(q_bStateLatch);
+mb_PLC_Memory[151]:=BOOL_TO_WORD(q_bLimitSummaryFaultLatch);   
+mb_PLC_Memory[152]:=BOOL_TO_WORD(q_bMinEnergyFaultLatch);
+mb_PLC_Memory[153]:=BOOL_TO_WORD(q_bRequiresTransfocatorFaultLatch);
+mb_PLC_Memory[154]:=BOOL_TO_WORD(q_bTableLimitFaultLatch);
+mb_PLC_Memory[155]:=BOOL_TO_WORD(FALSE);
+mb_PLC_Memory[156]:=BOOL_TO_WORD(FALSE);
+mb_PLC_Memory[157]:=BOOL_TO_WORD(FALSE);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
