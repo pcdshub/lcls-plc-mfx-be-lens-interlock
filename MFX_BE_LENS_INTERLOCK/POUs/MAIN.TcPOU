@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <POU Name="MAIN" Id="{8f63f011-6378-4f32-beaf-4437ace2efcc}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
@@ -8,6 +8,8 @@ END_VAR
     <Implementation>
       <ST><![CDATA[(* 16-bit cycle counter *)
 iCycleCount := iCycleCount + 1;
+
+fbEnergyTables();
 
 (*  EPICS Rx UPDATE
     Modbus receive
@@ -42,21 +44,21 @@ TFS_LENSES[10].RADIUS := 50.0;
 
 *)
 fMinEnergies[0] := 0.0; (* No XRT lens *)
-fMinEnergies[1] := 9500.0; (* XRT Lens 1 *)
+fMinEnergies[3] := 9500.0; (* XRT Lens 3 *)
 fMinEnergies[2] := 8280.0; (* XRT lens 2 *)
-fMinEnergies[3] := 5960.0; (* XRT lens 3 *)
+fMinEnergies[1] := 5960.0; (* XRT lens 1 *)
 
 afbRequiresLensEnergyRange[0].fLow := 0.0; (* No XRT lens / no restriction*)
 afbRequiresLensEnergyRange[0].fHigh := 0.0;
 
-afbRequiresLensEnergyRange[1].fLow := 9500.0; (* Lens 1: 9.5~11.11keV *)
-afbRequiresLensEnergyRange[1].fHigh := 11110.0;
+afbRequiresLensEnergyRange[3].fLow := 9500.0; (* Lens 3: 9.5~11.11keV *)
+afbRequiresLensEnergyRange[3].fHigh := 11110.0;
 
 afbRequiresLensEnergyRange[2].fLow := 8280.0; (* Lens 2: 8.28 ~ 10.02 keV *)
 afbRequiresLensEnergyRange[2].fHigh := 10020.0;
 
-afbRequiresLensEnergyRange[3].fLow := 5960.0; (* Lens 3: 5.96 ~ 8.02 keV *)
-afbRequiresLensEnergyRange[3].fHigh := 8020.0;
+afbRequiresLensEnergyRange[1].fLow := 5960.0; (* Lens 1: 5.96 ~ 8.02 keV *)
+afbRequiresLensEnergyRange[1].fHigh := 8020.0;
 
 (*  MPS LOGIC SUMMARY *)
 p_MPSSup();
