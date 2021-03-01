@@ -2,9 +2,9 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <GVL Name="GVL" Id="{14f7e4c4-1971-4a0b-b8fc-55754218cf88}">
     <Declaration><![CDATA[VAR_GLOBAL
-	(* Fault handling - inputs *)
+    (* Fault handling - inputs *)
     i_xFAULT_CLEAR    			: BOOL;  // Clear fault bit
-	i_iUpdateRequestSeq			: DINT;  // Parameter update request sequence number
+    i_iUpdateRequestSeq			: DINT;  // Parameter update request sequence number
 
     (* Fault Handling - active faults *)
     bHeartbeatAlive     		: BOOL; // [Active] Whether heartbeat has updated
@@ -13,29 +13,29 @@
     bLimitSummaryFault			: BOOL; // [Active] Whether limit has been violated
     bTableLimitFault 			: BOOL;	// [Active] Energy/lens combination disallowed in table
     bMinEnergyFault 			: BOOL;	// [Active] Minimum energy not met
-    bRequiresTransfocatorFault 	: BOOL; // [Active] Transfocator lens required to be inserted 
+    bRequiresTransfocatorFault 	: BOOL; // [Active] Transfocator lens required to be inserted
 
     (* Fault Handling - latched faults *)
-	q_bHeartbeatLatch					: BOOL; // Latch: heartbeat fault
-	q_bFaultLatch  						: BOOL; // Latch: summary for *any* fault
-    q_bStateLatch 						: BOOL;	// Latch: motor state/position unknown 
+    q_bHeartbeatLatch					: BOOL; // Latch: heartbeat fault
+    q_bFaultLatch  						: BOOL; // Latch: summary for *any* fault
+    q_bStateLatch 						: BOOL;	// Latch: motor state/position unknown
     q_bLimitSummaryFaultLatch    		: BOOL; // Latch: Summary fault due to energy/lens combination
-	q_bTableLimitFaultLatch 			: BOOL;	// Latch: Table disallowed range match
+    q_bTableLimitFaultLatch 			: BOOL;	// Latch: Table disallowed range match
     q_bMinEnergyFaultLatch 				: BOOL; // Latch: Minimum energy not met
     q_bRequiresTransfocatorFaultLatch 	: BOOL; // Latch: Transfocator lens required to be inserted
 
-	fbEnergyTables : FB_EnergyTables;
-	
-	(* Fault handling - MPS signals *)
+    fbEnergyTables : FB_EnergyTables;
+
+    (* Fault handling - MPS signals *)
     bTRIP_MPS AT %Q*    		: BOOL;  // [Active] Bit output to MPS (trip when LOW)
-	
+
     (*Lens Information *)
     ////////////////////////////////
     XRT_LENSES : ARRAY[1..10] OF LENS; //Set of XRT Lenses
     TFS_LENSES : ARRAY[1..10] OF LENS; //Set of TFS Lenses
     XRT_RADIUS : REAL; //Current Radius of XRT lenses
     TFS_RADIUS : REAL; //Current Radius of TFS lenses
-	
+
     XRT_LENS_SYSTEM : FB_LENS_SYSTEM;
     TFS_LENS_SYSTEM : FB_LENS_SYSTEM;
 
@@ -44,11 +44,11 @@
     NO_LENS_LIMIT : RADII_LIMIT;
     LENS1_LIMIT : RADII_LIMIT;
     LENS2_LIMIT : RADII_LIMIT;
-    LENS3_LIMIT : RADII_LIMIT;	
-	
-	(* Feedback to the IOC *)
+    LENS3_LIMIT : RADII_LIMIT;
+
+    (* Feedback to the IOC *)
     q_stActiveLimit : RADII_LIMIT;
-	
+
     fMinEnergies : ARRAY[0..3] OF LREAL;
     afbRequiresLensEnergyRange : ARRAY[0..3] OF ST_FloatRange;
 
@@ -70,7 +70,7 @@
     mb_Output_Registers: ARRAY[0..255] OF WORD;
     /// test mb_PLC_Memory[0] with "modpoll -r 12289 -t 4 127.0.0.1"
     mb_PLC_Memory AT %MW0: ARRAY[0..1000] OF WORD;
-	iCycleCount : WORD;
+    iCycleCount : WORD;
 
 END_VAR]]></Declaration>
   </GVL>

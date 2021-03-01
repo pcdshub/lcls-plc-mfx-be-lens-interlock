@@ -9,13 +9,13 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF XRT_LENS_SYSTEM.LENSES[1].IN THEN
-	F_GetXRTLensIndex := 1;
+    F_GetXRTLensIndex := 1;
 ELSIF XRT_LENS_SYSTEM.LENSES[2].IN THEN
-	F_GetXRTLensIndex := 2;
+    F_GetXRTLensIndex := 2;
 ELSIF XRT_LENS_SYSTEM.LENSES[3].IN THEN
-	F_GetXRTLensIndex := 3;
+    F_GetXRTLensIndex := 3;
 ELSE
-	F_GetXRTLensIndex := 0;
+    F_GetXRTLensIndex := 0;
 END_IF]]></ST>
     </Implementation>
   </POU>

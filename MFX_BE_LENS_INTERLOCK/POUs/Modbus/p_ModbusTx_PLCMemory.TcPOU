@@ -39,10 +39,10 @@ MEMCPY(destAddr:=ADR(mb_PLC_Memory[136]), srcAddr:=ADR(i_fPhotonEnergy), n:=SIZE
 // 137 taken up by fPhotonEnergy
 
 (* Online/active values *)
-mb_PLC_Memory[138]:=BOOL_TO_WORD(bHeartbeatAlive); 
-mb_PLC_Memory[139]:=BOOL_TO_WORD(bFAULT);          
-mb_PLC_Memory[140]:=BOOL_TO_WORD(bStateFault);    
-mb_PLC_Memory[141]:=BOOL_TO_WORD(bLimitSummaryFault); 
+mb_PLC_Memory[138]:=BOOL_TO_WORD(bHeartbeatAlive);
+mb_PLC_Memory[139]:=BOOL_TO_WORD(bFAULT);
+mb_PLC_Memory[140]:=BOOL_TO_WORD(bStateFault);
+mb_PLC_Memory[141]:=BOOL_TO_WORD(bLimitSummaryFault);
 mb_PLC_Memory[142]:=BOOL_TO_WORD(bMinEnergyFault);
 mb_PLC_Memory[143]:=BOOL_TO_WORD(bRequiresTransfocatorFault);
 mb_PLC_Memory[144]:=BOOL_TO_WORD(bTableLimitFault);
@@ -54,7 +54,7 @@ mb_PLC_Memory[147]:=BOOL_TO_WORD(FALSE);
 mb_PLC_Memory[148]:=BOOL_TO_WORD(q_bHeartbeatLatch);
 mb_PLC_Memory[149]:=BOOL_TO_WORD(q_bFaultLatch);
 mb_PLC_Memory[150]:=BOOL_TO_WORD(q_bStateLatch);
-mb_PLC_Memory[151]:=BOOL_TO_WORD(q_bLimitSummaryFaultLatch);   
+mb_PLC_Memory[151]:=BOOL_TO_WORD(q_bLimitSummaryFaultLatch);
 mb_PLC_Memory[152]:=BOOL_TO_WORD(q_bMinEnergyFaultLatch);
 mb_PLC_Memory[153]:=BOOL_TO_WORD(q_bRequiresTransfocatorFaultLatch);
 mb_PLC_Memory[154]:=BOOL_TO_WORD(q_bTableLimitFaultLatch);

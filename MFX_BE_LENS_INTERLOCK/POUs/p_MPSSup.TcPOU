@@ -4,28 +4,28 @@
     <Declaration><![CDATA[PROGRAM p_MPSSup
 VAR
     BEAT: FB_HEARTBEAT;
-	fbHeartbeatLatch : RS;
-	fbFaultLatch : RS;
+    fbHeartbeatLatch : RS;
+    fbFaultLatch : RS;
     fbStateLatch : RS;
     fbLimitLatch : RS;
     fbTableLimitFaultLatch : RS;
     fbMinEnergyFaultLatch : RS;
     fbRequiresTransfocatorFaultLatch : RS;
-	rtUpdate : R_TRIG;
-	iLastSeq : DINT;
-	bUpdateRequest: BOOL;
-	
+    rtUpdate : R_TRIG;
+    iLastSeq : DINT;
+    bUpdateRequest: BOOL;
+
     LIMIT_FAULT : BOOL;
 
     fEnergyMin : LREAL;
     fRequiresTransfocatorEnergyLow : LREAL;
     fRequiresTransfocatorEnergyHigh : LREAL;
-	fTripLow : LREAL;
-	fTripHigh : LREAL;
-	bEnergyInTable : BOOL;
-	
+    fTripLow : LREAL;
+    fTripHigh : LREAL;
+    bEnergyInTable : BOOL;
+
     iLensIdx: INT;
-	fbLimitLookup : FB_LimitLookup;
+    fbLimitLookup : FB_LimitLookup;
 
 END_VAR
 ]]></Declaration>
@@ -76,68 +76,68 @@ bRequiresTransfocatorFault := FALSE;
 (* Determine which XRT lens is inserted, and pick the correct range based on it. *)
 
 IF NOT XRT_LENS_SYSTEM.UNKNOWN_FAULT THEN
-	iLensIdx := F_GetXRTLensIndex();
-	fbLimitLookup(
-		fEnergy:=i_fPhotonEnergy,
-		fLow=>fTripLow,
-		fHigh=>fTripHigh,
-		bEnergyInTable=>bEnergyInTable
-	);
+    iLensIdx := F_GetXRTLensIndex();
+    fbLimitLookup(
+        fEnergy:=i_fPhotonEnergy,
+        fLow=>fTripLow,
+        fHigh=>fTripHigh,
+        bEnergyInTable=>bEnergyInTable
+    );
 
-	q_stActiveLimit.TRIP_LOW := LREAL_TO_REAL(fTripLow);
-	q_stActiveLimit.TRIP_HIGH := LREAL_TO_REAL(fTripHigh);
+    q_stActiveLimit.TRIP_LOW := LREAL_TO_REAL(fTripLow);
+    q_stActiveLimit.TRIP_HIGH := LREAL_TO_REAL(fTripHigh);
 
-	IF bEnergyInTable AND fTripHigh > fTripLow THEN
-		// Lens inserted and trip region specified:
-		bTableLimitFault := (fTripLow <= TFS_RADIUS AND TFS_RADIUS <= fTripHigh);
-	END_IF
-	
-	fEnergyMin := fMinEnergies[iLensIdx];
-	fRequiresTransfocatorEnergyLow := afbRequiresLensEnergyRange[iLensIdx].fLow;
-	fRequiresTransfocatorEnergyHigh := afbRequiresLensEnergyRange[iLensIdx].fHigh;
-	
-	(*
-	Regardless of transfocator setting, the minimum energy must be
-	greater than or equal to that shown in the table (Minimum energy [keV]).
-	Trip if below.
-	*)
-	bMinEnergyFault := i_fPhotonEnergy < fEnergyMin;
+    IF bEnergyInTable AND fTripHigh > fTripLow THEN
+        // Lens inserted and trip region specified:
+        bTableLimitFault := (fTripLow <= TFS_RADIUS AND TFS_RADIUS <= fTripHigh);
+    END_IF
 
-	(*
-	When a pre-focusing lens is inserted, there exists a range of photon
-	energies in which at least one transfocator lens must be inserted.
-	If the current photon energy is within this (inclusive) range and no
-	lens is inserted, trip.
-	*)
-	IF fRequiresTransfocatorEnergyHigh > fRequiresTransfocatorEnergyLow THEN
-		(* Check that we're in the given photon energy range *)
-		IF fRequiresTransfocatorEnergyLow <= i_fPhotonEnergy AND i_fPhotonEnergy <= fRequiresTransfocatorEnergyHigh THEN
-			(* And if so, trip when IN_COUNT == 0 *)
-			bRequiresTransfocatorFault := (TFS_LENS_SYSTEM.IN_COUNT < 1);
-		END_IF
-	END_IF
+    fEnergyMin := fMinEnergies[iLensIdx];
+    fRequiresTransfocatorEnergyLow := afbRequiresLensEnergyRange[iLensIdx].fLow;
+    fRequiresTransfocatorEnergyHigh := afbRequiresLensEnergyRange[iLensIdx].fHigh;
+
+    (*
+    Regardless of transfocator setting, the minimum energy must be
+    greater than or equal to that shown in the table (Minimum energy [keV]).
+    Trip if below.
+    *)
+    bMinEnergyFault := i_fPhotonEnergy < fEnergyMin;
+
+    (*
+    When a pre-focusing lens is inserted, there exists a range of photon
+    energies in which at least one transfocator lens must be inserted.
+    If the current photon energy is within this (inclusive) range and no
+    lens is inserted, trip.
+    *)
+    IF fRequiresTransfocatorEnergyHigh > fRequiresTransfocatorEnergyLow THEN
+        (* Check that we're in the given photon energy range *)
+        IF fRequiresTransfocatorEnergyLow <= i_fPhotonEnergy AND i_fPhotonEnergy <= fRequiresTransfocatorEnergyHigh THEN
+            (* And if so, trip when IN_COUNT == 0 *)
+            bRequiresTransfocatorFault := (TFS_LENS_SYSTEM.IN_COUNT < 1);
+        END_IF
+    END_IF
 
 END_IF
-  
+
 //Summarize faults
 ///////////////////////////
 
 bLimitSummaryFault := (
-	bTableLimitFault OR         // Inside the table-defined trip range
-	bMinEnergyFault OR			// Below minimum required energy for XRT lens
-	bRequiresTransfocatorFault	// Require transfocator lens in this range
+    bTableLimitFault OR         // Inside the table-defined trip range
+    bMinEnergyFault OR			// Below minimum required energy for XRT lens
+    bRequiresTransfocatorFault	// Require transfocator lens in this range
 );
 
 //State Violations
 bStateFault := (
-	XRT_LENS_SYSTEM.UNKNOWN_FAULT OR  // XRT lens state unknown
-	TFS_LENS_SYSTEM.UNKNOWN_FAULT OR  // Transfocator lens state unknown
-	XRT_LENS_SYSTEM.IN_COUNT > 1      // Unexpected lens count
+    XRT_LENS_SYSTEM.UNKNOWN_FAULT OR  // XRT lens state unknown
+    TFS_LENS_SYSTEM.UNKNOWN_FAULT OR  // Transfocator lens state unknown
+    XRT_LENS_SYSTEM.IN_COUNT > 1      // Unexpected lens count
 );
 
 //Final Summary
 
-// MPS trips when *LOW*. 
+// MPS trips when *LOW*.
 // 	So: bTRIP_MPS (False) when bFAULT (True)
 // 	And bTRIP_MPS (True) when bFAULT (False)
 bFAULT := bLimitSummaryFault OR bStateFault OR NOT bHeartbeatAlive;

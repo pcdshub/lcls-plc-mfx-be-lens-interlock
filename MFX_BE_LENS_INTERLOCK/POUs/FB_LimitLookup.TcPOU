@@ -3,39 +3,39 @@
   <POU Name="FB_LimitLookup" Id="{d2a23f8c-7f59-4e9d-888f-ed774cd15cbd}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_LimitLookup
 VAR_INPUT
-	fEnergy : LREAL;
+    fEnergy : LREAL;
 END_VAR
 VAR_OUTPUT
-	bEnergyInTable : BOOL;
-	fLow : LREAL;
-	fHigh : LREAL;
+    bEnergyInTable : BOOL;
+    fLow : LREAL;
+    fHigh : LREAL;
 END_VAR
 VAR
-	(* TC version doesn't appear to support dynamic arrays here *)
-	(* falling back to pointer-handling; sorry! *)
-	stRow : POINTER TO ST_TableRow;
-	stNextRow : POINTER TO ST_TableRow;
-	iRowCount : UINT;
-	iRowIdx : UINT;
-	fSlope : LREAL;
-	fEnergyDelta : LREAL;
-	iLensIdx: INT;
+    (* TC version doesn't appear to support dynamic arrays here *)
+    (* falling back to pointer-handling; sorry! *)
+    stRow : POINTER TO ST_TableRow;
+    stNextRow : POINTER TO ST_TableRow;
+    iRowCount : UINT;
+    iRowIdx : UINT;
+    fSlope : LREAL;
+    fEnergyDelta : LREAL;
+    iLensIdx: INT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[iLensIdx := F_GetXRTLensIndex();
 
 IF iLensIdx = 1 THEN
-	stRow := ADR(fbEnergyTables.stLENS1_750);
-	iRowCount := SIZEOF(fbEnergyTables.stLENS1_750) / SIZEOF(ST_TableRow);
+    stRow := ADR(fbEnergyTables.stLENS1_750);
+    iRowCount := SIZEOF(fbEnergyTables.stLENS1_750) / SIZEOF(ST_TableRow);
 ELSIF iLensIdx = 2 THEN
-	stRow := ADR(fbEnergyTables.stLENS2_428);
-	iRowCount := SIZEOF(fbEnergyTables.stLENS2_428) / SIZEOF(ST_TableRow);
+    stRow := ADR(fbEnergyTables.stLENS2_428);
+    iRowCount := SIZEOF(fbEnergyTables.stLENS2_428) / SIZEOF(ST_TableRow);
 ELSIF iLensIdx = 3 THEN
-	stRow := ADR(fbEnergyTables.stLENS3_333);
-	iRowCount := SIZEOF(fbEnergyTables.stLENS3_333) / SIZEOF(ST_TableRow);
+    stRow := ADR(fbEnergyTables.stLENS3_333);
+    iRowCount := SIZEOF(fbEnergyTables.stLENS3_333) / SIZEOF(ST_TableRow);
 ELSE
-	stRow := ADR(fbEnergyTables.stNO_LENS);
-	iRowCount := SIZEOF(fbEnergyTables.stNO_LENS) / SIZEOF(ST_TableRow);
+    stRow := ADR(fbEnergyTables.stNO_LENS);
+    iRowCount := SIZEOF(fbEnergyTables.stNO_LENS) / SIZEOF(ST_TableRow);
 END_IF
 
 fLow := 0.0;
@@ -43,7 +43,7 @@ fHigh := 0.0;
 bEnergyInTable := FALSE;
 
 IF fEnergy < stRow^.fEnergy THEN
-	RETURN;
+    RETURN;
 END_IF
 
 FOR iRowIdx := 0 TO iRowCount - 2
@@ -56,21 +56,21 @@ DO
  slope = (rows[upper_idx].high - rows[lower_idx].high) / delta_energy;
  result->high = rows[lower_idx].high + slope * (find_energy - rows[lower_idx].energy);
 *)
-	stNextRow := ADR(stRow[1]);
-	IF fEnergy >= stRow^.fEnergy AND fEnergy <= stNextRow^.fEnergy THEN
-		fEnergyDelta := stNextRow^.fEnergy - stRow^.fEnergy;
-		IF fEnergyDelta > 0.0 THEN
-			bEnergyInTable := TRUE;
-			// Interpolate between the points
-			fSlope := (stNextRow^.fLow - stRow^.fLow) / fEnergyDelta;
-			fLow := stRow^.fLow + fSlope * (fEnergy - stRow^.fEnergy);
+    stNextRow := ADR(stRow[1]);
+    IF fEnergy >= stRow^.fEnergy AND fEnergy <= stNextRow^.fEnergy THEN
+        fEnergyDelta := stNextRow^.fEnergy - stRow^.fEnergy;
+        IF fEnergyDelta > 0.0 THEN
+            bEnergyInTable := TRUE;
+            // Interpolate between the points
+            fSlope := (stNextRow^.fLow - stRow^.fLow) / fEnergyDelta;
+            fLow := stRow^.fLow + fSlope * (fEnergy - stRow^.fEnergy);
 
-			fSlope := (stNextRow^.fHigh - stRow^.fHigh) / fEnergyDelta;
-			fHigh := stRow^.fHigh + fSlope * (fEnergy - stRow^.fEnergy);
-		END_IF	
-		RETURN;
-	END_IF
-	stRow := stNextRow;
+            fSlope := (stNextRow^.fHigh - stRow^.fHigh) / fEnergyDelta;
+            fHigh := stRow^.fHigh + fSlope * (fEnergy - stRow^.fEnergy);
+        END_IF
+        RETURN;
+    END_IF
+    stRow := stNextRow;
 END_FOR]]></ST>
     </Implementation>
   </POU>
