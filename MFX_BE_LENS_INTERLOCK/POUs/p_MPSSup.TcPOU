@@ -141,19 +141,7 @@ bStateFault := (
 // 	So: bTRIP_MPS (False) when bFAULT (True)
 // 	And bTRIP_MPS (True) when bFAULT (False)
 bFAULT := bLimitSummaryFault OR bStateFault OR NOT bHeartbeatAlive;
-bTRIP_MPS := NOT bFAULT;
-
-(******************************)
-(******************************)
-(******************************)
-(******************************)
-bTRIP_MPS := TRUE; (* TEMPORARY: Alex requested the PLC never trip MPS for his overnight experiments *)
-(* TODO: reviewers, this needs to be removed *)
-(******************************)
-(******************************)
-(******************************)
-(******************************)
-]]></ST>
+bTRIP_MPS := NOT bFAULT;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
