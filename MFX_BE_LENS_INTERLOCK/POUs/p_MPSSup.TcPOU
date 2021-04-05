@@ -124,8 +124,8 @@ END_IF
 
 bLimitSummaryFault := (
     bTableLimitFault OR         // Inside the table-defined trip range
-    bMinEnergyFault OR			// Below minimum required energy for XRT lens
-    bRequiresTransfocatorFault	// Require transfocator lens in this range
+    bMinEnergyFault OR          // Below minimum required energy for XRT lens
+    bRequiresTransfocatorFault  // Require transfocator lens in this range
 );
 
 //State Violations
@@ -138,8 +138,8 @@ bStateFault := (
 //Final Summary
 
 // MPS trips when *LOW*.
-// 	So: bTRIP_MPS (False) when bFAULT (True)
-// 	And bTRIP_MPS (True) when bFAULT (False)
+//  So: bTRIP_MPS (False) when bFAULT (True)
+//  And bTRIP_MPS (True) when bFAULT (False)
 bFAULT := bLimitSummaryFault OR bStateFault OR NOT bHeartbeatAlive;
 bTRIP_MPS := NOT bFAULT;]]></ST>
     </Implementation>
