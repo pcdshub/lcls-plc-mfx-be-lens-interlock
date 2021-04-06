@@ -5,6 +5,7 @@
 VAR_INPUT
     RADII : ARRAY[1..10] OF REAL; // Array of Effective Radii
     COUNT : INT;                 //  Number of Lenses
+    IF_NONE: LREAL;              //  Radius to report if none inserted (-> infinity)
 END_VAR
 VAR
     INDEX: INT; //Counter for Loop
@@ -35,6 +36,9 @@ END_WHILE
 /////////////////////
 IF F_EFF_RADIUS > 0.0 THEN
     F_EFF_RADIUS := 1/F_EFF_RADIUS;
+ELSE
+    // B
+    F_EFF_RADIUS := IF_NONE;
 END_IF]]></ST>
     </Implementation>
   </POU>

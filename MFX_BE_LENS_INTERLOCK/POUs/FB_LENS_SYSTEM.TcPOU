@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <POU Name="FB_LENS_SYSTEM" Id="{17806ffa-fff7-4bba-a8b4-71fc59888d71}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_LENS_SYSTEM
 VAR_INPUT
     LENSES : ARRAY[1..10] OF LENS;  //Array of lens structures
     COUNT  : INT;                   //Number of lenses
+    IF_NONE : LREAL := 10000.0;	    //Effective radius if no lenses are inserted (instead of infinity)
 END_VAR
 VAR_OUTPUT
     UNKNOWN_FAULT : BOOL;         //Fault for unknown lens state
@@ -51,7 +52,7 @@ UNKNOWN_FAULT := NOT (COUNT=KNOWN);
 
 // Calculate effective radii of inserted lens
 //////////////////////////////////////////////
-EFF_RADII := F_EFF_RADIUS(RADII:=RADII, COUNT:=COUNT);]]></ST>
+EFF_RADII := F_EFF_RADIUS(RADII:=RADII, COUNT:=COUNT, IF_NONE:=IF_NONE);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

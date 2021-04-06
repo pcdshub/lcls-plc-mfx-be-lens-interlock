@@ -65,7 +65,7 @@ XRT_RADIUS := XRT_LENS_SYSTEM.EFF_RADII; (* Propagated to EPICS *)
 
 //TFS LENS SYSTEM
 ///////////////////////////
-TFS_LENS_SYSTEM(LENSES:=TFS_LENSES, COUNT:=10);
+TFS_LENS_SYSTEM(LENSES:=TFS_LENSES, COUNT:=10, IF_NONE:=10000.0);
 TFS_RADIUS := TFS_LENS_SYSTEM.EFF_RADII; (* Propagated to EPICS *)
 
 (* Reset our tracking variables *)
@@ -124,8 +124,8 @@ END_IF
 
 bLimitSummaryFault := (
     bTableLimitFault OR         // Inside the table-defined trip range
-    bMinEnergyFault OR			// Below minimum required energy for XRT lens
-    bRequiresTransfocatorFault	// Require transfocator lens in this range
+    bMinEnergyFault OR          // Below minimum required energy for XRT lens
+    bRequiresTransfocatorFault  // Require transfocator lens in this range
 );
 
 //State Violations
@@ -138,8 +138,8 @@ bStateFault := (
 //Final Summary
 
 // MPS trips when *LOW*.
-// 	So: bTRIP_MPS (False) when bFAULT (True)
-// 	And bTRIP_MPS (True) when bFAULT (False)
+//  So: bTRIP_MPS (False) when bFAULT (True)
+//  And bTRIP_MPS (True) when bFAULT (False)
 bFAULT := bLimitSummaryFault OR bStateFault OR NOT bHeartbeatAlive;
 bTRIP_MPS := NOT bFAULT;]]></ST>
     </Implementation>
