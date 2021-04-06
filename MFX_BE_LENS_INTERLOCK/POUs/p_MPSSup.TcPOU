@@ -65,7 +65,7 @@ XRT_RADIUS := XRT_LENS_SYSTEM.EFF_RADII; (* Propagated to EPICS *)
 
 //TFS LENS SYSTEM
 ///////////////////////////
-TFS_LENS_SYSTEM(LENSES:=TFS_LENSES, COUNT:=10);
+TFS_LENS_SYSTEM(LENSES:=TFS_LENSES, COUNT:=10, IF_NONE:=10000.0);
 TFS_RADIUS := TFS_LENS_SYSTEM.EFF_RADII; (* Propagated to EPICS *)
 
 (* Reset our tracking variables *)
