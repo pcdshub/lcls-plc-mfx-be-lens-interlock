@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <POU Name="F_EFF_RADIUS" Id="{f8ea6ca8-8cd4-42de-9ec9-202ffccaf6e8}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION F_EFF_RADIUS : REAL
 VAR_INPUT
     RADII : ARRAY[1..10] OF REAL; // Array of Effective Radii
     COUNT : INT;                 //  Number of Lenses
-    IF_NONE: LREAL;              //  Radius to report if none inserted (-> infinity)
+    IF_NONE: REAL;              //  Radius to report if none inserted (-> infinity)
 END_VAR
 VAR
     INDEX: INT; //Counter for Loop

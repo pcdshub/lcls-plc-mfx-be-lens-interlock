@@ -55,7 +55,7 @@ fbRequiresTransfocatorFaultLatch(SET:=bRequiresTransfocatorFault, RESET1:=i_xFAU
 q_bRequiresTransfocatorFaultLatch := fbRequiresTransfocatorFaultLatch.Q1;
 
 //IOC Heartbeat:
-BEAT(BEAT:=i_xIOC_HEARTBEAT, DEADTIME:=TIME#0.5S);
+BEAT(BEAT:=i_xIOC_HEARTBEAT, DEADTIME:=TIME#1.0S);
 bHeartbeatAlive := BEAT.ALIVE;
 
 //XRT LENS SYSTEM

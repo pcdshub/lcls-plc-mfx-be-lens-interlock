@@ -52,7 +52,7 @@ UNKNOWN_FAULT := NOT (COUNT=KNOWN);
 
 // Calculate effective radii of inserted lens
 //////////////////////////////////////////////
-EFF_RADII := F_EFF_RADIUS(RADII:=RADII, COUNT:=COUNT, IF_NONE:=IF_NONE);]]></ST>
+EFF_RADII := F_EFF_RADIUS(RADII:=RADII, COUNT:=COUNT, IF_NONE:=LREAL_TO_REAL(IF_NONE));]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
