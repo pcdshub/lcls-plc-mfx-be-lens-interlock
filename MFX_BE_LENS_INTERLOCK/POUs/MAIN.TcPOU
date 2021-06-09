@@ -50,17 +50,17 @@ afbRequiresLensEnergyRange[0].fHigh := 0.0;
 fMinEnergies[0] := 0.0;
 
 (* 333.33um Lens 3: 9.5~11.11keV *)
-afbRequiresLensEnergyRange[3].fLow := 9500.0; 
+afbRequiresLensEnergyRange[3].fLow := 9500.0;
 afbRequiresLensEnergyRange[3].fHigh := 11110.0;
 fMinEnergies[3] := 9500.0;
 
 (* 428um Lens 2: 8.28 ~ 10.02 keV *)
-afbRequiresLensEnergyRange[2].fLow := 8280.0; 
+afbRequiresLensEnergyRange[2].fLow := 8280.0;
 afbRequiresLensEnergyRange[2].fHigh := 10020.0;
 fMinEnergies[2] := 8280.0;
 
 (* 750um Lens 1: 5.96 ~ 8.02 keV *)
-afbRequiresLensEnergyRange[1].fLow := 5960.0; 
+afbRequiresLensEnergyRange[1].fLow := 5960.0;
 afbRequiresLensEnergyRange[1].fHigh := 8020.0;
 fMinEnergies[1] := 5960.0;
 
