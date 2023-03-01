@@ -1,23 +1,24 @@
-mfx-be-lens-interlock-plc
--------------------------
+lcls-plc-mfx-be-lens-interlock
+------------------------------
 
 .. toctree::
     :maxdepth: 2
-    :caption: MFX
+    :caption: TFS_MPS
 
-    MFX_pragmas
-    MFX_nc
-    MFX_boxes
-    MFX_links
+    TFS_MPS_pragmas
+    TFS_MPS_nc
+    TFS_MPS_ethercat
+    TFS_MPS_boxes
+    TFS_MPS_links
 
 
 .. toctree::
     :maxdepth: 2
-    :caption: MFX-PLC
+    :caption: MFX_BE_LENS_INTERLOCK
 
-    MFX_MFX-PLC_summary
-    MFX_MFX-PLC_epics
-    MFX_MFX-PLC_source
+    TFS_MPS_MFX_BE_LENS_INTERLOCK_summary
+    TFS_MPS_MFX_BE_LENS_INTERLOCK_epics
+    TFS_MPS_MFX_BE_LENS_INTERLOCK_source
 
 
 
